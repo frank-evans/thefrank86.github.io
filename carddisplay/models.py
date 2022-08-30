@@ -26,5 +26,5 @@ class Choice(models.Model):
 # print(df1.iloc[5, 1])
 class card(models.Model):
     name = models.CharField(max_length=64)
-    image = models.CharField(max_lenth=128)
+    image = models.CharField(max_length=128)
     
