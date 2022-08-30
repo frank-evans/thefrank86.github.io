@@ -1,0 +1,16 @@
+{% extends "carddisplay/layout.html" %}
+
+{% block body %}
+    <h1>Cards</h1>
+    <ul>
+        {% for card in carddisplay %}
+            <li>
+                <a href="{% url 'card' card.name %}">
+                card {{ card.id }}: {{ card.name }} to {{ card.image }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <a href="{% url 'index' %}">Back to Main page</a>
+{% endblock %}
