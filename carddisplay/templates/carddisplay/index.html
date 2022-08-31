@@ -2,13 +2,11 @@
 
 {% block body %}
     <h1>Cards</h1>
-    <ul>
+
         {% for card in carddisplay %}
-            <li>
-                Card: {{ card.name }}<img src="{{ card.image }}">
-            </li>
+                <div> <img src="{{ card.image }}">
+                </div>
         {% endfor %}
-    </ul>
 
     <a href="{% url 'index' %}">Back to Main page</a>
 {% endblock %}
