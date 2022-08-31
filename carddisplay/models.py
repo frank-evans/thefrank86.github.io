@@ -19,5 +19,13 @@ class card(models.Model):
     image = models.CharField(max_length=128)
 
     def __str__(self):
-        return f"{self.set} {self.name} {self.image}"
+        return f"{self.set}: {self.name}: {self.image}"
+
+
+class type(models.Model):
+    set = models.CharField(max_length=64)
+    name = models.CharField(max_length=64)
+    search = models.CharField(max_length=64)
     
+    def __str__(self):
+        return f"{self.id}: {self.name}: {self.search}"

@@ -1,12 +1,8 @@
 {% extends "carddisplay/layout.html" %}
 
 {% block body %}
-    <h1>Cards</h1>
+    <h1>Search by Set or Card Name</h1>
 
-        {% for card in carddisplay %}
-                 <img src="{{ card.image }}" width="25%">
-                
-        {% endfor %}
-
-    <a href="{% url 'index' %}">Back to Main page</a>
+    <a href="{% url 'result' %}">Go to Results</a>
+    
 {% endblock %}

@@ -4,3 +4,4 @@ from .models import *
 
 # Register your models here.
 admin.site.register(card)
+admin.site.register(type)
