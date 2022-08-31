@@ -3,7 +3,8 @@ from django.shortcuts import render
 from .models import *
 from django.core.management import call_command
 
-#import pandas as pd
+#call_command('flush')
+card.objects.all().delete()
 call_command('updatemodels')
 # Create your views here.
 def index(request):
