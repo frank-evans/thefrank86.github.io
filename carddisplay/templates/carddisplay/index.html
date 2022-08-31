@@ -5,9 +5,7 @@
     <ul>
         {% for card in carddisplay %}
             <li>
-                <a href="{% url 'card' card.name %}">
-                card {{ card.id }}: {{ card.name }} to {{ card.image }}
-                </a>
+                Card: {{ card.name }}<img src="{{ card.image }}">
             </li>
         {% endfor %}
     </ul>

@@ -28,4 +28,7 @@ class card(models.Model):
     set = models.CharField(max_length=64)
     name = models.CharField(max_length=64)
     image = models.CharField(max_length=128)
+
+    def __str__(self):
+        return f"{self.set} {self.name} {self.image}"
     
