@@ -13,6 +13,8 @@ def index(request):
     df1.set_index("name", inplace=True)
     card.image = df1.loc[['{name}'], ['image_uri']]
     card.name = {name}
-    card.set = sdf1.loc[['{name}'], ['set']] 
+    card.set = df1.loc[['{name}'], ['set']] 
     
-    return render(request, "carddisplay/index.html")
+    return render(request, "carddisplay/index.html", {
+        "carddisplay": card.objects.all()
+    })
