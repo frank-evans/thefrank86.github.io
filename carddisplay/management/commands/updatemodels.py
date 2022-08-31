@@ -11,8 +11,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
 
-        set = "s:m20"
-        df1 = pd.read_csv(f"https://api.scryfall.com/cards/search?format=csv&q={set} ", usecols = ['set', 'name', 'image_uri'])
+        search = "s:m19"
+        df1 = pd.read_csv(f"https://api.scryfall.com/cards/search?format=csv&q={search} ", usecols = ['set', 'name', 'image_uri'])
         for SET,NAME,IMAGE in zip(df1.set,df1.name,df1.image_uri):
             models=card(set=SET,name=NAME,image=IMAGE)
             models.save()
