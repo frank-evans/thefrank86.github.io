@@ -1,5 +1,3 @@
-from unicodedata import name
-from django.http import HttpResponseRedirect 
 from django.shortcuts import render
 from .models import *
 from django.core.management import call_command

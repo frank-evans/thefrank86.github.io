@@ -18,8 +18,8 @@ class Command(BaseCommand):
         #(cardname structure) unique = "cardname-cardname"
         unique = f"s:{sellect}"
         # use Pandas to generate data frame (table), from the keyword csv file search.  Using the scryfall api
-        df1 = pd.read_csv(f"https://api.scryfall.com/cards/search?format=csv&q={unique} ", usecols = ['set', 'name', 'image_uri'])
+        df1 = pd.read_csv(f"https://api.scryfall.com/cards/search?format=csv&q={unique} ", usecols = ['set', 'name', 'mana_cost', 'image_uri'])
         # iterate data frame data onto the card model and save
-        for SET,NAME,IMAGE in zip(df1.set,df1.name,df1.image_uri):
-            models=card(set=SET,name=NAME,image=IMAGE)
+        for SET,NAME,COST,IMAGE in zip(df1.set,df1.name,df1.mana_cost,df1.image_uri):
+            models=card(set=SET,name=NAME,cost=COST,image=IMAGE)
             models.save()
