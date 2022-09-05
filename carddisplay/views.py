@@ -17,7 +17,7 @@ def index(request):
 
 
 def result(request):
-    #search = type.objects.get(pk=type_search)
+    #search = search.objects.get(pk=type_search)
     return render(request, "carddisplay/result.html", {
         "carddisplay": card.objects.all()
     })

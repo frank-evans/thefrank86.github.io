@@ -15,8 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+# added for favicon
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.views.generic.base import RedirectView
+# ../
 
 urlpatterns = [
     path('carddisplay/', include('carddisplay.urls')),
     path('admin/', admin.site.urls),
+    path("favicon.ico",
+        RedirectView.as_view(url=staticfiles_storage.url("favicon.ico")),
+    ),
 ]

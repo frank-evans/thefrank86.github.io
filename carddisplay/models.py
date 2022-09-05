@@ -22,10 +22,11 @@ class card(models.Model):
         return f"{self.set}: {self.name}: {self.image}"
 
 
-class type(models.Model):
+class search(models.Model):
     set = models.CharField(max_length=64)
     name = models.CharField(max_length=64)
-    search = models.CharField(max_length=64)
+    # color/"mana_cost" {2}{R}
+    color = models.CharField(max_length=64)
     
     def __str__(self):
-        return f"{self.id}: {self.name}: {self.search}"
+        return f"{self.set}: {self.name}: {self.color}"
