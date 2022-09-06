@@ -10,13 +10,13 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         # don't "pass"
         # parse variable from index.html from the result view (request.POST) name variable
-        parser.add_argument('-s', '--sellect', type=str)
+        parser.add_argument('-s', '--select', type=str)
 
     def handle(self, *args, **kwargs):
-        sellect = kwargs['sellect']
+        select = kwargs['select']
         #(set structure) unique = "s:dmu"
         #(cardname structure) unique = "cardname-cardname"
-        unique = f"s:{sellect}"
+        unique = f"s:{select}"
         # use Pandas to generate data frame (table), from the keyword csv file search.  Using the scryfall api
         df1 = pd.read_csv(f"https://api.scryfall.com/cards/search?format=csv&q={unique} ", usecols = ['set', 'name', 'mana_cost', 'image_uri'])
         # iterate data frame data onto the card model and save

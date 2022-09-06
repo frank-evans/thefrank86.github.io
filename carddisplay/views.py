@@ -17,9 +17,9 @@ def result(request):
         # reset object data for each search
         card.objects.all().delete()
 
-        # update object data based on set sellected
-        setsellect = request.POST["setsellect"]
-        call_command('updatemodels', sellect=setsellect)
+        # update object data based on set selected
+        setselect = request.POST["setselect"]
+        call_command('updatemodels', select=setselect)
 
         return render(request, "carddisplay/result.html", {
             "carddisplay": card.objects.all()

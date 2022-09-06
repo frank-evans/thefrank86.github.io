@@ -10,7 +10,7 @@ class card(models.Model):
     cost = models.CharField(max_length=24)
 
     def __str__(self):
-        return f"{self.set}: {self.name}: {self.image}"
+        return f"{self.set}: {self.name}: {self.image}: {self.cost}"
 
 # model for advanced search features
 class search(models.Model):
