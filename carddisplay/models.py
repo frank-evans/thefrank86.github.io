@@ -4,10 +4,10 @@ from django.db import models
 # Create your models here.
 # model used to save api card data based on search.  Display card image, etc
 class card(models.Model):
-    set = models.CharField(max_length=64)
-    name = models.CharField(max_length=64)
+    set = models.CharField(max_length=8)
+    name = models.CharField(max_length=32)
     image = models.CharField(max_length=128)
-    cost = models.CharField(max_length=64)
+    cost = models.CharField(max_length=24)
 
     def __str__(self):
         return f"{self.set}: {self.name}: {self.image}"
