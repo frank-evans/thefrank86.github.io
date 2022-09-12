@@ -6,7 +6,7 @@
     <form action="{% url 'result' %}" method="post">
         {% csrf_token %}
 
-        <select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list"><optgroup label="Expansions"><option data-svg-code="default" value="bro">The Brothers&#39; War (BRO)</option>
+        <select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list"><optgroup label="Expansions">
             <option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
             <option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
             <option data-svg-code="neo" value="neo">Kamigawa: Neon Dynasty (NEO)</option>
@@ -754,7 +754,8 @@
             <option data-svg-code="default" value="tugl">Unglued Tokens (TUGL)</option></optgroup><optgroup label="Treasure Chest"><option data-svg-code="pz2" value="pz2">Treasure Chest (PZ2)</option>
             <option data-svg-code="pz1" value="pz1">Legendary Cube Prize Pack (PZ1)</option></optgroup><optgroup label="Vanguard"><option data-svg-code="mtgo" value="pmoa">Magic Online Avatars (PMOA)</option>
             <option data-svg-code="van" value="pvan">Vanguard Series (PVAN)</option></optgroup></select>
-        <input type="submit">
+            
+        <input type="submit" value="Submit" style="height:50px; width:100px">
     </form>
     
 {% endblock %}
