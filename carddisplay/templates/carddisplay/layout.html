@@ -15,23 +15,24 @@
                 text-align: center;
             }
 
-            body {
-                text-align:center;
-                background-color: #f1f1f1
-                margin: 0;
-            }
-
             canvas {
-                position: fixed,
+                position: fixed;
                 top: 0;
                 left: 0;
                 display: block;
+                overflow-y: hidden;
+                }
+
+            body {
+                text-align: center;
+                background-color: #f1f1f1
+                margin: 0;
                 }
             
 
             main {
-                position: absolute;
-                
+                position: relative;
+                z-index: 2;
             }
 
             h1 {
@@ -48,6 +49,10 @@
 
             optgroup > option {
                 font-size: 75%;
+            }
+
+            img {
+                padding: 5px;
             }
 
         </style>
@@ -80,6 +85,7 @@
 			init();
 			animate();
 
+
 			function init() {
 
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -103,7 +109,7 @@
                 } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
-                camera.position.setZ(500);
+                camera.position.setZ(200);
 				document.body.appendChild( renderer.domElement );
 
 				window.addEventListener( 'resize', onWindowResize );
@@ -128,11 +134,13 @@
 				mesh.rotation.y += 0.01;
                 mesh.rotation.z += 0.005;
 
+    
 
 				renderer.render( scene, camera );
 
 			}
-
+          
+        
 		</script>
 
     </body>
