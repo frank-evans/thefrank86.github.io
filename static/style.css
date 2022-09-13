@@ -1,0 +1,47 @@
+select {
+    width:600px;
+    height:600px;
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: block;
+    overflow-y: hidden;
+    }
+
+body {
+    text-align: center;
+    background-color: #f1f1f1;
+    margin: 0;
+    }
+
+
+main {
+    position: relative;
+    z-index: 2;
+}
+
+h1 {
+    color: #ffffff;
+}
+
+h2 {
+    color: #ffffff;
+}
+
+optgroup {
+    font-size: 150%;
+}
+
+optgroup > option {
+    font-size: 75%;
+}
+
+img {
+    padding: 5px;
+}
