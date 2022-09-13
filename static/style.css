@@ -16,8 +16,11 @@ canvas {
 
 body {
     text-align: center;
-    background-color: #000022;
     margin: 0;
+    background-color: #000022; /* backup image */ 
+    background-image: url("stars.jpg");
+    background-attachment: fixed;
+    background-size: cover;
     }
 
 main {
