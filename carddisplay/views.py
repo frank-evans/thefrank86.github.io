@@ -2,7 +2,11 @@ from django.shortcuts import render
 from .models import *
 from django.core.management import call_command
 
+def test(request):
 
+        return render(request, "carddisplay/test.html", {
+            "carddisplay": card.objects.all()
+        })
 
 
 # Create your views here.
