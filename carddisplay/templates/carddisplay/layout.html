@@ -3,6 +3,8 @@
 <html lang="en">
     <head>
         <!-- (this is a comment ) <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> -->
+        <!-- <script src="js/three.js"></script>
+        -->
         
         <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
 
@@ -17,8 +19,7 @@
     <body>
 
         <canvas id="bg"></canvas>
-        <script src="js/three.js"></script>
-
+        
         <main>
         {% block body %}
         {% endblock %}
@@ -55,6 +56,7 @@
 				renderer = new THREE.WebGLRenderer( { 
                     canvas: document.querySelector('#bg'),
                     antialias: true, 
+                    alpha: true,
                 } );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
