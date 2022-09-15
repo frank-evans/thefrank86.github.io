@@ -1,14 +1,20 @@
+<!-- load static folder for .js and images -->
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <!-- (this is a comment ) <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet"> -->
+
+        <!-- base three.js files -->
         <script src="{% static 'three.js' %}"></script>
 
+		<!-- (three) js for object 1 -->
 		<script type="module" src="{% static 'object1.js' %}"></script>
-        
+
+        <!-- favicon image -->
         <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
 
+		<!-- style.css file -->
         <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
 
         <meta charset="UTF-8">
@@ -26,6 +32,5 @@
         {% endblock %}
         </main>
 
-
-    </body>
+	</body>
 </html>

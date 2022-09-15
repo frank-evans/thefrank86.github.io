@@ -33,8 +33,7 @@ let camera, scene, renderer;
 				document.body.appendChild( renderer.domElement );
 
 				window.addEventListener( 'resize', onWindowResize );
-
-               
+   
 			}
 
 			function onWindowResize() {
