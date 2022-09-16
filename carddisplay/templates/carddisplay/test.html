@@ -49,13 +49,13 @@
 
 					// Light directional Top
 					const Light = new THREE.DirectionalLight(0xC97711, 1);
-					Light.position.set(50,70,50);
+					Light.position.set(90,90,50);
 
 					scene.add(Light);
 
 					// Light directional Bottom
 					const Light2 = new THREE.DirectionalLight(0x110055, 5);
-					Light2.position.set(-50,-70,50);
+					Light2.position.set(-90,-90,50);
 
 					scene.add(Light2);
 	
@@ -63,9 +63,9 @@
 					//scene.add(pointLightHelper);
 
 					// Object Geometry 
-					const geometry = new THREE.DodecahedronGeometry(180, 2);
-					//const geometry = new THREE.IcosahedronGeometry(180, 1);
-					//const geometry = new THREE.SphereGeometry(180, 180, 180);
+					//const geometry = new THREE.DodecahedronGeometry(180, 2);
+					//const geometry = new THREE.IcosahedronGeometry(180, 2);
+					const geometry = new THREE.SphereGeometry(230, 230, 230);
 
 					// Material
 					const material = new THREE.MeshStandardMaterial();
@@ -81,6 +81,16 @@
 					mesh = new THREE.Mesh( geometry, material );
 					scene.add( mesh );
 
+					//second object ****************
+					//const geometry2 = new THREE.BoxGeometry( 200, 200, 200 );
+					//const material2 = new THREE.MeshBasicMaterial({ 
+                    	//color: "red",
+                    	//wireframe: true
+                	//});
+
+					//mesh2 = new THREE.Mesh( geometry2, material2 );
+					//scene.add( mesh2 );
+					// **************************
 
 					// Renderer
 					renderer = new THREE.WebGLRenderer( { 

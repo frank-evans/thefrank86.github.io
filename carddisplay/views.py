@@ -8,6 +8,12 @@ def test(request):
             "carddisplay": card.objects.all()
         })
 
+def test2(request):
+
+        return render(request, "carddisplay/animationTest.html", {
+            "carddisplay": card.objects.all()
+        })
+
 
 # Create your views here.
 def index(request):
