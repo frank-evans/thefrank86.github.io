@@ -28,10 +28,7 @@ main {
     z-index: 2;
 }
 
-h1 {
-    color: #ffffff;
-}
-
+h1,
 h2 {
     color: #ffffff;
 }
