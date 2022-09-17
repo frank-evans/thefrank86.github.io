@@ -12,6 +12,7 @@ canvas {
     left: 0;
     display: block;
     overflow-y: hidden;
+    /*mix-blend-mode: exclusion;*/
     }
 
 body {
