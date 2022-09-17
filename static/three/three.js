@@ -1,7 +1,7 @@
 /**
  * @license
  * Copyright 2010-2022 Three.js Authors
- * SPDX-License-Identifier: MIT
+ * SPDX-License-Identifier:  MIT
  */
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :

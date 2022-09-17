@@ -38,7 +38,7 @@ let camera, scene, renderer, mesh;
 	
 					//const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
 					//scene.add(pointLightHelper);
-
+ 
 					// Object Geometry 
 					// Particles test
 					//const dotGeometry = new THREE.BufferGeometry;
