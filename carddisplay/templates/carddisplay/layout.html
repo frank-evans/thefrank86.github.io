@@ -136,8 +136,8 @@
 				}
 
 				// scroll object zoom
-				window.addEventListener( 'scroll', updateSphere );
-				
+				window.addEventListener( 'scroll', updateSphere, false);
+
 				var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
 				function updateSphere(event) {
@@ -147,7 +147,7 @@
 						lastScrollTop = st <= 0 ? 0 : st;
 					}
 					else if (st < lastScrollTop && mesh.position.z > -150) {
-						mesh.position.z -= window.scrollY * .0007;
+						mesh.position.z += window.scrollY * -.0007;
 						lastScrollTop = st <= 0 ? 0 : st;
 				 	}
 					else {
