@@ -46,19 +46,19 @@
 					const normalTexture = textureLoader.load("{% static 'textures/NormalMap5.png' %}");
 
 					// Lightning ambient
-					const ambientLight = new THREE.AmbientLight(0x404040, 2);
+					const ambientLight = new THREE.AmbientLight(0x404040, 3);
 					//ambientLight.position.set(1,1,1);
 	
 					scene.add(ambientLight);
 
 					// Light directional Top
-					const Light = new THREE.DirectionalLight(0xC95500, 2);
+					const Light = new THREE.DirectionalLight(0xC95500, 4);
 					Light.position.set(90,90,50);
 
 					scene.add(Light);
 
 					// Light directional Bottom
-					const Light2 = new THREE.DirectionalLight(0x050055, 5);
+					const Light2 = new THREE.DirectionalLight(0x050055, 10);
 					Light2.position.set(-90,-90,50);
 
 					scene.add(Light2);
@@ -123,6 +123,7 @@
 
 					window.addEventListener( 'resize', onWindowResize );
 
+
 					// mouse orientation
 					//document.addEventListener('mousemove', onDocumentMouseMove);
 					//let mouseX = 0;
@@ -132,6 +133,27 @@
 					//const windowX = window.innerWidth / 2;
 					//const windowY = window.innerHeight / 2;
 
+				}
+
+				// scroll object zoom
+				window.addEventListener( 'scroll', updateSphere );
+				
+				var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+				function updateSphere(event) {
+					var st = window.pageYOffset || document.documentElement.scrollTop;
+					if (st > lastScrollTop && mesh.position.z < 180){
+						mesh.position.z += window.scrollY * .0007;
+						lastScrollTop = st <= 0 ? 0 : st;
+					}
+					else if (st < lastScrollTop && mesh.position.z > -150) {
+						mesh.position.z -= window.scrollY * .0007;
+						lastScrollTop = st <= 0 ? 0 : st;
+				 	}
+					else {
+						lastScrollTop = st <= 0 ? 0 : st;
+						return;
+					}
 				}
 
 				//function onDocumentMouseMove(event) {
