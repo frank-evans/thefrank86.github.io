@@ -3,6 +3,7 @@ select {
     height:600px;
     display: block;
     margin: 0 auto;
+    background-color: #d8d8d8; 
     text-align: center;
 }
 
