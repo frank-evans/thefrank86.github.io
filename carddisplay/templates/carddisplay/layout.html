@@ -49,6 +49,7 @@
 					// this texture being referenced from the static folder only loads in html (not.js)
 					const normalTexture = textureLoader.load("{% static 'textures/NormalMap5.png' %}");
 
+
 					// Lightning ambient (x, 3'intensity')
 					const ambientLight = new THREE.AmbientLight(0x404040, 3);
 					//ambientLight.position.set(1,1,1);
@@ -116,11 +117,10 @@
 					//dotGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
 					//const dotMaterial = new THREE.PointsMaterial({
-					//	size: 0.005
+					//	size: 0.05
 					//});
 
 					//mesh2 = new THREE.Points(dotGeometry, dotMaterial);
-
 					//scene.add(mesh2);
 
 					// Renderer
@@ -147,11 +147,12 @@
 					windowY = window.innerHeight / 2;
 				}
 
-				// scroll object ZOOM
+				// scroll object ZOOM browser event listener
 				window.addEventListener( 'scroll', updateSphere, false);
 
 				var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
+				// scroll function to zoom Object main
 				function updateSphere(event) {
 					var st = window.pageYOffset || document.documentElement.scrollTop;
 					if (st > lastScrollTop && mesh.position.z < 170){
