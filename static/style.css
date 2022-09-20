@@ -19,8 +19,9 @@ canvas {
 body {
     text-align: center;
     margin: 0;
-    background-color: #000022; /* backup image */ 
-    background-image: url("stars.jpg");
+    /* background-color: #000022; /* backup image */ 
+    background-color: #000000;
+    background-image: url("stars.jpg"); 
     background-attachment: fixed;
     background-size: cover;
     }

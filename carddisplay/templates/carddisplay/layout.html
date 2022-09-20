@@ -17,13 +17,17 @@
     </head>
 
     <body>
+
 		<canvas id="bg"></canvas>
+
 		<!-- base three.js files -->
         <script type="module" src="{% static 'three/three.js' %}"></script>
+
 		<!-- (three) js for object 1 
 		<script type="module" src="{% static 'object1.js' %}"></script> -->
 
-		<script type="module" src="{% static 'three/OrbitControls.js' %}"></script>
+		<!-- Orbit camera around objects (not currently used)
+		<script type="module" src="{% static 'three/OrbitControls.js' %}"></script> -->
 
 		<script type="module">
 			
@@ -92,36 +96,53 @@
 
 					//second object 
 
-					const geometry2 = new THREE.BoxGeometry(430, 430, 430);
-					const material2 = new THREE.MeshStandardMaterial({ 
-                    	color: "red",
-                    	wireframe: true,
-                	});
+					//const geometry2 = new THREE.BoxGeometry(430, 430, 430);
+					//const material2 = new THREE.MeshStandardMaterial({ 
+                    //	color: "red",
+                    //	wireframe: true,
+                	//});
 
-					mesh2 = new THREE.Mesh(geometry2, material2);
-					mesh2.position.set(0,0,0);
-					scene.add(mesh2);
+					//mesh2 = new THREE.Mesh(geometry2, material2);
+					//mesh2.position.set(0,0,0);
+					//scene.add(mesh2);
 
 
 					// **************************
 
-					// Object Geometry 
-					// Particles test (needs correction)
+					// Other 2nd object
+					// Particles geometry
+					const dotGeometry = new THREE.BufferGeometry();
+					// particle count
+					const dotsCnt = 5000;
+					//const posArray = new Float32Array(dotCnt * 3);  ***Old attempt***
 
-					//const dotGeometry = new THREE.BufferGeometry;
-					//const dotsCnt = 5000;
-					//const posArray = new Float32Array(dotCnt * 3);
-					//for(let i = 0; i < dotCnt * 3; i++) {
-					//	posArray[i] = Math.random() - 0.5
+					const vertices = [];
+
+					for ( let i = 0; i < dotsCnt; i ++) {
+
+						// randFloatSpread is +/- half the input spread (points spread volume)
+						const x = THREE.MathUtils.randFloatSpread( 1000 );
+						const y = THREE.MathUtils.randFloatSpread( 1000 );
+						const z = THREE.MathUtils.randFloatSpread( 1000 );
+
+						vertices.push( x, y, z );
+					}
+				
+					// ***old attempt***
+					//for (let i = 0; i < dotCnt * 3; i++) {
+					//	posArray[i] = (Math.random() - 0.5) * 5,
 					//};
-					//dotGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
 
-					//const dotMaterial = new THREE.PointsMaterial({
-					//	size: 0.05
-					//});
+					dotGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
-					//mesh2 = new THREE.Points(dotGeometry, dotMaterial);
-					//scene.add(mesh2);
+					const dotMaterial = new THREE.PointsMaterial({
+						size: 0.5,
+						color: 0xffffff,
+					});
+
+					mesh2 = new THREE.Points(dotGeometry, dotMaterial);
+					scene.add(mesh2);
+
 
 					// Renderer
 					renderer = new THREE.WebGLRenderer( { 
@@ -204,10 +225,10 @@
 					//mesh.rotation.y += 0.002;
 					mesh.rotation.z += 0.002;
 
-					// Mesh 2
+					// Mesh 2  best (rotate z)
 					//mesh2.rotation.y += 0.002;
 					//mesh2.rotation.x += 0.005;
-					mesh2.rotation.z += 0.005;
+					mesh2.rotation.z += 0.0004;
 
 					renderer.render(scene, camera);
 
