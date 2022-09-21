@@ -3,6 +3,17 @@
 {% block body %}
     <h1>Search by Set</h1>
 
+    <!-- force reload on "back button" to ensure object.model data reload -->
+		<script type="module">
+
+            window.addEventListener( "pageshow", function ( event ) {
+			    if (performance.navigation.type == 2){
+				    location.reload(true);
+			    }
+            });
+
+		</script>
+
     <form action="{% url 'result' %}" method="post">
         {% csrf_token %}
 
