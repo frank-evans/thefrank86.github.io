@@ -54,6 +54,9 @@
 					// this texture being referenced from the static folder only loads in html (not.js)
 					const normalTexture = textureLoader.load("{% static 'textures/NormalMap5.png' %}");
 
+					//  particle texture loading
+					const star = textureLoader.load("{% static 'star/star-purple.png' %}");
+
 
 					// Lightning ambient (x, 3'intensity')
 					const ambientLight = new THREE.AmbientLight(0x404040, 3);
@@ -137,8 +140,10 @@
 					dotGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
 					const dotMaterial = new THREE.PointsMaterial({
-						size: 0.5,
-						color: 0xddc0ff,
+						size: 1.5,
+						//color: 0xddc0ff,
+						map: star,
+						transparent: true,
 					});
 
 					mesh2 = new THREE.Points(dotGeometry, dotMaterial);
