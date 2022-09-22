@@ -181,13 +181,16 @@
 
 				// scroll function to zoom Object main
 				function updateSphere(event) {
+					
 					var st = window.pageYOffset || document.documentElement.scrollTop;
+
 					if (st > lastScrollTop && mesh.position.z < 170){
-						mesh.position.z += window.scrollY * .0007;
+						mesh.position.z += 1;
 						lastScrollTop = st <= 0 ? 0 : st;
 					}
 					else if (st < lastScrollTop && mesh.position.z > -100) {
-						mesh.position.z += window.scrollY * -.0007;
+						//mesh.position.z += window.scrollY * -.0007;
+						mesh.position.z += -1;
 						lastScrollTop = st <= 0 ? 0 : st;
 				 	}
 					else {

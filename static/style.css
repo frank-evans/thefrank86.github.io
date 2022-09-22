@@ -72,3 +72,9 @@ img:hover {
   img:hover .content {
     transform: translateZ(12px);
   }
+
+  @media (prefers-reduced-motion) {
+    img {
+      transform: none !important;
+    }
+  }
