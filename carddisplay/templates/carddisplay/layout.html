@@ -19,6 +19,8 @@
 
     <body>
 
+		<header>
+		</header>
 		<canvas id="bg"></canvas>
 
 		<!-- base three.js files -->
@@ -30,6 +32,7 @@
 		<!-- Orbit camera around objects (not currently used)
 		<script type="module" src="{% static 'three/OrbitControls.js' %}"></script> -->
 
+		<!-- background three.js dynamic/responsive objects script -->
 		<script type="module">
 			
 			let camera, scene, renderer, mesh, mesh2;
@@ -142,6 +145,7 @@
 					const dotMaterial = new THREE.PointsMaterial({
 						size: 1.5,
 						//color: 0xddc0ff,
+						color: 0xffffff,
 						map: star,
 						transparent: true,
 					});
@@ -181,7 +185,7 @@
 
 				// scroll function to zoom Object main
 				function updateSphere(event) {
-					
+
 					var st = window.pageYOffset || document.documentElement.scrollTop;
 
 					if (st > lastScrollTop && mesh.position.z < 170){
