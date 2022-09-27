@@ -14,7 +14,7 @@
           })
 
         // hover angle threshold
-        const THRESHOLD = 8;
+        const THRESHOLD = 6;
 
 
         function handleHover(e) {
@@ -25,6 +25,7 @@
             // added -window.scrollY to fix distortin on scroll
             const vertical = (clientY - (offsetTop - window.scrollY)) / clientHeight;
 
+            // this can be positive or negative to reverse the dynamic 3d (hover) effect
             const rotateX = -(THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
             const rotateY = -(vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
 
