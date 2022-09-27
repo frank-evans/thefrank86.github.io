@@ -51,14 +51,20 @@ optgroup > option {
 }
 
 img {
-    padding: 5px;
+    padding: 0px;
     opacity: 0.8;
     /* transformed in result.html script  */
     transition: transform 0.1s ease;
     transform-style: preserve-3d;
     will-change: transform;
     
+    margin-right: 5px;
+    margin-bottom: 5px;
+
     z-index: 3;
+  /* round card corners --- & offset box shadows (bottom-right, top-left, all-blend)  */
+    border-radius: 15px;
+    box-shadow: 7px 6px 6px black, -3px -2px 4px black, 0px 0px 1px 2px black;
 }
 
 img:hover {
