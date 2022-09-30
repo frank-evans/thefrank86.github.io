@@ -3,6 +3,58 @@
 {% block body %}
     <h1>Search by Set</h1>
 
+    <!-- loading graphic divs -->
+    <section id="loading">
+        <div class="loader">
+            <div class="dot" style="--i:0;"></div>
+            <div class="dot" style="--i:1;"></div>
+            <div class="dot" style="--i:2;"></div>
+            <div class="dot" style="--i:3;"></div>
+            <div class="dot" style="--i:4;"></div>
+            <div class="dot" style="--i:5;"></div>
+            <div class="dot" style="--i:6;"></div>
+            <div class="dot" style="--i:7;"></div>
+            <div class="dot" style="--i:8;"></div>
+            <div class="dot" style="--i:9;"></div>
+        </div>
+
+        <h2>Getting Up-to-date Cards in real time...</h2>
+
+        <div class="loader">
+            <div class="dot" style="--i:0;"></div>
+            <div class="dot" style="--i:1;"></div>
+            <div class="dot" style="--i:2;"></div>
+            <div class="dot" style="--i:3;"></div>
+            <div class="dot" style="--i:4;"></div>
+            <div class="dot" style="--i:5;"></div>
+            <div class="dot" style="--i:6;"></div>
+            <div class="dot" style="--i:7;"></div>
+            <div class="dot" style="--i:8;"></div>
+            <div class="dot" style="--i:9;"></div>
+        </div>
+    </section>
+
+    <!-- jquery code for loading "on submit" code -->
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+    <!-- display loading graphic "on submit" (from none to flex) -->
+    <script>
+
+        $(document).ready(function() {  
+            $('form').on('submit', function() {
+                // loading graphic
+                var x = document.getElementById("loading");
+                x.style.display = "flex";
+                // hide form on load
+                var y = document.getElementById("form");
+                y.style.display = "none";
+
+                return true; // return false to cancel form action
+            }); 
+        });
+      
+	</script>
+   
     <!-- force reload on "back button" to ensure object.model data reload -->
 		<script type="module">
 
@@ -14,11 +66,11 @@
 
 		</script>
 
-    <form action="{% url 'result' %}" method="post">
+    <form action="{% url 'result' %}" method="post" id="form">
         {% csrf_token %}
 
         <select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list"><optgroup label="Expansions">
-            <option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
+            <option data-svg-code="dmu" value="dmu" selected="selected">Dominaria United (DMU)</option>
             <option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
             <option data-svg-code="neo" value="neo">Kamigawa: Neon Dynasty (NEO)</option>
             <option data-svg-code="vow" value="vow">Innistrad: Crimson Vow (VOW)</option>
@@ -766,7 +818,8 @@
             <option data-svg-code="pz1" value="pz1">Legendary Cube Prize Pack (PZ1)</option></optgroup><optgroup label="Vanguard"><option data-svg-code="mtgo" value="pmoa">Magic Online Avatars (PMOA)</option>
             <option data-svg-code="van" value="pvan">Vanguard Series (PVAN)</option></optgroup></select>
             
-        <input type="submit" value="Submit" style="height:50px; width:100px">
+        <input id="input" type="submit" value="Submit" style="height:50px; width:100px">
     </form>
+
     
 {% endblock %}

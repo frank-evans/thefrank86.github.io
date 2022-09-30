@@ -84,3 +84,89 @@ img:hover {
       transform: none !important;
     }
   }
+ 
+  /*   loading test *************************************************************************************************   */
+  #loading {
+    position: relative;
+    width: 100%;
+    height: 75vh;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    animation: changeColor 5s linear infinite;
+
+    z-index: 10;
+
+  }
+  @keyframes changeColor {
+    0%
+    {
+      filter: hue-rotate(300deg);
+    }
+    50%
+    {
+      filter: hue-rotate(420deg);
+    }
+    100%
+    {
+      filter: hue-rotate(300deg);
+    }
+  }
+  section h2 {
+    color:#00ff0a;
+    font-family: consolas;
+    font-weight: 300;
+    letter-spacing: 5px;
+  }
+  section .loader {
+    position: relative;
+    display: flex;
+  }
+  section .loader .dot {
+    position: relative;
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: #00ff0a;
+    box-shadow: 0 0 10px #00ff0a,
+                0 0 20px #00ff0a,
+                0 0 40px #00ff0a,
+                0 0 60px #00ff0a,
+                0 0 80px #00ff0a,
+                0 0 10px #00ff0a;
+    margin: 20px 10px;
+    transform: scale(0.1); 
+    border-radius: 50%;
+    animation: animateDot 2.6s linear infinite;
+    animation-delay: calc(0.13s * var(--i));
+  }
+  @keyframes animateDot {
+    0%
+    {
+      transform: scale(0.1);
+    }
+    10% 
+    {
+      transform: scale(1);
+    }
+    50%,100%
+    {
+      transform: scale(0.1);
+    }
+  }
+  section .loader:last-child .dot {
+    animation-delay: calc(-0.16s * var(--i));
+  }
+
+  button {
+    position: absolute;
+    top: 60%;
+    left: 50%;
+    margin: auto;
+    padding: 10px;
+    vertical-align: middle;
+    text-align: center;
+    
+    z-index: 15;
+  }
