@@ -179,7 +179,8 @@ img:hover {
     }
   }
   section h2 {
-    color:#00ff0a;
+    color:#bcffbe;
+    /* box-shadow: 0px 0px 5px #ffffff; */
     font-family: consolas;
     font-weight: 300;
     letter-spacing: 5px;
