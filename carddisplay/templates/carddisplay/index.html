@@ -48,6 +48,8 @@
                 // hide form on load
                 var y = document.getElementById("form");
                 y.style.display = "none";
+                var y = document.getElementById("outer");
+                y.style.display = "none";
 
                 return true; // return false to cancel form action
             }); 
@@ -65,7 +67,7 @@
             });
 
 		</script>
-
+    <div class="outer" id="outer">
     <form action="{% url 'result' %}" method="post" id="form">
         {% csrf_token %}
 
@@ -817,9 +819,10 @@
             <option data-svg-code="default" value="tugl">Unglued Tokens (TUGL)</option></optgroup><optgroup label="Treasure Chest"><option data-svg-code="pz2" value="pz2">Treasure Chest (PZ2)</option>
             <option data-svg-code="pz1" value="pz1">Legendary Cube Prize Pack (PZ1)</option></optgroup><optgroup label="Vanguard"><option data-svg-code="mtgo" value="pmoa">Magic Online Avatars (PMOA)</option>
             <option data-svg-code="van" value="pvan">Vanguard Series (PVAN)</option></optgroup></select>
-            
+          
+        <p></p>
         <input id="input" type="submit" value="Submit" style="height:50px; width:100px">
     </form>
-
+    </div>
     
 {% endblock %}
