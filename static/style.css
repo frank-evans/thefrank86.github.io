@@ -1,3 +1,40 @@
+header {
+  box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.5);
+  position: sticky;
+  top: 0px;
+  background: #d8d8d8;
+  font-family: sans-serif;
+  opacity: 0.85;
+  z-index: 5;
+}
+.title {
+  color: black;
+  flex: 1;
+  text-align: left;
+}
+nav {
+  min-height: 5vh;
+  margin: auto;
+  width: 90%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+nav ul {
+  font-size: 1.5rem;
+  flex: 1;
+}
+nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+nav a {
+  color: black;
+  text-decoration: none;
+}
+/* nav bar css above ********************************** */
+
 select {
     width:600px;
     height:600px;
@@ -5,11 +42,11 @@ select {
     margin: 0 auto;
     background-color: #d8d8d8; 
     text-align: center;
-    opacity: 0.9;
+    opacity: 0.5;
+    transition: 1s ease-in-out;
 }
-
 select:hover {
-    opacity: 0.8;
+    opacity: 0.85;
     transition: 1s ease-in-out;
   }
 
@@ -37,8 +74,8 @@ main {
     z-index: 2;
 }
 
-h1,
-h2 {
+body h1,
+body h2 {
     color: #ffffff;
 }
 
@@ -89,7 +126,7 @@ img:hover {
   #loading {
     position: relative;
     width: 100%;
-    height: 75vh;
+    height: 60vh;
     display: none;
     justify-content: center;
     align-items: center;
