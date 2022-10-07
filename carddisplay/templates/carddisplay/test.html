@@ -34,8 +34,9 @@
 							page1 = data;
 							//page1.push(data);
 							//page1 = JSON.stringify(page1);
-							const pic = page1.data[5].image_uris.normal;
-							document.getElementById('img1').src = pic;
+
+							//const pic = page1.data[5].image_uris.normal;
+							//document.getElementById('img1').src = pic;
 
 
 							// set img1 for div used to iterate 
@@ -43,9 +44,18 @@
 
 							// loop through each page adding images 
 							for (let i = 0; i < Object.keys( page1.data ).length; i++) {
-								//var img1Elem = document.getElementById('result');
+								//check if double face card
 								if (typeof page1.data[i].image_uris === 'undefined') {
-									continue;
+									if (typeof page1.data[i].card_faces === 'undefined') {
+										continue;
+									}
+									else {
+										img1.innerHTML +=
+										 `<img class="tilt" width="20%" src="${page1.data[i].card_faces[0].image_uris.normal}">`;
+										img1.innerHTML +=
+										 `<img class="tilt" width="20%" src="${page1.data[i].card_faces[1].image_uris.normal}">`;
+										 continue;
+									}
 								}
 								img1.innerHTML += `<img class="tilt" width="20%" src="${page1.data[i].image_uris.normal}">`;
 								
@@ -61,9 +71,18 @@
 
 									// loop through each page adding images 
 									for (let i = 0; i < Object.keys( page2.data ).length; i++) {
-										//var img1Elem = document.getElementById('result');
+										//check if double face card
 										if (typeof page2.data[i].image_uris === 'undefined') {
-											continue;
+											if (typeof page2.data[i].card_faces === 'undefined') {
+												continue;
+											}
+											else {
+												img1.innerHTML +=
+												`<img class="tilt" width="20%" src="${page2.data[i].card_faces[0].image_uris.normal}">`;
+												img1.innerHTML +=
+												`<img class="tilt" width="20%" src="${page2.data[i].card_faces[1].image_uris.normal}">`;
+												continue;
+											}
 										}
 										img1.innerHTML += `<img class="tilt" width="20%" src="${page2.data[i].image_uris.normal}">`;
 									}
@@ -83,9 +102,18 @@
 
 									// loop through each page adding images 
 									for (let i = 0; i < Object.keys( page3.data ).length; i++) {
-										//var img1Elem = document.getElementById('result');
+										//check if double face card.
 										if (typeof page3.data[i].image_uris === 'undefined') {
-											continue;
+											if (typeof page3.data[i].card_faces === 'undefined') {
+												continue;
+											}
+											else {
+												img1.innerHTML +=
+												`<img class="tilt" width="20%" src="${page3.data[i].card_faces[0].image_uris.normal}">`;
+												img1.innerHTML +=
+												`<img class="tilt" width="20%" src="${page3.data[i].card_faces[1].image_uris.normal}">`;
+												continue;
+											}
 										}
 										img1.innerHTML += `<img class="tilt" width="20%" src="${page3.data[i].image_uris.normal}">`;
 									}
