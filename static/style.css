@@ -1,3 +1,6 @@
+#img1 {
+  margin: auto;
+}
 header {
   box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.5);
   position: sticky;
@@ -68,11 +71,11 @@ select {
     background-color: #d8d8d8; 
     text-align: center;
     opacity: 0.5;
-    transition: 1s ease-in-out;
+    transition: 0.7s ease-in-out;
 }
 select:hover {
     opacity: 0.85;
-    transition: 1s ease-in-out;
+    transition: 0.7s ease-in-out;
   }
 
 canvas {
@@ -88,7 +91,7 @@ body {
     text-align: center;
     margin: 0;
     /* background-color: #000022; /* backup image */ 
-    background-color: #000000;
+    background-color: #ffffff;
     background-image: url("stars.jpg"); 
     background-attachment: fixed;
     background-size: cover;
@@ -120,7 +123,7 @@ img {
     transform-style: preserve-3d;
     will-change: transform;
     
-    margin-right: 10px;
+    margin-right: 20px;
     margin-bottom: 30px;
 
     z-index: 3;
@@ -130,13 +133,11 @@ img {
 }
 img:not(:hover) {
   transition: 0.5s ease;
-  z-index: 4;
+  z-index: 5;
   } 
 img:hover {
     opacity: 1;
-    /* transition: .9s ease-in-out;  */
     position: relative;
-
     z-index: 4; 
   }
 

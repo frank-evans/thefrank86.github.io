@@ -3,6 +3,24 @@
 {% block body %}
     <h1>Search by Set</h1>
 
+    <!-- new javascript object api search    set.value/ select.value   -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var search_id = "neo";
+            fetch((`https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${search_id}&unique=prints`))
+            .then(response => response.json())
+            .then(data => {
+                const pic = data.data[5].image_uris.normal;
+                document.getElementById('img1').src = pic;
+            })
+            .catch(error => {
+                console.log("Error:", error);
+            });
+        });
+    </script>
+    <img id="img1">
+    <img id="img2" src="https://cards.scryfall.io/normal/front/e/8/e83b1b87-01d5-4624-8a2b-4b771e13e59c.jpg?1663046824"> 
+
     <!-- loading graphic divs -->
     <section id="loading">
         <div class="loader">
@@ -72,7 +90,8 @@
         {% csrf_token %}
 
         <select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list"><optgroup label="Expansions">
-            <option data-svg-code="dmu" value="dmu" selected="selected">Dominaria United (DMU)</option>
+            <option data-svg-code="default" value="bro"  selected="selected">The Brothers War (BRO)</option>
+            <option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
             <option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
             <option data-svg-code="neo" value="neo">Kamigawa: Neon Dynasty (NEO)</option>
             <option data-svg-code="vow" value="vow">Innistrad: Crimson Vow (VOW)</option>

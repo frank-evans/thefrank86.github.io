@@ -34,13 +34,12 @@
         }
 
         function resetStyles(e) {
+            this.style.zIndex = "10";
 	        this.style.transform =
             `perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
         }
 
     </script>
-
-    <h1>Cards : <a href="{% url 'index' %}">Go to New Search</a> </h1>
 
         {% for card in carddisplay %}
             
@@ -50,5 +49,5 @@
 
     <p>
         
-    <h2> <a href="{% url 'index' %}">Go to New Search</a> </h2>
+    <!-- <h2> <a href="{% url 'index' %}">Go to New Search</a> </h2> --> 
 {% endblock %}
