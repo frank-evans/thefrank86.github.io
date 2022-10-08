@@ -8,6 +8,9 @@
 		<!-- style.css file -->
         <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
 
+		<!-- jquery code for loading "on submit" code -->
+		<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -16,12 +19,70 @@
 
 	<body>
 
-		<!-- new javascript object api search    set.value/ select.value   -->
+		<script>
+			// image 3D effect on hover scripting
+			
+			//document.addEventListener('scroll', function() {
+			var hover = function () {	
+				document.querySelectorAll('img').forEach(item => {
+					item.addEventListener('mousemove', handleHover, false)
+				})
+	
+				document.querySelectorAll('img').forEach(item => {
+					item.addEventListener('mouseleave', resetStyles, false)
+				})
+
+			}
+			// throttle function for scroll
+			function throttle(fn, wait) {
+				var time = Date.now();
+				return function() {
+				  if ((time + wait - Date.now()) < 0) {
+					fn();
+					time = Date.now();
+				  }
+				}
+			  }
+			// throttled scroll listener
+			window.addEventListener('scroll', throttle(hover, 2000));
+
+
+				// hover angle threshold
+				const THRESHOLD = 6;
+	
+	
+				function handleHover(e) {
+					const { clientX, clientY, currentTarget } = e;
+					const { clientWidth, clientHeight, offsetLeft, offsetTop } = currentTarget;
+	
+					const horizontal = (clientX - offsetLeft) / clientWidth;
+					// added -window.scrollY to fix distortin on scroll
+					const vertical = (clientY - (offsetTop - window.scrollY)) / clientHeight;
+	
+					// this can be positive or negative to reverse the dynamic 3d (hover) effect
+					const rotateX = -(THRESHOLD / 2 - horizontal * THRESHOLD).toFixed(2);
+					const rotateY = -(vertical * THRESHOLD - THRESHOLD / 2).toFixed(2);
+	
+					this.style.transform =
+					`perspective(${clientWidth}px) rotateX(${rotateY}deg) rotateY(${rotateX}deg) scale3d(1.18, 1.18, 1.18)`;
+				}
+	
+				function resetStyles(e) {
+					this.style.zIndex = "10";
+					this.style.transform =
+					`perspective(${e.currentTarget.clientWidth}px) rotateX(0deg) rotateY(0deg)`;
+				}
+			
+	
+		</script>
+
+		<!--  new javascript object api search    set.value/ select.value   -->
+
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
 				document.querySelector('form').onsubmit = () => {
-						var select = document.getElementById('set');
-						var search_id = select.options[select.selectedIndex].value;
+						const select = document.getElementById('set');
+						const search_id = select.options[select.selectedIndex].value;
 						//var search_id = document.querySelector('setselect');
 						// fetch page 1 (0-174 entries)   =request.getparameter("setselect");
 						var page1 = {};
@@ -35,10 +96,6 @@
 							//page1.push(data);
 							//page1 = JSON.stringify(page1);
 
-							//const pic = page1.data[5].image_uris.normal;
-							//document.getElementById('img1').src = pic;
-
-
 							// set img1 for div used to iterate 
 							var img1 = document.getElementById('result');
 
@@ -46,7 +103,9 @@
 							for (let i = 0; i < Object.keys( page1.data ).length; i++) {
 								//check if double face card
 								if (typeof page1.data[i].image_uris === 'undefined') {
+									//check if all img data missing
 									if (typeof page1.data[i].card_faces === 'undefined') {
+
 										continue;
 									}
 									else {
@@ -54,6 +113,7 @@
 										 `<img class="tilt" width="20%" src="${page1.data[i].card_faces[0].image_uris.normal}">`;
 										img1.innerHTML +=
 										 `<img class="tilt" width="20%" src="${page1.data[i].card_faces[1].image_uris.normal}">`;
+
 										 continue;
 									}
 								}
@@ -73,7 +133,9 @@
 									for (let i = 0; i < Object.keys( page2.data ).length; i++) {
 										//check if double face card
 										if (typeof page2.data[i].image_uris === 'undefined') {
+											//check if all img data missing
 											if (typeof page2.data[i].card_faces === 'undefined') {
+
 												continue;
 											}
 											else {
@@ -81,6 +143,7 @@
 												`<img class="tilt" width="20%" src="${page2.data[i].card_faces[0].image_uris.normal}">`;
 												img1.innerHTML +=
 												`<img class="tilt" width="20%" src="${page2.data[i].card_faces[1].image_uris.normal}">`;
+
 												continue;
 											}
 										}
@@ -104,7 +167,9 @@
 									for (let i = 0; i < Object.keys( page3.data ).length; i++) {
 										//check if double face card.
 										if (typeof page3.data[i].image_uris === 'undefined') {
+											//check if all img data missing
 											if (typeof page3.data[i].card_faces === 'undefined') {
+
 												continue;
 											}
 											else {
@@ -112,6 +177,7 @@
 												`<img class="tilt" width="20%" src="${page3.data[i].card_faces[0].image_uris.normal}">`;
 												img1.innerHTML +=
 												`<img class="tilt" width="20%" src="${page3.data[i].card_faces[1].image_uris.normal}">`;
+
 												continue;
 											}
 										}
@@ -129,10 +195,16 @@
 							console.log("Error:", error);
 						});
 						
+						// add img listener condition here ************************
+						//var evt = document.createEvent("MouseEvents");
+ 						//evt.initMouseEvent("mousedown", true, true);
+						//document.body.dispatchEvent(evt);
+	
 
 						// stop form from submitting
 						return false;
 					}
+
 			});
 		</script>
 
@@ -1173,6 +1245,8 @@
 			<input id="input" type="submit" value="Submit" style="height:50px; width:100px">
 		</form>
 		</div>
+
 	</main>
 	</body>
+
 </html>
