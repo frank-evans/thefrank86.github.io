@@ -92,7 +92,7 @@ body {
     margin: 0;
     /* background-color: #000022; /* backup image */ 
     background-color: #ffffff;
-    background-image: url("stars.jpg"); 
+    background-image: url("stars.jpg");
     background-attachment: fixed;
     background-size: cover;
     }
@@ -130,6 +130,7 @@ img {
   /* round card corners --- & offset box shadows (bottom-right, top-left, all-blend)  */
     border-radius: 15px;
     box-shadow: 7px 6px 6px black, -3px -3px 4px black, 0px 0px 1px 2px black;
+
 }
 img:not(:hover) {
   transition: 0.5s ease;

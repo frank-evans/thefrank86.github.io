@@ -22,6 +22,7 @@
 		<script>
 			// image 3D effect on hover scripting
 			
+			// function to add hover effects after all img's added
 			//document.addEventListener('scroll', function() {
 			var hover = function () {	
 				document.querySelectorAll('img').forEach(item => {
@@ -43,8 +44,11 @@
 				  }
 				}
 			  }
-			// throttled scroll listener
-			window.addEventListener('scroll', throttle(hover, 2000));
+			// throttled scroll listener for img hover
+			//window.addEventListener('scroll', throttle(hover, 2000));
+
+			//setInterval(hover, 2000);
+			
 
 
 				// hover angle threshold
@@ -188,20 +192,22 @@
 									console.log("Error:", error);
 								});
 
-								
 							}
 						})
 						.catch(error => {
 							console.log("Error:", error);
 						});
 						
-						// add img listener condition here ************************
-						//var evt = document.createEvent("MouseEvents");
- 						//evt.initMouseEvent("mousedown", true, true);
-						//document.body.dispatchEvent(evt);
-	
+						// hide form on submit/search
+						var y = document.getElementById("form");
+						y.style.display = "none";
+						var z = document.getElementById("outer");
+						z.style.display = "none";
 
-						// stop form from submitting
+						// call for img 3d hover AFTER new img's load   ************* 2 seconds current MINIMUM  *****************
+						setTimeout(hover, 2000);
+
+						// stop form from submitting (bypass django dataframe search/result)
 						return false;
 					}
 
@@ -211,7 +217,7 @@
 		<canvas id="bg"></canvas>
 
 		<main>
-		<img id="img1" class = "tilt" width = "20%">
+		<p></p>
 
 		<div id="result"></div>
 
@@ -294,19 +300,19 @@
 
 
 				// Lightning ambient (x, 3'intensity')
-				const ambientLight = new THREE.AmbientLight(0x404040, 3);
+				const ambientLight = new THREE.AmbientLight(0x404040, 1);
 				//ambientLight.position.set(1,1,1);
 
 				scene.add(ambientLight);
 
-				// Light directional Top
-				const Light = new THREE.DirectionalLight(0xC95500, 8);
+				// Light directional Top (gold : 0xC95500)
+				const Light = new THREE.DirectionalLight(0xaa1000, 8);
 				Light.position.set(90,90,50);
 
 				scene.add(Light);
 
-				// Light directional Bottom
-				const Light2 = new THREE.DirectionalLight(0x050055, 20);
+				// Light directional Bottom  (purple : 0x050055)
+				const Light2 = new THREE.DirectionalLight(0x001030, 20);
 				Light2.position.set(-90,-90,50);
 
 				scene.add(Light2);
@@ -419,8 +425,8 @@
 			function updateSphere(event) {
 
 				var st = window.pageYOffset || document.documentElement.scrollTop;
-
-				if (st > lastScrollTop && mesh.position.z < 170){
+				// lastScrollTop && mesh.position.z < 170
+				if (st > lastScrollTop && mesh.position.z < 150){
 					mesh.position.z += 1;
 					lastScrollTop = st <= 0 ? 0 : st;
 				}
