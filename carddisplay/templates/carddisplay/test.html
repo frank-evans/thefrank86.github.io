@@ -47,7 +47,7 @@
 			// throttled scroll listener for img hover
 			//window.addEventListener('scroll', throttle(hover, 2000));
 
-			//setInterval(hover, 2000);
+			setInterval(hover, 5000);
 			
 
 
@@ -81,7 +81,6 @@
 		</script>
 
 		<!--  new javascript object api search    set.value/ select.value   -->
-
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
 				document.querySelector('form').onsubmit = () => {
@@ -205,7 +204,7 @@
 						z.style.display = "none";
 
 						// call for img 3d hover AFTER new img's load   ************* 2 seconds current MINIMUM  *****************
-						setTimeout(hover, 2000);
+						//setTimeout(hover, 3000);
 
 						// stop form from submitting (bypass django dataframe search/result)
 						return false;
@@ -305,13 +304,13 @@
 
 				scene.add(ambientLight);
 
-				// Light directional Top (gold : 0xC95500)
+				// Light directional Top (gold : 0xC95500) (red : 0xaa1000)
 				const Light = new THREE.DirectionalLight(0xaa1000, 8);
 				Light.position.set(90,90,50);
 
 				scene.add(Light);
 
-				// Light directional Bottom  (purple : 0x050055)
+				// Light directional Bottom  (purple : 0x050055) (blue : 0x001030)
 				const Light2 = new THREE.DirectionalLight(0x001030, 20);
 				Light2.position.set(-90,-90,50);
 
