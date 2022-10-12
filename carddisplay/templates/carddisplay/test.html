@@ -14,7 +14,7 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>Cards test page</title>	
+		<title>Cards test</title>	
 	</head>
 
 	<body>
@@ -24,7 +24,8 @@
 			
 			// function to add hover effects after all img's added
 			//document.addEventListener('scroll', function() {
-			var hover = function () {	
+			//var hover = function () {	
+			function hover() {
 				document.querySelectorAll('img').forEach(item => {
 					item.addEventListener('mousemove', handleHover, false)
 				})
@@ -35,7 +36,7 @@
 
 			}
 			// throttle function for scroll
-			function throttle(fn, wait) {
+			/* function throttle(fn, wait) {
 				var time = Date.now();
 				return function() {
 				  if ((time + wait - Date.now()) < 0) {
@@ -43,12 +44,11 @@
 					time = Date.now();
 				  }
 				}
-			  }
+			  } */
 			// throttled scroll listener for img hover
 			//window.addEventListener('scroll', throttle(hover, 2000));
 
-			setInterval(hover, 5000);
-			
+			//const hoverId = setInterval(hover, 4000);
 
 
 				// hover angle threshold
@@ -80,17 +80,18 @@
 	
 		</script>
 
-		<!--  new javascript object api search    set.value/ select.value   -->
+		<!--  new javascript object api search   -->
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
 				document.querySelector('form').onsubmit = () => {
+						// get submitted selected option 
 						const select = document.getElementById('set');
 						const search_id = select.options[select.selectedIndex].value;
-						//var search_id = document.querySelector('setselect');
-						// fetch page 1 (0-174 entries)   =request.getparameter("setselect");
+						
 						var page1 = {};
 						var page2 = {};
 						var page3 = {};
+						// fetch page 1 (0-174 entries)   =request.getparameter("setselect");
 						fetch((`https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${search_id}&unique=prints`))
 						.then(response => response.json())
 						.then(data => {
@@ -124,8 +125,49 @@
 								
 							}
 
+							for (let j = 1; j < 10; j++) {
+								if (page1.has_more) {
+									k = j + 1;
+									fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=${k}&q=e%3A${search_id}&unique=prints`))
+									.then(response => response.json())
+									.then(data => {
+
+										pagek = data;
+	
+										// loop through each page adding images 
+										for (let i = 0; i < Object.keys( pagek.data ).length; i++) {
+											//check if double face card
+											if (typeof pagek.data[i].image_uris === 'undefined') {
+												//check if all img data missing
+												if (typeof pagek.data[i].card_faces === 'undefined') {
+	
+													continue;
+												}
+												else {
+													img1.innerHTML +=
+													`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
+													img1.innerHTML +=
+													`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
+	
+													continue;
+												}
+											}
+											img1.innerHTML += `<img class="tilt" width="20%" src="${pagek.data[i].image_uris.normal}">`;
+
+											if (pagek.has_more !== true) {
+												page1.has_more = false;
+											}
+										}
+									})
+									.catch(error => {
+										console.log("Error:", error);
+									});
+								}
+							}
+
+
 							// fetch page 2 (175-350 entries)
-							if (page1.has_more) {
+							/* if (page1.has_more) {
 								fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=2&q=e%3A${search_id}&unique=prints`))
 								.then(response => response.json())
 								.then(data => {
@@ -156,11 +198,11 @@
 								.catch(error => {
 									console.log("Error:", error);
 								});
-							}
+							}  */
 
 
 							// fetch page 3 (350-? entries)
-							if (page2.has_more) {
+							/* if (page2.has_more) {
 								fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=3&q=e%3A${search_id}&unique=prints`))
 								.then(response => response.json())
 								.then(data => {
@@ -189,10 +231,12 @@
 								})
 								.catch(error => {
 									console.log("Error:", error);
-								});
+								}); 
 
-							}
+							}  */
 						})
+						// call 3d hover effect function after new img's loaded
+						.then(setTimeout(hover, 2 * 1000))
 						.catch(error => {
 							console.log("Error:", error);
 						});
@@ -203,14 +247,18 @@
 						var z = document.getElementById("outer");
 						z.style.display = "none";
 
-						// call for img 3d hover AFTER new img's load   ************* 2 seconds current MINIMUM  *****************
-						//setTimeout(hover, 3000);
+
+						// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
+						setTimeout(hover, 8 * 1000);
+						
 
 						// stop form from submitting (bypass django dataframe search/result)
 						return false;
 					}
 
+
 			});
+
 		</script>
 
 		<canvas id="bg"></canvas>
@@ -218,7 +266,7 @@
 		<main>
 		<p></p>
 
-		<div id="result"></div>
+		<div id="result" style="margin-top:60px;"></div>
 
 		<section id="loading">
 			<div class="loader">
@@ -272,7 +320,7 @@
 	<!-- background three.js dynamic/responsive objects script -->
 	<script type="module">
 		
-		let camera, scene, renderer, mesh, mesh2;
+		let camera, scene, renderer, mesh, mesh2, controls;
 
 		let mouseX, mouseY, targetX, targetY, windowX, windowY;
 
@@ -288,6 +336,9 @@
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 43, 1000 );
 				camera.position.set(0, 0, 400);
 
+				// orbit controls 
+				// controls = new THREE.OrbitControls(camera);
+
 				//texture loading
 				const textureLoader = new THREE.TextureLoader();
 
@@ -295,7 +346,7 @@
 				const normalTexture = textureLoader.load("{% static 'textures/NormalMap5.png' %}");
 
 				//  particle texture loading
-				const star = textureLoader.load("{% static 'star/star-purple.png' %}");
+				const star = textureLoader.load("{% static 'star/star-blue.png' %}");
 
 
 				// Lightning ambient (x, 3'intensity')
@@ -306,13 +357,13 @@
 
 				// Light directional Top (gold : 0xC95500) (red : 0xaa1000)
 				const Light = new THREE.DirectionalLight(0xaa1000, 8);
-				Light.position.set(90,90,50);
+				Light.position.set(90,90,70);
 
 				scene.add(Light);
 
 				// Light directional Bottom  (purple : 0x050055) (blue : 0x001030)
 				const Light2 = new THREE.DirectionalLight(0x001030, 20);
-				Light2.position.set(-90,-90,50);
+				Light2.position.set(-90,-90,20);
 
 				scene.add(Light2);
 
@@ -416,7 +467,20 @@
 			}
 
 			// scroll object ZOOM browser event listener
-			window.addEventListener( 'scroll', updateSphere, false);
+			window.addEventListener( 'scroll', throttle(updateSphere, 0), false);
+
+			// throttle function for scroll
+			function throttle(fn, wait) {
+				var time = Date.now();
+				return function() {
+				  if ((time + wait - Date.now()) < 0) {
+					fn();
+					time = Date.now();
+				  }
+				}
+			  } 
+			// throttled scroll listener for img hover
+			//window.addEventListener('scroll', throttle(hover, 2000));
 
 			var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -426,12 +490,12 @@
 				var st = window.pageYOffset || document.documentElement.scrollTop;
 				// lastScrollTop && mesh.position.z < 170
 				if (st > lastScrollTop && mesh.position.z < 150){
-					mesh.position.z += 1;
+					mesh.position.z += 1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 				}
 				else if (st < lastScrollTop && mesh.position.z > -100) {
 					//mesh.position.z += window.scrollY * -.0007;
-					mesh.position.z += -1;
+					mesh.position.z += -1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 				}
 				else {
