@@ -24,7 +24,6 @@
 	</head>
 
 	<body id="body">
-
 		<!-- sticky navigation bar -->
 		<header class="nav">
 			<nav>
@@ -49,10 +48,17 @@
 							if (x.style.display == "none") {
 								x.style.display = "block";
 								y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+
+								audioSun.muted = false;
+								audioFire.muted = false;
 							}
 							else {
 								x.style.display = "none";
 								y.style.backgroundImage = "none";
+
+								audioSun.muted = true;
+								audioFire.muted = true;
+			
 							}
 						}
 					});
@@ -134,11 +140,30 @@
 
 		<!--  new javascript object api search   -->
 		<script>
+
+			//audio file script 
+			const audioFire = new Audio("{% static 'fire4.ogg' %}");
+			audioFire.volume = (0.007);
+			audioFire.autoplay = true;
+			audioFire.muted = true;
+			audioFire.loop = true; 
+
+			const audioSun = new Audio("{% static 'sun5.ogg' %}");
+			audioSun.volume = (0.1);
+			audioSun.autoplay = true;
+			audioSun.muted = true;
+			audioSun.loop = true;
+
 			document.addEventListener('DOMContentLoaded', function() {
 
 				// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
 
 				document.querySelector('form').onsubmit = () => {
+						// play audio
+						audioFire.muted = false; 
+						audioSun.muted = false;
+						
+					
 						// get submitted selected option 
 						const select = document.getElementById('set');
 						const search_id = select.options[select.selectedIndex].value;
@@ -598,11 +623,18 @@
 				if (st > lastScrollTop && mesh.position.z < 150){
 					mesh.position.z += 1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
+
+					audioFire.volume += (0.00015);
+					audioSun.volume += (0.0015);
 				}
-				else if (st < lastScrollTop && mesh.position.z > -100) {
+				// lastScrollTop && mesh.position.z > -100
+				else if (st < lastScrollTop && mesh.position.z > 0) {
 					//mesh.position.z += window.scrollY * -.0007;
 					mesh.position.z += -1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
+
+					audioFire.volume -= (0.00015);
+					audioSun.volume -= (0.0015);
 				}
 				else {
 					lastScrollTop = st <= 0 ? 0 : st;
