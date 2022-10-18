@@ -17,21 +17,45 @@
         <title>Cards</title>
     </head>
 
-    <body>
+    <body id="body">
 
-		<!-- ********* change planet to look like moten Lava on the right ********** -->
+		<!-- sticky navigation bar -->
 		<header>
 			<nav>
 				<h1 class="title">Frank's Code</h1>
 				<ul>
 					<li><a data-page="home" href="{% url 'index' %}">Home</a></li>
 					<li><a data-page="project" href="{% url 'index' %}">Projects</a></li>
-					<li><a data-page="contact" href="{% url 'index' %}">Contact</a></li>
+					<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
+					<button id="hide">Background</button>
 				</ul>
 			</nav>
+			<!-- Hide/unhide background-->
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+	
+					// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
+	
+					document.querySelector('button').onclick = () => {
+							// hide/unhide canvas
+							let x = document.getElementById("bg");
+							let y = document.getElementById("body");
+							if (x.style.display == "none") {
+								x.style.display = "block";
+								y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+							}
+							else {
+								x.style.display = "none";
+								y.style.backgroundImage = "none";
+							}
+						}
+					});
+			</script>
 		</header>
+
 		<canvas id="bg"></canvas>
 
+		
 		<!-- base three.js files -->
         <script type="module" src="{% static 'three/three.js' %}"></script>
 

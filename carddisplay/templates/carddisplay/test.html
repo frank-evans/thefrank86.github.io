@@ -14,10 +14,62 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<meta http-equiv='cache-control' content='no-cache'>
+		<meta http-equiv='expires' content='0'>
+		<meta http-equiv='pragma' content='no-cache'>
+
+		
 		<title>Cards test</title>	
 	</head>
 
-	<body>
+	<body id="body">
+
+		<!-- sticky navigation bar -->
+		<header class="nav">
+			<nav>
+				<h1 class="title">Frank's Code</h1>
+				<ul>
+					<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
+					<li><a data-page="project" href="{% url 'test' %}">Projects</a></li>
+					<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
+					<li><a id="hide">Background</a></li>
+				</ul>
+			</nav>
+			<!-- Hide/unhide background-->
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+	
+					// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
+	
+					document.getElementById('hide').onclick = () => {
+							// hide/unhide canvas
+							let x = document.getElementById("bg");
+							let y = document.getElementById("body");
+							if (x.style.display == "none") {
+								x.style.display = "block";
+								y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+							}
+							else {
+								x.style.display = "none";
+								y.style.backgroundImage = "none";
+							}
+						}
+					});
+			</script>
+		</header>
+
+		<!-- force reload on "back button" to ensure object.model data reload -->
+		<script type="module">
+
+            window.addEventListener( "pageshow", function ( event ) {
+			    if (performance.navigation.type == 2){
+				    location.reload(true);
+					document.getElementById('form').reset();
+			    }
+            });
+
+		</script>
 
 		<script>
 			// image 3D effect on hover scripting
@@ -83,14 +135,14 @@
 		<!--  new javascript object api search   -->
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
+
+				// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
+
 				document.querySelector('form').onsubmit = () => {
 						// get submitted selected option 
 						const select = document.getElementById('set');
 						const search_id = select.options[select.selectedIndex].value;
-						
-						var page1 = {};
-						var page2 = {};
-						var page3 = {};
+				
 						// fetch page 1 (0-174 entries)   =request.getparameter("setselect");
 						fetch((`https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${search_id}&unique=prints`))
 						.then(response => response.json())
@@ -101,7 +153,7 @@
 							//page1 = JSON.stringify(page1);
 
 							// set img1 for div used to iterate 
-							var img1 = document.getElementById('result');
+							let img1 = document.getElementById('result');
 
 							// loop through each page adding images 
 							for (let i = 0; i < Object.keys( page1.data ).length; i++) {
@@ -126,43 +178,64 @@
 							}
 
 							for (let j = 1; j < 10; j++) {
-								if (page1.has_more) {
-									k = j + 1;
-									fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=${k}&q=e%3A${search_id}&unique=prints`))
-									.then(response => response.json())
-									.then(data => {
+								delay(j);
+							}
+							
+							function delay(j) {
+								// timeout to comply with scryfall api use rules
+								setTimeout( () => {
+								//`promise${k}` = setTimeout( () => {
+									if (page1.has_more) {
+										k = j + 1;
+										fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=${k}&q=e%3A${search_id}&unique=prints`))
+										.then(response => response.json())
+										.then(data => {
 
-										pagek = data;
-	
-										// loop through each page adding images 
-										for (let i = 0; i < Object.keys( pagek.data ).length; i++) {
-											//check if double face card
-											if (typeof pagek.data[i].image_uris === 'undefined') {
-												//check if all img data missing
-												if (typeof pagek.data[i].card_faces === 'undefined') {
-	
-													continue;
+											pagek = data;
+		
+											// loop through each page adding images 
+											// for (let i = 0; i < Object.keys( pagek.data ).length; i++) {    *** old ***
+											for (let i = 0; i < 175; i++) {
+												//check if double face card
+												if (typeof pagek.data[i].image_uris === 'undefined') {
+													//check if all img data missing
+													if (typeof pagek.data[i].card_faces === 'undefined') {
+
+														// attempt to slow last page load for proper order (fail)
+														img1.innerHTML += 
+														`<img class="tilt" width="20%" hidden="hidden" src="${page1.data[i].image_uris.normal}">`;
+
+														img1.innerHTML +=
+														`<img class="tilt" width="20%" hidden="hidden" scr="${page1.data[i].card_faces[0].image_uris.normal}">`;
+
+														continue;
+													}
+													else {
+														img1.innerHTML +=
+														`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
+														img1.innerHTML +=
+														`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
+		
+														continue;
+													}
 												}
-												else {
-													img1.innerHTML +=
-													`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
-													img1.innerHTML +=
-													`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
-	
-													continue;
-												}
+												img1.innerHTML += `<img class="tilt" width="20%" src="${pagek.data[i].image_uris.normal}">`;
+
 											}
-											img1.innerHTML += `<img class="tilt" width="20%" src="${pagek.data[i].image_uris.normal}">`;
 
 											if (pagek.has_more !== true) {
 												page1.has_more = false;
 											}
-										}
-									})
-									.catch(error => {
-										console.log("Error:", error);
-									});
-								}
+										})
+										.catch(error => {
+											console.log("Error:", error);
+										});
+										
+									}
+
+								}, 200);
+
+								
 							}
 
 
@@ -249,8 +322,16 @@
 
 
 						// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
-						setTimeout(hover, 8 * 1000);
+						setTimeout(hover, 6 * 1000);
 						
+						setTimeout(hover, 12 * 1000);
+						
+
+						delete page1;
+						delete pagek;
+						
+						// reset form for proper load on refresh
+						//document.getElementById('form').reset();
 
 						// stop form from submitting (bypass django dataframe search/result)
 						return false;
@@ -266,6 +347,7 @@
 		<main>
 		<p></p>
 
+		<!-- added style margin top to prevent overflow on hover of top row -->
 		<div id="result" style="margin-top:60px;"></div>
 
 		<section id="loading">
@@ -317,12 +399,20 @@
 	<!-- Orbit camera around objects (not currently used)
 	<script type="module" src="{% static 'three/OrbitControls.js' %}"></script> -->
 
+	<!--
+	<script type="module" src="{% static 'three/EffectComposer.js' %}"></script>
+	<script type="module" src="{% static 'three/RenderPass.js' %}"></script>
+	<script type="module" src="{% static 'three/UnrealBloomPass.js' %}"></script>
+	<script type="module" src="{% static 'three/AfterimagePass.js' %}"></script>  -->
+
 	<!-- background three.js dynamic/responsive objects script -->
 	<script type="module">
 		
 		let camera, scene, renderer, mesh, mesh2, controls;
 
 		let mouseX, mouseY, targetX, targetY, windowX, windowY;
+
+		// let renderPass, composer, bloomPass;
 
 			init();
 
@@ -346,7 +436,7 @@
 				const normalTexture = textureLoader.load("{% static 'textures/NormalMap5.png' %}");
 
 				//  particle texture loading
-				const star = textureLoader.load("{% static 'star/star-blue.png' %}");
+				const star = textureLoader.load("{% static 'star/star-blue2.png' %}");
 
 
 				// Lightning ambient (x, 3'intensity')
@@ -404,7 +494,7 @@
 
 				// **************************
 
-				// Other 2nd object
+				// Other small stars object
 				// Particles geometry
 				const dotGeometry = new THREE.BufferGeometry();
 				// particle count
@@ -431,7 +521,7 @@
 				dotGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
 				const dotMaterial = new THREE.PointsMaterial({
-					size: 1.5,
+					size: 3,
 					//color: 0xddc0ff,
 					color: 0xffffff,
 					map: star,
@@ -453,6 +543,17 @@
 				camera.position.setZ(500);
 				document.body.appendChild( renderer.domElement );
 
+				// post-processing effects setup
+				/* composer = new EffectComposer(renderer);
+
+				renderPass = new RenderPass(scene, camera);
+				composer.addPass(renderPass);
+
+				bloomPass = new UnrealBloomPass(new THREE.Vector2(w, h), 5.0, 0, 0);
+				composer.addPass(bloomPass); */
+
+
+				
 				window.addEventListener( 'resize', onWindowResize );
 
 
@@ -482,6 +583,11 @@
 			// throttled scroll listener for img hover
 			//window.addEventListener('scroll', throttle(hover, 2000));
 
+			// nav bar dynamic on scroll
+			const nav = document.querySelector("header.nav");
+			let lastScrollY = window.scrollY;
+
+			// scroll function to zoom Object main
 			var lastScrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
 			// scroll function to zoom Object main
@@ -500,8 +606,20 @@
 				}
 				else {
 					lastScrollTop = st <= 0 ? 0 : st;
-					return;
+					
 				}
+
+				// nav bar dynamic on scroll
+				if (lastScrollY < window.scrollY) {
+					nav.style.top = "-100px";
+				}
+				else {
+					nav.style.top = "0";
+				}
+
+				lastScrollY = window.scrollY;
+
+				return;
 			}
 
 			// dynamic mouse movement interaction Function					
@@ -545,8 +663,11 @@
 				mesh2.rotation.z += 0.0004;
 
 				renderer.render(scene, camera);
+				//composer.render();
 
 				requestAnimationFrame(animate);
+
+				
 
 			}
 
@@ -557,7 +678,7 @@
 
 	<div class="outer" id="outer">
 		<!-- <form action="{% url 'result' %}" method="post" id="form"> -->
-			<form id="form" method="post">
+			<form id="form" method="post" autocomplete="off">
 			{% csrf_token %}
 	
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list"><optgroup label="Expansions">

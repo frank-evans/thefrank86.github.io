@@ -1,0 +1,35 @@
+<!-- load static folder for .js and images -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style.css file -->
+    <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
+
+    <title>Get in Contact</title>
+</head>
+<body class="contactBody">
+    
+    <div class="container">
+        
+        <form action="https://formspree.io/f/meqdzwgv" method="POST" class="contactForm">
+            
+            <h1 class="contacth1">Contact Me</h1>
+
+            <input type="text" name="Name" placeholder="Your Name/Company" class="contactOption" required>
+            
+            <input type="email" name"Email" placeholder="Your Email" class="contactOption" required>
+            
+            <textarea name="Message" placeholder="Your Message" class="contactOption" required></textarea>
+            
+            <input type="submit" value="Send" class="contactButton">
+        </form>
+    </div>
+    
+</body>
+</html>

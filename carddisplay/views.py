@@ -25,6 +25,12 @@ def index(request):
             "carddisplay": card.objects.all()
         })
 
+def contact(request):
+
+        return render(request, "carddisplay/contact.html", {
+            "carddisplay": card.objects.all()
+        })
+
 
 
 def result(request):
