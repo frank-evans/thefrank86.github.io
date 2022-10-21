@@ -661,7 +661,7 @@
 			//gl_FragColor = vec4(vUv*, 0.0, 1.);
 
 			// BASE
-			vec4 p = vec4(vPos/30., time *0.04);
+			vec4 p = vec4(vPos/50., time *0.04);
 			float noisy = fbm(p);
 			
 			//gl_FragColor = vec4(noisy); 
@@ -674,7 +674,7 @@
 
 			// Color
 			float brightness = noisy * mix(0., spots, 0.9);
-			brightness = brightness*3. + 1.;
+			brightness = brightness*3. + 1.5;
 
 			//fresnel
 			float fres = Fresnel(eyeVector, vNormal);
@@ -699,6 +699,46 @@
 	
 	</script>
 
+	<!-- GLOW *********************************************************** -->
+	<script type="x-shader/x-vertex" id="vertexShaderGlow">
+		uniform float time;
+		varying vec2 vUv;
+		varying vec3 vPosition; 
+		varying vec3 vNorm;
+		void main() {
+			vUv = uv;
+			vNorm = normal;
+			vPosition = position;
+	
+			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0);
+
+		}
+	</script>
+
+	<script type="x-shader/x-fragment" id="fragmentShaderGlow">
+		uniform float time;
+		varying vec2 vUv;
+		varying vec3 vPosition; 
+		varying vec3 vNorm;
+
+		vec3 brightnessToColor(float b) {
+			b *= 0.25;
+			return (vec3(b, b*b, b*b*b*b)/0.25)*0.8;
+		}
+
+		void main() {
+			float radial = 1. - vNorm.z;
+			radial *= radial * radial * radial;
+
+			float brightness = 1. + radial*2.0;
+
+			gl_FragColor.rgb = brightnessToColor(brightness)*radial;
+
+			gl_FragColor.a = radial;
+
+			//gl_FragColor = vec4(radial, 0., 0., 1.);
+		}
+	</script>
 
 	<!-- background three.js dynamic/responsive objects script -->
 	<script type="module">
@@ -708,6 +748,8 @@
 		let mouseX, mouseY, targetX, targetY, windowX, windowY;
 
 		let geometry, material, uniforms, extensions, time, resolution, derivatives;
+
+		let geometry3, material3, mesh3;
 
 		// let renderPass, composer, bloomPass;
 
@@ -762,6 +804,9 @@
 				//const geometry = new THREE.IcosahedronGeometry(180, 2);
 				geometry = new THREE.SphereBufferGeometry(280, 100, 100);
 
+				// sun outer glow geo
+				geometry3 = new THREE.SphereBufferGeometry(310, 100, 100);
+
 				// Material (normal texture)
 				/*const material = new THREE.MeshStandardMaterial();
 				material.metalness = 0.7;
@@ -774,10 +819,11 @@
 				// Material (Shaders)
 				time = 1.0;
 				material = new THREE.ShaderMaterial( {
-					extensions: {
-						derivatives: "#extension GL_OES_standard_derivatives : enable"
-					},
-					side: THREE.DoubleSide, 
+					//extensions: {
+					//	derivatives: "#extension GL_OES_standard_derivatives : enable"
+					//},
+					//side: THREE.DoubleSide, 
+					//side: THREE.BackSide,
 
 					uniforms: {
 						/*globeTexture: { 
@@ -796,10 +842,32 @@
 				
 				} ); 
 
+				// sun outer glow mat
+				material3 = new THREE.ShaderMaterial( {
+					
+					side: THREE.BackSide,
+
+					uniforms: {
+						time: {
+							value: 1.0
+						}
+					}, 
+				
+					vertexShader: document.getElementById( 'vertexShaderGlow' ).textContent,
+
+					fragmentShader: document.getElementById( 'fragmentShaderGlow' ).textContent,
+				
+				} ); 
+
+				// sun glow mesh
+				mesh3 = new THREE.Mesh(geometry3, material3);
+
 				// Mesh
 				mesh = new THREE.Mesh(geometry, material);
 				scene.add(mesh);
-				
+
+				scene.add(mesh3);
+
 
 				//second object 
 
@@ -919,6 +987,7 @@
 				// lastScrollTop && mesh.position.z < 170
 				if (st > lastScrollTop && mesh.position.z < 150){
 					mesh.position.z += 1.5;
+					mesh3.position.z += 1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 
 					audioFire.volume += (0.00015);
@@ -928,6 +997,7 @@
 				else if (st < lastScrollTop && mesh.position.z > 0) {
 					//mesh.position.z += window.scrollY * -.0007;
 					mesh.position.z += -1.5;
+					mesh3.position.z += -1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 
 					audioFire.volume -= (0.00015);
@@ -995,6 +1065,7 @@
 				//shader updates
 				time += 0.05;
 				material.uniforms.time.value = time;
+				material3.uniforms.time.value = time;
 
 				renderer.render(scene, camera);
 				//composer.render();
