@@ -661,7 +661,8 @@
 			//gl_FragColor = vec4(vUv*, 0.0, 1.);
 
 			// BASE
-			vec4 p = vec4(vPos/50., time *0.04);
+			//vec4 p = vec4(vPos/35., time *0.03);
+			vec4 p = vec4(vNormal*08., time *0.03);
 			float noisy = fbm(p);
 			
 			//gl_FragColor = vec4(noisy); 
@@ -673,7 +674,7 @@
 			//gl_FragColor *= mix(0., spots, 0.7);
 
 			// Color
-			float brightness = noisy * mix(0., spots, 0.9);
+			float brightness = noisy * mix(0., spots, 0.8);
 			brightness = brightness*3. + 1.5;
 
 			//fresnel
@@ -775,7 +776,8 @@
 				const normalTexture = textureLoader.load("{% static 'textures/NormalMap5.png' %}");
 
 				//  particle texture loading
-				const star = textureLoader.load("{% static 'star/star-blue2.png' %}");
+				const star = textureLoader.load("{% static 'star/asteroid2.png' %}");
+				star.rotation = 0.3;
 
 
 				// Lightning ambient (x, 3'intensity')
@@ -805,7 +807,7 @@
 				geometry = new THREE.SphereBufferGeometry(280, 100, 100);
 
 				// sun outer glow geo
-				geometry3 = new THREE.SphereBufferGeometry(310, 100, 100);
+				geometry3 = new THREE.SphereBufferGeometry(310, 100, 12);
 
 				// Material (normal texture)
 				/*const material = new THREE.MeshStandardMaterial();
@@ -911,7 +913,7 @@
 				dotGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
 
 				const dotMaterial = new THREE.PointsMaterial({
-					size: 3,
+					size: 2.0,
 					//color: 0xddc0ff,
 					color: 0xffffff,
 					map: star,
@@ -985,12 +987,12 @@
 
 				var st = window.pageYOffset || document.documentElement.scrollTop;
 				// lastScrollTop && mesh.position.z < 170
-				if (st > lastScrollTop && mesh.position.z < 150){
+				if (st > lastScrollTop && mesh.position.z < 140){
 					mesh.position.z += 1.5;
 					mesh3.position.z += 1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 
-					audioFire.volume += (0.00015);
+					audioFire.volume += (0.00011);
 					audioSun.volume += (0.0015);
 				}
 				// lastScrollTop && mesh.position.z > -100
@@ -1000,7 +1002,7 @@
 					mesh3.position.z += -1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 
-					audioFire.volume -= (0.00015);
+					audioFire.volume -= (0.00011);
 					audioSun.volume -= (0.0015);
 				}
 				else {
@@ -1045,22 +1047,22 @@
 				// dynamic mouse movement interaction (keep rotation.z for constant movement)
 				targetX = mouseX * .001;
 				targetY = mouseY * .001;
-				// 4 Mesh rotations temp off for shader tests
-				//mesh.rotation.x += .01 * (targetY - mesh.rotation.x);
-				//mesh.rotation.y += .01 * (targetX - mesh.rotation.y);
+				// 4 Mesh rotations temporary off for shader tests
+				//mesh.rotation.x += .003 * (targetY - mesh.rotation.x);
+				//mesh.rotation.y += .003 * (targetX - mesh.rotation.y);
 
-				//mesh2.rotation.x += .05 * (targetY - mesh2.rotation.x);
-				//mesh2.rotation.y += .05 * (targetX - mesh2.rotation.y);
+				mesh2.rotation.x += .008 * (targetY - mesh2.rotation.x);
+				mesh2.rotation.y += .008 * (targetX - mesh2.rotation.y);
 
-				// Mesh
-				//mesh.rotation.x += 0.003;
-				//mesh.rotation.y += 0.002;
-				mesh.rotation.z += 0.0005;
+				// Mesh (sun) static movement (diable x/y when mouse move on)
+				//mesh.rotation.x += 0.0005;
+				//mesh.rotation.y += 0.0009;
+				mesh.rotation.z -= 0.0003;
 
-				// Mesh 2  best (rotate z)
-				//mesh2.rotation.y += 0.002;
-				//mesh2.rotation.x += 0.005;
-				mesh2.rotation.z -= 0.001;
+				// Mesh 2 (asteroids) static movement best (rotate z)
+				//mesh2.rotation.y += 0.003;
+				//mesh2.rotation.x += 0.0005;
+				mesh2.rotation.z -= 0.0009;
 
 				//shader updates
 				time += 0.05;
