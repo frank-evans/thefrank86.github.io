@@ -1,5 +1,11 @@
+#hide {
+  cursor: help;
+}
 #img1 {
   margin: auto;
+}
+#input {
+  cursor: pointer;
 }
 header.nav {
   box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.5);
@@ -7,7 +13,7 @@ header.nav {
   top: 0px;
   display: flex;
   background: #d8d8d8;
-  font-family: sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   opacity: 0.85;
   z-index: 5;
   transition: top 0.6s ease-in-out;
@@ -28,8 +34,6 @@ nav {
 nav ul {
   font-size: 1.5rem;
   flex: 1;
-}
-nav ul {
   list-style: none;
   display: flex;
   justify-content: space-between;
@@ -91,17 +95,23 @@ canvas {
 
 body {
     text-align: center;
+    justify-content: center;
+    align-items: center;
     margin: 0;
     /* background-color: #000022; /* backup image */ 
     background-color: #ffffff;
     background-image: url("stars.jpg");
     background-attachment: fixed;
     background-size: cover;
+    /*cursor: url("ship6.png"), default; */
     }
 
 main {
+  /* width: 96%; (hover overflow guard) */
+    width: 96%;
     position: relative;
     z-index: 2;
+    display: inline-table;
 }
 
 body h1,
@@ -118,6 +128,8 @@ optgroup > option {
 }
 
 img {
+    width: 24rem;
+    height: auto;
     padding: 0px;
     opacity: 0.8;
     /* transformed in result.html script  */
@@ -125,23 +137,26 @@ img {
     transform-style: preserve-3d;
     will-change: transform;
     
-    margin-right: 20px;
-    margin-bottom: 30px;
+    margin-right: 1.25rem;
+    margin-bottom: 1.9rem;
 
     z-index: 3;
   /* round card corners --- & offset box shadows (bottom-right, top-left, all-blend)  */
-    border-radius: 15px;
+    border-radius: 1.1rem;
     box-shadow: 7px 6px 6px black, -3px -3px 4px black, 0px 0px 1px 2px black;
 
-}
-img:not(:hover) {
-  transition: 0.5s ease;
-  z-index: 5;
-  } 
-img:hover {
-    opacity: 1;
-    position: relative;
-    z-index: 4; 
+  }
+  #result {
+    margin-top: 4rem;
+  }
+  img:not(:hover) {
+    transition: 0.5s ease;
+    z-index: 5;
+    } 
+  img:hover {
+      opacity: 1;
+      position: relative;
+      z-index: 4; 
   }
 
   img:hover .content {
@@ -241,14 +256,12 @@ img:hover {
     z-index: 15;  
   }
 
-  /*  Nav bar and contact page   *****************************************************  */
-  #hide {
-    cursor: help;
-  }
+  /*  Contact page   *****************************************************  */
   .contacth1 {
-    color: white;
+    color: black;
     font-size: 250%;
     font-weight: 600;
+    text-shadow: 0.17rem 0.17rem #c4c4c4;
   }
   .contactForm {
     display: inline-flex;
@@ -256,14 +269,16 @@ img:hover {
     place-items: center;
     width: 36rem;
     gap: 1rem;
-    background: rgb(50, 50, 50);
-    box-shadow: 7px 6px 10px black, 0px 0px 1px 1px black;
+    /*background: rgb(50, 50, 50); */
+    background: #ffffff;
+    /* box-shadow: 7px 6px 10px black, 0px 0px 1px 1px black; */
     border-radius: 10px;
     padding: 2rem;
   }
   .contactBody {
     height: 100vh;
-    background: #4f4d59; /* override star background */
+    /* background: #4f4d59; /* override star background */
+    background: #ffffff;
     font-family: Arial, Helvetica, sans-serif;
     display: grid;
     place-items: center;
@@ -276,7 +291,7 @@ img:hover {
     width: 10rem;
     padding: 1.4rem;
     cursor: pointer;
-    background: #2336db;
+    background: #40669d;
     color: rgb(255, 255, 255);
     font-weight: bold;
     font-size: 100%;
@@ -290,7 +305,8 @@ img:hover {
   }
   .contactOption {
     padding: 2rem;
-    background: rgb(219, 219, 219);
+    /* background: rgb(219, 219, 219); */
+    background: #ffffff;
     color: black;
     font-weight: bold;
     box-shadow: 7px 6px 10px black, 0px 0px 1px 1px black;
@@ -300,5 +316,5 @@ img:hover {
     display: inline-table;
   }
   .contactButton:hover {
-    transform: scale(1.2, 1.1);
+    transform: scale(1.1, 1.05);
   }

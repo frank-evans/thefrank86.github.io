@@ -143,7 +143,7 @@
 
 			//audio file script 
 			const audioFire = new Audio("{% static 'fire4.ogg' %}");
-			audioFire.volume = (0.007);
+			audioFire.volume = (0.005);
 			audioFire.autoplay = true;
 			audioFire.muted = true;
 			audioFire.loop = true; 
@@ -191,14 +191,14 @@
 									}
 									else {
 										img1.innerHTML +=
-										 `<img class="tilt" width="20%" src="${page1.data[i].card_faces[0].image_uris.normal}">`;
+										 `<img class="tilt" src="${page1.data[i].card_faces[0].image_uris.normal}">`;
 										img1.innerHTML +=
-										 `<img class="tilt" width="20%" src="${page1.data[i].card_faces[1].image_uris.normal}">`;
+										 `<img class="tilt" src="${page1.data[i].card_faces[1].image_uris.normal}">`;
 
 										 continue;
 									}
 								}
-								img1.innerHTML += `<img class="tilt" width="20%" src="${page1.data[i].image_uris.normal}">`;
+								img1.innerHTML += `<img class="tilt" src="${page1.data[i].image_uris.normal}">`;
 								
 							}
 
@@ -228,23 +228,23 @@
 
 														// attempt to slow last page load for proper order (fail)
 														img1.innerHTML += 
-														`<img class="tilt" width="20%" hidden="hidden" src="${page1.data[i].image_uris.normal}">`;
+														`<img class="tilt" hidden="hidden" src="${page1.data[i].image_uris.normal}">`;
 
 														img1.innerHTML +=
-														`<img class="tilt" width="20%" hidden="hidden" scr="${page1.data[i].card_faces[0].image_uris.normal}">`;
+														`<img class="tilt" hidden="hidden" scr="${page1.data[i].card_faces[0].image_uris.normal}">`;
 
 														continue;
 													}
 													else {
 														img1.innerHTML +=
-														`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
+														`<img class="tilt" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
 														img1.innerHTML +=
-														`<img class="tilt" width="20%" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
+														`<img class="tilt" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
 		
 														continue;
 													}
 												}
-												img1.innerHTML += `<img class="tilt" width="20%" src="${pagek.data[i].image_uris.normal}">`;
+												img1.innerHTML += `<img class="tilt" src="${pagek.data[i].image_uris.normal}">`;
 
 											}
 
@@ -373,7 +373,7 @@
 		<p></p>
 
 		<!-- added style margin top to prevent overflow on hover of top row -->
-		<div id="result" style="margin-top:60px;"></div>
+		<div id="result"></div>
 
 		<section id="loading">
 			<div class="loader">
@@ -430,15 +430,15 @@
 	<script type="module" src="{% static 'three/UnrealBloomPass.js' %}"></script>
 	<script type="module" src="{% static 'three/AfterimagePass.js' %}"></script>  -->
 
-	<!-- shader scripts 
-	<div id="shaders">
+	<!-- shader scripts  *******************  
+	<div id="shaders1">
 	</div>
 	<script>
 		(function loadXMLDoc() {
 		  var xhttp = new XMLHttpRequest();
 		  xhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-			  document.getElementById("shaders").innerHTML =
+			  document.getElementById("shaders1").innerHTML =
 			  this.responseText;
 			}
 		  };
@@ -447,7 +447,8 @@
 		  xhttp.open("GET", "{% static 'shaders/fragment.glsl' %}", true);
 		  xhttp.send();
 		}());
-	</script> -->
+	</script>
+	-->
 	<script type="x-shader/x-vertex" id="vertexShader">
 
 		/* uniform float time;
@@ -675,11 +676,11 @@
 
 			// Color
 			float brightness = noisy * mix(0., spots, 0.8);
-			brightness = brightness*3. + 1.5;
+			brightness = brightness*3. + 1.2;
 
 			//fresnel
 			float fres = Fresnel(eyeVector, vNormal);
-			brightness += fres;
+			brightness += pow(fres, 0.4);
 
 			vec3 col = brightnessToColor(brightness);
 			gl_FragColor = vec4(col, 1.);
@@ -698,7 +699,8 @@
 	
 		}
 	
-	</script>
+	</script> 
+	
 
 	<!-- GLOW *********************************************************** -->
 	<script type="x-shader/x-vertex" id="vertexShaderGlow">
@@ -731,7 +733,7 @@
 			float radial = 1. - vNorm.z;
 			radial *= radial * radial * radial;
 
-			float brightness = 1. + radial*2.0;
+			float brightness = 1.0 + radial*2.0;
 
 			gl_FragColor.rgb = brightnessToColor(brightness)*radial;
 
@@ -781,6 +783,7 @@
 
 
 				// Lightning ambient (x, 3'intensity')
+				/*
 				const ambientLight = new THREE.AmbientLight(0x404040, 1);
 				//ambientLight.position.set(1,1,1);
 
@@ -801,6 +804,7 @@
 				//const pointLightHelper = new THREE.PointLightHelper(pointLight, 1);
 				//scene.add(pointLightHelper);
 
+				*/
 
 				//const geometry = new THREE.DodecahedronGeometry(180, 2);
 				//const geometry = new THREE.IcosahedronGeometry(180, 2);
@@ -840,7 +844,7 @@
 					//vertexShader: "{% static 'shaders/vertex.glsl' %}",
 
 					fragmentShader: document.getElementById( 'fragmentShader' ).textContent,
-					//fragmentShader: "{% static 'shaders/fragment.glsl' %}"
+					//fragmentShader: "{% static 'shaders/fragment.glsl' %}",
 				
 				} ); 
 

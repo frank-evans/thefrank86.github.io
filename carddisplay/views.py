@@ -5,7 +5,7 @@ from django.core.management import call_command
 def test(request):
 
         return render(request, "carddisplay/test.html", {
-            "carddisplay": card.objects.all()
+            #"carddisplay": card.objects.all()
         })
 
 def test2(request):
@@ -19,16 +19,17 @@ def test2(request):
 def index(request):
 
          # reset object data for each search
-        card.objects.all().delete()
+
+        #card.objects.all().delete()
 
         return render(request, "carddisplay/index.html", {
-            "carddisplay": card.objects.all()
+            #"carddisplay": card.objects.all()
         })
 
 def contact(request):
 
         return render(request, "carddisplay/contact.html", {
-            "carddisplay": card.objects.all()
+            #"carddisplay": card.objects.all()
         })
 
 
