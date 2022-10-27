@@ -8,13 +8,14 @@
   cursor: pointer;
   border-radius: 0.5rem;
   font-weight: 500;
-  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
-  background: rgb(255, 162, 162);
+  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out, color 0.4s ease-in-out;
+  background: #bbc2ff;
   font-size: 85%;
 }
 #input:hover {
   /*color: rgb(227, 255, 102, 1.0); */
-  background: red;
+  background: #5d6dff;
+  color: white;
   transform: scale(1.2, 1.1);
 }
 header.nav {
@@ -34,12 +35,15 @@ header.nav {
   text-align: left;
 }
 nav {
+  font-weight: 600;
   min-height: 5vh;
   margin: auto;
+  margin-right: 05%;
   width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-left: 50%;
 }
 nav ul {
   font-size: 1.5rem;
@@ -57,8 +61,9 @@ nav a {
   transition: background 0.4s ease-in-out, color 0.4s ease-in-out;
 }
 nav a:hover {
-  color: red;
-  background: rgb(227, 255, 102, 1.0); 
+  color: white; 
+  /*background: rgb(227, 255, 102, 1.0);  */
+  background: #5d6dff;
 }
 
 /* nav bar css above ********************************** */
@@ -89,11 +94,11 @@ select {
     margin: 0 auto;
     background-color: #d8d8d8; 
     text-align: center;
-    opacity: 0.5;
+    /*opacity: 0.5; */
     transition: 0.7s ease-in-out;
 }
 select:hover {
-    opacity: 0.85;
+    /*opacity: 0.85; */
     transition: 0.7s ease-in-out;
   }
 
@@ -133,11 +138,15 @@ body h2 {
 }
 
 optgroup {
-    font-size: 150%;
+  font-size: 150%;
+  margin-bottom: 1.0rem;
+  margin-top: 0.5rem;
+  color: #aa0000;
 }
 
 optgroup > option {
     font-size: 75%;
+    color: black;
 }
 
 img {
@@ -312,9 +321,9 @@ img {
     background: #bbc2ff;
     font-weight: bold;
     font-size: 100%;
-    box-shadow: 7px 6px 10px black, 0px 0px 1px 1px black;
+    box-shadow: 4px 3px 10px black, 0px 0px 1px 1px black;
     border-radius: 10px;
-    transition: transform 0.4s ease-in-out, background 0.4s ease-in-out;
+    transition: transform 0.4s ease-in-out, background 0.4s ease-in-out, color 0.4s ease-in-out;
   }
   textarea {
     height: 6rem;
@@ -326,7 +335,7 @@ img {
     background: #ffffff;
     color: black;
     font-weight: bold;
-    box-shadow: 7px 6px 10px black, 0px 0px 1px 1px black;
+    box-shadow: 4px 3px 10px black, 0px 0px 1px 1px black;
     width: 28rem;
     place-items: center;
     border-radius: 10px;
@@ -335,4 +344,59 @@ img {
   .contactButton:hover {
     transform: scale(1.1, 1.05);
     background: #5d6dff;
+    color: white;
+  }
+  /* Logo animation ************************************************** */
+  @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
+  .heading {
+    position: static;
+  }
+  .heading h2 {
+    color: #fff;
+    font-size: 2.5em;
+    font-family: "Poppins", sans-serif;
+    position: absolute;
+    margin-left: 5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+  }
+  .heading h2:nth-child(1) {
+    color: #ffff00;
+    -webkit-text-stroke: 0.15rem #ff7b00;
+    text-shadow: 0.25rem 0.25rem 0.15rem #000000;
+  }
+  .heading h2:nth-child(2) {
+    color: #ff7b00;
+    animation: animate 4s ease-in-out infinite;
+  }
+  
+  @keyframes animate {
+    0%,
+    100% {
+      clip-path: polygon(
+        0% 45%,
+        16% 44%,
+        33% 50%,
+        54% 60%,
+        70% 61%,
+        84% 59%,
+        100% 52%,
+        100% 100%,
+        0% 100%
+      );
+    }
+  
+    50% {
+      clip-path: polygon(
+        0% 60%,
+        15% 65%,
+        34% 66%,
+        51% 62%,
+        67% 50%,
+        84% 45%,
+        100% 46%,
+        100% 100%,
+        0% 100%
+      );
+    }
   }
