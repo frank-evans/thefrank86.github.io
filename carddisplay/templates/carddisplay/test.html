@@ -27,7 +27,7 @@
 		<!-- sticky navigation bar -->
 		<header class="nav">
 			<nav>
-				<h1 class="title">Frank's Code</h1>
+				<h1 class="title">Cards in Space</h1>
 				<ul>
 					<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
 					<li><a data-page="project" href="{% url 'test' %}">Projects</a></li>
@@ -804,7 +804,7 @@
 
 			//fresnel
 			float fres = Fresnel(eyeVector, vNormal);
-			brightness += pow(fres, 0.4);
+			brightness += pow(fres, 0.3);
 
 			vec3 col = brightnessToColor(brightness);
 			gl_FragColor = vec4(col, 1.);
@@ -1116,7 +1116,7 @@
 				var st = window.pageYOffset || document.documentElement.scrollTop;
 				// lastScrollTop && mesh.position.z < 140
 				// camera.position.set(0, 0, 400);
-				if (st > lastScrollTop && camera.position.z > 360){
+				if (st > lastScrollTop && camera.position.z > 365){
 					camera.position.z += -1.5;
 					//mesh.position.z += 1.5;
 					//mesh3.position.z += 1.5;

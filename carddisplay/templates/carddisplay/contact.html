@@ -12,8 +12,21 @@
     <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
 
     <title>Get in Contact</title>
+    
 </head>
 <body class="contactBody">
+    <!-- sticky navigation bar -->
+		<header class="nav">
+			<nav>
+				<h1 class="title">Cards in Space</h1>
+				<ul>
+					<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
+					<li><a data-page="project" href="{% url 'test' %}">Projects</a></li>
+					<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
+                    <li><a id="hide">Background</a></li>
+				</ul>
+			</nav>
+		</header>
     
     <div class="container">
         
