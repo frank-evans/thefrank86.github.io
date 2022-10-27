@@ -808,8 +808,9 @@
 			brightness = brightness*3. + 1.2;
 
 			//fresnel
-			float fres = Fresnel(eyeVector, vNormal);
-			brightness += pow(fres, 0.3) + (time*0.0008);
+			//float fres = (Fresnel(eyeVector, vNormal))*(time*0.02);
+			float fres = (Fresnel(eyeVector, vNormal));
+			brightness += pow(fres, 0.3);
 
 			vec3 col = brightnessToColor(brightness);
 			gl_FragColor = vec4(col, 1.);
@@ -833,17 +834,151 @@
 
 	<!-- GLOW *********************************************************** -->
 	<script type="x-shader/x-vertex" id="vertexShaderGlow">
-		uniform float time;
-		varying vec2 vUv;
-		varying vec3 vPosition; 
-		varying vec3 vNorm;
-		void main() {
-			vUv = uv;
-			vNorm = normal;
-			vPosition = position;
-	
-			gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0);
+		vec4 mod289(vec4 x) {
+			return x - floor(x * (1.0 / 289.0)) * 289.0; }
+		
+			float mod289(float x) {
+			return x - floor(x * (1.0 / 289.0)) * 289.0; }
+		
+			vec4 permute(vec4 x) {
+				return mod289(((x*34.0)+10.0)*x);
+			}
+		
+			float permute(float x) {
+				return mod289(((x*34.0)+10.0)*x);
+			}
+		
+			vec4 taylorInvSqrt(vec4 r)
+			{
+			return 1.79284291400159 - 0.85373472095314 * r;
+			}
+		
+			float taylorInvSqrt(float r)
+			{
+			return 1.79284291400159 - 0.85373472095314 * r;
+			}
+		
+			vec4 grad4(float j, vec4 ip)
+			{
+			const vec4 ones = vec4(1.0, 1.0, 1.0, -1.0);
+			vec4 p,s;
+		
+			p.xyz = floor( fract (vec3(j) * ip.xyz) * 7.0) * ip.z - 1.0;
+			p.w = 1.5 - dot(abs(p.xyz), ones.xyz);
+			s = vec4(lessThan(p, vec4(0.0)));
+			p.xyz = p.xyz + (s.xyz*2.0 - 1.0) * s.www; 
+		
+			return p;
+			}
+									
+			// (sqrt(5) - 1)/4 = F4, used once below
+			#define F4 0.309016994374947451
+		
+			float snoise(vec4 v)
+			{
+			const vec4  C = vec4( 0.138196601125011,  // (5 - sqrt(5))/20  G4
+									0.276393202250021,  // 2 * G4
+									0.414589803375032,  // 3 * G4
+								-0.447213595499958); // -1 + 4 * G4
+		
+			// First corner
+			vec4 i  = floor(v + dot(v, vec4(F4)) );
+			vec4 x0 = v -   i + dot(i, C.xxxx);
+		
+			// Other corners
+		
+			// Rank sorting originally contributed by Bill Licea-Kane, AMD (formerly ATI)
+			vec4 i0;
+			vec3 isX = step( x0.yzw, x0.xxx );
+			vec3 isYZ = step( x0.zww, x0.yyz );
+			//  i0.x = dot( isX, vec3( 1.0 ) );
+			i0.x = isX.x + isX.y + isX.z;
+			i0.yzw = 1.0 - isX;
+			//  i0.y += dot( isYZ.xy, vec2( 1.0 ) );
+			i0.y += isYZ.x + isYZ.y;
+			i0.zw += 1.0 - isYZ.xy;
+			i0.z += isYZ.z;
+			i0.w += 1.0 - isYZ.z;
+		
+			// i0 now contains the unique values 0,1,2,3 in each channel
+			vec4 i3 = clamp( i0, 0.0, 1.0 );
+			vec4 i2 = clamp( i0-1.0, 0.0, 1.0 );
+			vec4 i1 = clamp( i0-2.0, 0.0, 1.0 );
+		
+			//  x0 = x0 - 0.0 + 0.0 * C.xxxx
+			//  x1 = x0 - i1  + 1.0 * C.xxxx
+			//  x2 = x0 - i2  + 2.0 * C.xxxx
+			//  x3 = x0 - i3  + 3.0 * C.xxxx
+			//  x4 = x0 - 1.0 + 4.0 * C.xxxx
+			vec4 x1 = x0 - i1 + C.xxxx;
+			vec4 x2 = x0 - i2 + C.yyyy;
+			vec4 x3 = x0 - i3 + C.zzzz;
+			vec4 x4 = x0 + C.wwww;
+		
+			// Permutations
+			i = mod289(i); 
+			float j0 = permute( permute( permute( permute(i.w) + i.z) + i.y) + i.x);
+			vec4 j1 = permute( permute( permute( permute (
+						i.w + vec4(i1.w, i2.w, i3.w, 1.0 ))
+					+ i.z + vec4(i1.z, i2.z, i3.z, 1.0 ))
+					+ i.y + vec4(i1.y, i2.y, i3.y, 1.0 ))
+					+ i.x + vec4(i1.x, i2.x, i3.x, 1.0 ));
+		
+			// Gradients: 7x7x6 points over a cube, mapped onto a 4-cross polytope
+			// 7*7*6 = 294, which is close to the ring size 17*17 = 289.
+			vec4 ip = vec4(1.0/294.0, 1.0/49.0, 1.0/7.0, 0.0) ;
+		
+			vec4 p0 = grad4(j0,   ip);
+			vec4 p1 = grad4(j1.x, ip);
+			vec4 p2 = grad4(j1.y, ip);
+			vec4 p3 = grad4(j1.z, ip);
+			vec4 p4 = grad4(j1.w, ip);
+		
+			// Normalise gradients
+			vec4 norm = taylorInvSqrt(vec4(dot(p0,p0), dot(p1,p1), dot(p2, p2), dot(p3,p3)));
+			p0 *= norm.x;
+			p1 *= norm.y;
+			p2 *= norm.z;
+			p3 *= norm.w;
+			p4 *= taylorInvSqrt(dot(p4,p4));
+		
+			// Mix contributions from the five corners
+			vec3 m0 = max(0.6 - vec3(dot(x0,x0), dot(x1,x1), dot(x2,x2)), 0.0);
+			vec2 m1 = max(0.6 - vec2(dot(x3,x3), dot(x4,x4)            ), 0.0);
+			m0 = m0 * m0;
+			m1 = m1 * m1;
+			return 49.0 * ( dot(m0*m0, vec3( dot( p0, x0 ), dot( p1, x1 ), dot( p2, x2 )))
+						+ dot(m1*m1, vec2( dot( p3, x3 ), dot( p4, x4 ) ) ) ) ;
+		
+			}
+			// ******************************************************************************************************** noise above
 
+		/* uniform float time;
+		varying vec2 vUv;
+		varying vec3 vPosition;
+		uniform vec2 pixels;
+		float PI = 3.141592653589793238; */
+		varying vec2 vUv;
+		uniform float time;
+		varying vec3 vPosition;
+		varying vec3 vNorm;
+	
+	
+		//varying vec2 vUv;
+		void main () {
+			vUv = uv;
+			vPosition = position;
+			vNorm = normal;
+			// warp sphere
+			float uFrequency = 5.0;
+			float uStrength = 3.0;
+			float nStrength = snoise(vec4(position * uFrequency, time * 0.45)) * uStrength;
+			vPosition += normal * nStrength;
+
+			vec4 viewPos = viewMatrix * vec4(vPosition, 1.0);
+	
+			//gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0);
+			gl_Position = projectionMatrix * viewPos;
 		}
 	</script>
 
@@ -940,7 +1075,7 @@
 				geometry = new THREE.SphereBufferGeometry(280, 100, 150);
 
 				// sun outer glow geo
-				geometry3 = new THREE.SphereBufferGeometry(310, 100, 12);
+				geometry3 = new THREE.SphereBufferGeometry(310, 100, 8);
 
 				// Material (normal texture)
 				/*const material = new THREE.MeshStandardMaterial();
@@ -1123,24 +1258,24 @@
 				// lastScrollTop && mesh.position.z < 140
 				// camera.position.set(0, 0, 400);
 				if (st > lastScrollTop && camera.position.z > 365){
-					camera.position.z += -1.5;
+					camera.position.z += -1.0;
 					//mesh.position.z += 1.5;
 					//mesh3.position.z += 1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 
-					audioFire.volume += (0.00011);
-					audioSun.volume += (0.0015);
+					audioFire.volume += (0.00008);
+					audioSun.volume += (0.0010);
 				}
 				// lastScrollTop && mesh.position.z > 0
 				else if (st < lastScrollTop && camera.position.z < 500) {
-					camera.position.z += 1.5;
+					camera.position.z += 1.0;
 					//mesh.position.z += window.scrollY * -.0007;
 					//mesh.position.z += -1.5;
 					//mesh3.position.z += -1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
 
-					audioFire.volume -= (0.00011);
-					audioSun.volume -= (0.0015);
+					audioFire.volume -= (0.00008);
+					audioSun.volume -= (0.0010);
 				}
 				else {
 					lastScrollTop = st <= 0 ? 0 : st;
@@ -1194,7 +1329,9 @@
 				// Mesh (sun) static movement (diable x/y when mouse move on)
 				//mesh.rotation.x += 0.0005;
 				//mesh.rotation.y += 0.0009;
-				mesh.rotation.z -= 0.0003;
+				//mesh.rotation.z -= 0.0003;
+
+				//mesh3.rotation.z -= 2.0;
 
 				// Mesh 2 (asteroids) static movement best (rotate z)
 				//mesh2.rotation.y += 0.003;
@@ -1225,7 +1362,8 @@
 			<form id="form" method="post" autocomplete="off">
 			{% csrf_token %}
 	
-			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list"><optgroup label="Expansions">
+			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list">
+				<optgroup label="Expansions">
 				<option data-svg-code="default" value="bro"  selected="selected">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
 				<option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
@@ -1320,7 +1458,9 @@
 				<option data-svg-code="drk" value="drk">The Dark (DRK)</option>
 				<option data-svg-code="leg" value="leg">Legends (LEG)</option>
 				<option data-svg-code="atq" value="atq">Antiquities (ATQ)</option>
-				<option data-svg-code="arn" value="arn">Arabian Nights (ARN)</option></optgroup><optgroup label="Core Sets"><option data-svg-code="m21" value="m21">Core Set 2021 (M21)</option>
+				<option data-svg-code="arn" value="arn">Arabian Nights (ARN)</option></optgroup>
+				<optgroup label="Core Sets">
+				<option data-svg-code="m21" value="m21">Core Set 2021 (M21)</option>
 				<option data-svg-code="m20" value="m20">Core Set 2020 (M20)</option>
 				<option data-svg-code="m19" value="m19">Core Set 2019 (M19)</option>
 				<option data-svg-code="ori" value="ori">Magic Origins (ORI)</option>
@@ -1343,7 +1483,10 @@
 				<option data-svg-code="3ed" value="fbb">Foreign Black Border (FBB)</option>
 				<option data-svg-code="2ed" value="2ed">Unlimited Edition (2ED)</option>
 				<option data-svg-code="leb" value="leb">Limited Edition Beta (LEB)</option>
-				<option data-svg-code="lea" value="lea">Limited Edition Alpha (LEA)</option></optgroup><optgroup label="Masters"><option data-svg-code="dmr" value="dmr">Dominaria Remastered (DMR)</option>
+				<option data-svg-code="lea" value="lea">Limited Edition Alpha (LEA)</option></optgroup>
+				<optgroup label="Masters">
+				<option data-svg-code="dmr" value="dmr">Dominaria Remastered (DMR)</option>
+				<option data-svg-code="uplist" value="uplist">The List (Unfinity Foil Edition) (UPLIST)</option>
 				<option data-svg-code="2x2" value="2x2">Double Masters 2022 (2X2)</option>
 				<option data-svg-code="star" value="slx">Universes Within (SLX)</option>
 				<option data-svg-code="tsr" value="tsr">Time Spiral Remastered (TSR)</option>
@@ -1368,7 +1511,10 @@
 				<option data-svg-code="me1" value="me1">Masters Edition (ME1)</option>
 				<option data-svg-code="ren" value="ren">Renaissance (REN)</option>
 				<option data-svg-code="rin" value="rin">Rinascimento (RIN)</option>
-				<option data-svg-code="chr" value="chr">Chronicles (CHR)</option></optgroup><optgroup label="Draft Innovation"><option data-svg-code="clb" value="clb">Commander Legends: Battle for Baldur&#39;s Gate (CLB)</option>
+				<option data-svg-code="chr" value="chr">Chronicles (CHR)</option></optgroup>
+				<optgroup label="Draft Innovation">
+				<option data-svg-code="j22" value="j22">Jumpstart 2022 (J22)</option>
+				<option data-svg-code="clb" value="clb">Commander Legends: Battle for Baldur&#39;s Gate (CLB)</option>
 				<option data-svg-code="star" value="dbl">Innistrad: Double Feature (DBL)</option>
 				<option data-svg-code="j21" value="j21">Jumpstart: Historic Horizons (J21)</option>
 				<option data-svg-code="mh1" value="h1r">Modern Horizons 1 Timeshifts (H1R)</option>
@@ -1378,7 +1524,9 @@
 				<option data-svg-code="mh1" value="mh1">Modern Horizons (MH1)</option>
 				<option data-svg-code="bbd" value="bbd">Battlebond (BBD)</option>
 				<option data-svg-code="cn2" value="cn2">Conspiracy: Take the Crown (CN2)</option>
-				<option data-svg-code="cns" value="cns">Conspiracy (CNS)</option></optgroup><optgroup label="Duel Decks"><option data-svg-code="gs1" value="gs1">Global Series Jiang Yanggu &amp; Mu Yanling (GS1)</option>
+				<option data-svg-code="cns" value="cns">Conspiracy (CNS)</option></optgroup>
+				<optgroup label="Duel Decks">
+				<option data-svg-code="gs1" value="gs1">Global Series Jiang Yanggu &amp; Mu Yanling (GS1)</option>
 				<option data-svg-code="ddu" value="ddu">Duel Decks: Elves vs. Inventors (DDU)</option>
 				<option data-svg-code="ddt" value="ddt">Duel Decks: Merfolk vs. Goblins (DDT)</option>
 				<option data-svg-code="dds" value="dds">Duel Decks: Mind vs. Might (DDS)</option>
@@ -1404,18 +1552,27 @@
 				<option data-svg-code="ddd" value="ddd">Duel Decks: Garruk vs. Liliana (DDD)</option>
 				<option data-svg-code="ddc" value="ddc">Duel Decks: Divine vs. Demonic (DDC)</option>
 				<option data-svg-code="dd2" value="dd2">Duel Decks: Jace vs. Chandra (DD2)</option>
-				<option data-svg-code="dd1" value="dd1">Duel Decks: Elves vs. Goblins (DD1)</option></optgroup><optgroup label="Alchemy"><option data-svg-code="hbg" value="hbg">Alchemy Horizons: Baldur&#39;s Gate (HBG)</option>
+				<option data-svg-code="dd1" value="dd1">Duel Decks: Elves vs. Goblins (DD1)</option></optgroup>
+				<optgroup label="Alchemy">
+				<option data-svg-code="hbg" value="hbg">Alchemy Horizons: Baldur&#39;s Gate (HBG)</option>
 				<option data-svg-code="y22" value="ysnc">Alchemy: New Capenna (YSNC)</option>
 				<option data-svg-code="y22" value="yneo">Alchemy: Kamigawa (YNEO)</option>
-				<option data-svg-code="y22" value="ymid">Alchemy: Innistrad (YMID)</option></optgroup><optgroup label="Archenemy"><option data-svg-code="e01" value="oe01">Archenemy: Nicol Bolas Schemes (OE01)</option>
+				<option data-svg-code="y22" value="ymid">Alchemy: Innistrad (YMID)</option></optgroup>
+				<optgroup label="Archenemy">
+				<option data-svg-code="e01" value="oe01">Archenemy: Nicol Bolas Schemes (OE01)</option>
 				<option data-svg-code="e01" value="e01">Archenemy: Nicol Bolas (E01)</option>
 				<option data-svg-code="arc" value="oarc">Archenemy Schemes (OARC)</option>
 				<option data-svg-code="arc" value="arc">Archenemy (ARC)</option>
-				<option data-svg-code="dci" value="parc">Promotional Schemes (PARC)</option></optgroup><optgroup label="Arsenal"><option data-svg-code="cc2" value="cc2">Commander Collection: Black (CC2)</option>
+				<option data-svg-code="dci" value="parc">Promotional Schemes (PARC)</option></optgroup>
+				<optgroup label="Arsenal">
+				<option data-svg-code="cc2" value="cc2">Commander Collection: Black (CC2)</option>
 				<option data-svg-code="cc1" value="cc1">Commander Collection: Green (CC1)</option>
-				<option data-svg-code="cm1" value="cm1">Commander&#39;s Arsenal (CM1)</option></optgroup><optgroup label="Box"><option data-svg-code="gn3" value="gn3">Game Night 2022 (GN3)</option>
+				<option data-svg-code="cm1" value="cm1">Commander&#39;s Arsenal (CM1)</option></optgroup>
+				<optgroup label="Box">
+				<option data-svg-code="gn3" value="gn3">Game Night 2022 (GN3)</option>
 				<option data-svg-code="mtga" value="ea1">Explorer Anthology 1 (EA1)</option>
 				<option data-svg-code="ha1" value="ha6">Historic Anthology 6 (HA6)</option>
+				<option data-svg-code="q07" value="q07">Challenger Decks 2022 (Q07)</option>
 				<option data-svg-code="star" value="q06">Pioneer Challenger Decks 2021 (Q06)</option>
 				<option data-svg-code="ha1" value="ha5">Historic Anthology 5 (HA5)</option>
 				<option data-svg-code="ha1" value="ha4">Historic Anthology 4 (HA4)</option>
@@ -1445,7 +1602,11 @@
 				<option data-svg-code="ath" value="ath">Anthologies (ATH)</option>
 				<option data-svg-code="past" value="past">Astral Cards (PAST)</option>
 				<option data-svg-code="vis" value="mgb">Multiverse Gift Box (MGB)</option>
-				<option data-svg-code="default" value="rqs">Rivals Quick Start Set (RQS)</option></optgroup><optgroup label="Commander"><option data-svg-code="40k" value="40k">Warhammer 40,000 (40K)</option>
+				<option data-svg-code="default" value="rqs">Rivals Quick Start Set (RQS)</option></optgroup>
+				<optgroup label="Commander">
+				<option data-svg-code="scd" value="scd">Starter Commander Decks (SCD)</option>
+				<option data-svg-code="brc" value="brc">The Brother's War Commander (BRC)</option>	
+				<option data-svg-code="40k" value="40k">Warhammer 40,000 (40K)</option>
 				<option data-svg-code="dmc" value="dmc">Dominaria United Commander (DMC)</option>
 				<option data-svg-code="ncc" value="ncc">New Capenna Commander (NCC)</option>
 				<option data-svg-code="planeswalker" value="phed">Heads I Win, Tails You Lose (PHED)</option>
@@ -1466,7 +1627,9 @@
 				<option data-svg-code="c15" value="c15">Commander 2015 (C15)</option>
 				<option data-svg-code="c14" value="c14">Commander 2014 (C14)</option>
 				<option data-svg-code="c13" value="c13">Commander 2013 (C13)</option>
-				<option data-svg-code="cmd" value="cmd">Commander 2011 (CMD)</option></optgroup><optgroup label="From The Vault"><option data-svg-code="v17" value="v17">From the Vault: Transform (V17)</option>
+				<option data-svg-code="cmd" value="cmd">Commander 2011 (CMD)</option></optgroup>
+				<optgroup label="From The Vault">
+				<option data-svg-code="v17" value="v17">From the Vault: Transform (V17)</option>
 				<option data-svg-code="v16" value="v16">From the Vault: Lore (V16)</option>
 				<option data-svg-code="v15" value="v15">From the Vault: Angels (V15)</option>
 				<option data-svg-code="v14" value="v14">From the Vault: Annihilation (V14)</option>
@@ -1475,7 +1638,9 @@
 				<option data-svg-code="v11" value="v11">From the Vault: Legends (V11)</option>
 				<option data-svg-code="v10" value="v10">From the Vault: Relics (V10)</option>
 				<option data-svg-code="v09" value="v09">From the Vault: Exiled (V09)</option>
-				<option data-svg-code="drb" value="drb">From the Vault: Dragons (DRB)</option></optgroup><optgroup label="Funny"><option data-svg-code="unf" value="unf">Unfinity (UNF)</option>
+				<option data-svg-code="drb" value="drb">From the Vault: Dragons (DRB)</option></optgroup>
+				<optgroup label="Funny">
+				<option data-svg-code="unf" value="unf">Unfinity (UNF)</option>
 				<option data-svg-code="vow" value="mvow">Innistrad: Crimson Vow Minigames (MVOW)</option>
 				<option data-svg-code="planeswalker" value="cmb2">Mystery Booster Playtest Cards 2021 (CMB2)</option>
 				<option data-svg-code="star" value="htr20">2020 Heroes of the Realm (HTR20)</option>
@@ -1495,13 +1660,20 @@
 				<option data-svg-code="star" value="htr16">2016 Heroes of the Realm (HTR16)</option>
 				<option data-svg-code="star" value="hho">Happy Holidays (HHO)</option>
 				<option data-svg-code="unh" value="unh">Unhinged (UNH)</option>
-				<option data-svg-code="ugl" value="ugl">Unglued (UGL)</option></optgroup><optgroup label="Masterpiece"><option data-svg-code="sta" value="sta">Strixhaven Mystical Archive (STA)</option>
+				<option data-svg-code="ugl" value="ugl">Unglued (UGL)</option></optgroup>
+				<optgroup label="Masterpiece">
+				<option data-svg-code="brr" value="brr">The Brother's War Retro Artifacts (BRR)</option>
+				<option data-svg-code="bot" value="bot">Transformers (BOT)</option>
+				<option data-svg-code="sta" value="sta">Strixhaven Mystical Archive (STA)</option>
 				<option data-svg-code="zne" value="zne">Zendikar Rising Expeditions (ZNE)</option>
 				<option data-svg-code="uma" value="puma">Ultimate Box Topper (PUMA)</option>
 				<option data-svg-code="med" value="med">Mythic Edition (MED)</option>
 				<option data-svg-code="mp2" value="mp2">Amonkhet Invocations (MP2)</option>
 				<option data-svg-code="mps" value="mps">Kaladesh Inventions (MPS)</option>
-				<option data-svg-code="exp" value="exp">Zendikar Expeditions (EXP)</option></optgroup><optgroup label="Memorabilia"><option data-svg-code="dmu" value="admu">Dominaria United Art Series (ADMU)</option>
+				<option data-svg-code="exp" value="exp">Zendikar Expeditions (EXP)</option></optgroup>
+				<optgroup label="Memorabilia">
+				<option data-svg-code="30a" value="30a">30th Anniversary Edition (30A)</option>
+				<option data-svg-code="dmu" value="admu">Dominaria United Art Series (ADMU)</option>
 				<option data-svg-code="clb" value="aclb">Battle for Baldur&#39;s Gate Art Series (ACLB)</option>
 				<option data-svg-code="snc" value="asnc">New Capenna Art Series (ASNC)</option>
 				<option data-svg-code="neo" value="aneo">Neon Dynasty Art Series (ANEO)</option>
@@ -1551,14 +1723,23 @@
 				<option data-svg-code="default" value="ptc">Pro Tour Collector Set (PTC)</option>
 				<option data-svg-code="star" value="o90p">Oversized 90&#39;s Promos (O90P)</option>
 				<option data-svg-code="cei" value="cei">Intl. Collectors’ Edition (CEI)</option>
-				<option data-svg-code="ced" value="ced">Collectors’ Edition (CED)</option></optgroup><optgroup label="Planechase"><option data-svg-code="pca" value="opca">Planechase Anthology Planes (OPCA)</option>
+				<option data-svg-code="ced" value="ced">Collectors’ Edition (CED)</option></optgroup>
+				<optgroup label="Planechase">
+				<option data-svg-code="pca" value="opca">Planechase Anthology Planes (OPCA)</option>
 				<option data-svg-code="pca" value="pca">Planechase Anthology (PCA)</option>
 				<option data-svg-code="pc2" value="opc2">Planechase 2012 Planes (OPC2)</option>
 				<option data-svg-code="pc2" value="pc2">Planechase 2012 (PC2)</option>
 				<option data-svg-code="hop" value="ohop">Planechase Planes (OHOP)</option>
-				<option data-svg-code="hop" value="hop">Planechase (HOP)</option></optgroup><optgroup label="Premium Deck"><option data-svg-code="pd3" value="pd3">Premium Deck Series: Graveborn (PD3)</option>
+				<option data-svg-code="hop" value="hop">Planechase (HOP)</option></optgroup>
+				<optgroup label="Premium Deck">
+				<option data-svg-code="pd3" value="pd3">Premium Deck Series: Graveborn (PD3)</option>
 				<option data-svg-code="pd2" value="pd2">Premium Deck Series: Fire and Lightning (PD2)</option>
-				<option data-svg-code="h09" value="h09">Premium Deck Series: Slivers (H09)</option></optgroup><optgroup label="Promo"><option data-svg-code="star" value="prcq">Regional Championship Qualifiers 2022 (PRCQ)</option>
+				<option data-svg-code="h09" value="h09">Premium Deck Series: Slivers (H09)</option></optgroup>
+				<optgroup label="Promo">
+				<option data-svg-code="pr23" value="pr23">Regional Championship Qualifiers 2022 (PR23)</option>
+				<option data-svg-code="pewk" value="pewk">Eternal Weekend 2022 (PEWK)</option>
+				<option data-svg-code="slc" value="slc">Secret Lair 30th Anniversary Countdown Kit (SLC)</option>
+				<option data-svg-code="star" value="prcq">Regional Championship Qualifiers 2022 (PRCQ)</option>
 				<option data-svg-code="star" value="p30h">30th Anniversary History Promos (P30H)</option>
 				<option data-svg-code="dmu" value="pdmu">Dominaria United Promos (PDMU)</option>
 				<option data-svg-code="star" value="p30a">30th Anniversary Promos (P30A)</option>
@@ -1812,9 +1993,13 @@
 				<option data-svg-code="pmei" value="pmei">Media Inserts (PMEI)</option>
 				<option data-svg-code="default" value="plgm">DCI Legend Membership (PLGM)</option>
 				<option data-svg-code="pbook" value="phpr">HarperPrism Book Promos (PHPR)</option>
-				<option data-svg-code="pdrc" value="pdrc">Dragon Con (PDRC)</option></optgroup><optgroup label="Spellbook"><option data-svg-code="ss3" value="ss3">Signature Spellbook: Chandra (SS3)</option>
+				<option data-svg-code="pdrc" value="pdrc">Dragon Con (PDRC)</option></optgroup>
+				<optgroup label="Spellbook">
+				<option data-svg-code="ss3" value="ss3">Signature Spellbook: Chandra (SS3)</option>
 				<option data-svg-code="ss2" value="ss2">Signature Spellbook: Gideon (SS2)</option>
-				<option data-svg-code="ss1" value="ss1">Signature Spellbook: Jace (SS1)</option></optgroup><optgroup label="Starter"><option data-svg-code="mtga" value="anb">Arena Beginner Set (ANB)</option>
+				<option data-svg-code="ss1" value="ss1">Signature Spellbook: Jace (SS1)</option></optgroup>
+				<optgroup label="Starter">
+				<option data-svg-code="mtga" value="anb">Arena Beginner Set (ANB)</option>
 				<option data-svg-code="jmp" value="ajmp">Jumpstart Arena Exclusives (AJMP)</option>
 				<option data-svg-code="mtga" value="ana">Arena New Player Experience (ANA)</option>
 				<option data-svg-code="mtga" value="oana">Arena New Player Experience Cards (OANA)</option>
@@ -1828,7 +2013,12 @@
 				<option data-svg-code="s99" value="s99">Starter 1999 (S99)</option>
 				<option data-svg-code="p02" value="p02">Portal Second Age (P02)</option>
 				<option data-svg-code="por" value="por">Portal (POR)</option>
-				<option data-svg-code="x2ps" value="itp">Introductory Two-Player Set (ITP)</option></optgroup><optgroup label="Token"><option data-svg-code="unf" value="sunf">Unfinity Sticker Sheets (SUNF)</option>
+				<option data-svg-code="x2ps" value="itp">Introductory Two-Player Set (ITP)</option></optgroup>
+				<optgroup label="Token">
+				<option data-svg-code="t30a" value="t30a">30th Anniversary Tokens (T30A)</option>
+				<option data-svg-code="tbot" value="tbot">Transformers Tokens (TBOT)</option>
+				<option data-svg-code="tgn3" value="tgn3">Game Night: Free-for-All Tokens (TGN3)</option>
+				<option data-svg-code="unf" value="sunf">Unfinity Sticker Sheets (SUNF)</option>
 				<option data-svg-code="40k" value="t40k">Warhammer 40,000 Tokens (T40K)</option>
 				<option data-svg-code="unf" value="tunf">Unfinity Tokens (TUNF)</option>
 				<option data-svg-code="dmu" value="tdmu">Dominaria United Tokens (TDMU)</option>
@@ -1971,8 +2161,12 @@
 				<option data-svg-code="dd1" value="tdd1">Duel Decks: Elves vs. Goblins Tokens (TDD1)</option>
 				<option data-svg-code="lrw" value="tlrw">Lorwyn Tokens (TLRW)</option>
 				<option data-svg-code="10e" value="t10e">Tenth Edition Tokens (T10E)</option>
-				<option data-svg-code="default" value="tugl">Unglued Tokens (TUGL)</option></optgroup><optgroup label="Treasure Chest"><option data-svg-code="pz2" value="pz2">Treasure Chest (PZ2)</option>
-				<option data-svg-code="pz1" value="pz1">Legendary Cube Prize Pack (PZ1)</option></optgroup><optgroup label="Vanguard"><option data-svg-code="mtgo" value="pmoa">Magic Online Avatars (PMOA)</option>
+				<option data-svg-code="default" value="tugl">Unglued Tokens (TUGL)</option></optgroup>
+				<optgroup label="Treasure Chest">
+				<option data-svg-code="pz2" value="pz2">Treasure Chest (PZ2)</option>
+				<option data-svg-code="pz1" value="pz1">Legendary Cube Prize Pack (PZ1)</option></optgroup>
+				<optgroup label="Vanguard">
+				<option data-svg-code="mtgo" value="pmoa">Magic Online Avatars (PMOA)</option>
 				<option data-svg-code="van" value="pvan">Vanguard Series (PVAN)</option></optgroup></select>
 			  
 			<p></p>

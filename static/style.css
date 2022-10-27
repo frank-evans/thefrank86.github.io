@@ -8,7 +8,7 @@
   cursor: pointer;
   border-radius: 0.5rem;
   font-weight: 500;
-  transition: transform 0.4s ease-in-out, background 0.4s ease-in-out, color 0.4s ease-in-out;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
   background: #bbc2ff;
   font-size: 85%;
 }
@@ -17,6 +17,7 @@
   background: #5d6dff;
   color: white;
   transform: scale(1.2, 1.1);
+  text-shadow: 0.05rem 0.05rem 0.1rem #000000;
 }
 header.nav {
   box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.5);
@@ -58,12 +59,15 @@ nav a {
   /*background: rgba(255, 54, 54, 1); */
   border-radius: 0.9rem;
   padding: 0.9rem 0.9rem;
-  transition: background 0.4s ease-in-out, color 0.4s ease-in-out;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-shadow: 0.05rem 0.05rem 0.1rem #ffbb00;
 }
 nav a:hover {
   color: white; 
   /*background: rgb(227, 255, 102, 1.0);  */
   background: #5d6dff;
+  text-shadow: 0.05rem 0.05rem 0.1rem #000000;
+  box-shadow: 0.1rem 0.1rem 0.3rem black;
 }
 
 /* nav bar css above ********************************** */
@@ -313,18 +317,6 @@ img {
     outline: 0;
     border: 0;
   }
-  .contactButton {
-    width: 10rem;
-    padding: 1.4rem;
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    background: #bbc2ff;
-    font-weight: bold;
-    font-size: 100%;
-    box-shadow: 4px 3px 10px black, 0px 0px 1px 1px black;
-    border-radius: 10px;
-    transition: transform 0.4s ease-in-out, background 0.4s ease-in-out, color 0.4s ease-in-out;
-  }
   textarea {
     height: 6rem;
     font-size: 115%;
@@ -341,10 +333,23 @@ img {
     border-radius: 10px;
     display: inline-table;
   }
+  .contactButton {
+    width: 10rem;
+    padding: 1.4rem;
+    cursor: pointer;
+    color: rgb(0, 0, 0);
+    background: #bbc2ff;
+    font-weight: bold;
+    font-size: 100%;
+    box-shadow: 4px 3px 10px black, 0px 0px 1px 1px black;
+    border-radius: 10px;
+    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+  }
   .contactButton:hover {
     transform: scale(1.1, 1.05);
     background: #5d6dff;
     color: white;
+    text-shadow: 0.05rem 0.05rem 0.1rem #000000;
   }
   /* Logo animation ************************************************** */
   @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
@@ -360,6 +365,9 @@ img {
     margin-top: 0.5rem;
     padding: 0.5rem;
   }
+  .heading h2:hover {
+    cursor: default;
+  }
   .heading h2:nth-child(1) {
     color: #ffff00;
     -webkit-text-stroke: 0.15rem #ff7b00;
@@ -367,7 +375,7 @@ img {
   }
   .heading h2:nth-child(2) {
     color: #ff7b00;
-    animation: animate 4s ease-in-out infinite;
+    animation: animate 3.5s ease-in-out infinite;
   }
   
   @keyframes animate {
