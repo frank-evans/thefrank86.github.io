@@ -44,7 +44,9 @@ nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-left: 50%;
+  overflow: auto;
+  width: 50%;
+  float: right;
 }
 nav ul {
   font-size: 1.5rem;
@@ -72,14 +74,16 @@ nav a:hover {
 
 /* nav bar css above ********************************** */
 .outer {
-  width:600px;
-  height:600px;
-  border-radius: 10px;
+  width: 37.5rem;
+  height: 37.5rem;
+  border-radius: 0.625rem;
   border: 2px solid #d8d8d8;
   padding: 4px 0px;
   background: #d8d8d8;
 
-  margin: 0 auto;
+  float: right;
+  margin-right: 8rem;
+
   display: block;
   text-align: center;
   opacity: 0.5;
@@ -116,6 +120,7 @@ canvas {
     }
 
 body {
+    position: relative;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -127,18 +132,88 @@ body {
     background-size: cover;
     /*cursor: url("ship6.png"), default; */
     }
-
+.footer {
+  box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  /* custom for footer */
+  transform: translateY(100%);
+  right: 0;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 4rem;
+  background: #d8d8d8;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.75;
+  border-radius: .0625rem;
+  color: rgb(92, 92, 92);
+  z-index: 5;
+  transition: bottom 0.6s ease-in-out;
+  display: flex;
+  margin: auto;
+}
+#dis {
+  width: 50%;
+  float: left;
+  padding: 0.5rem;
+  overflow: auto;
+  cursor: default;
+}
+#links {
+  width: 50%;
+  float: right;
+  padding-left: 10%;
+  padding-right: 05%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: auto;
+}
+#links ul {
+  font-size: 1.1rem;
+  flex: 0.6;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+}
+#links a {
+  color: rgb(92, 92, 92);
+  text-decoration: none;
+  border-radius: 0.9rem;
+  padding: 0.9rem 0.9rem;
+}
+#links a:hover {
+  color: rgb(0, 0, 0);
+  text-shadow: 0.05rem 0.05rem 0.1rem #ffffff;
+}
+#intro {
+  text-align: center;
+  color: white;
+  width: 50%;
+  float: left;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3rem;
+  font-weight: 600;
+  border-radius: 0.625rem;
+  text-shadow: 0.25rem 0.25rem 0.1rem #000000;
+  cursor: default;
+}
 main {
   /* width: 96%; (hover overflow guard) */
     width: 96%;
     position: relative;
     z-index: 2;
     display: inline-table;
+    /* custom for footer */
+    min-height: calc(100vh - 12.75rem);
 }
 
 body h1,
-body h2 {
-    color: #ffffff;
+body h2,
+body h3 {
+    color: #000000;
 }
 
 optgroup {
@@ -175,6 +250,7 @@ img {
   }
   #result {
     margin-top: 4rem;
+    margin-bottom: 4rem;
   }
   img:not(:hover) {
     transition: 0.5s ease;
@@ -289,6 +365,7 @@ img {
     font-size: 250%;
     font-weight: 600;
     text-shadow: 0.17rem 0.17rem #c4c4c4;
+    cursor: default;
   }
   .contactForm {
     display: inline-flex;
@@ -355,6 +432,9 @@ img {
   @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
   .heading {
     position: static;
+    overflow: auto;
+    width: 50%;
+    float: left;
   }
   .heading h2 {
     color: #fff;

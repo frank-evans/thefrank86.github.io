@@ -27,8 +27,8 @@
 		<!-- sticky navigation bar -->
 		<header class="nav">
 			<div class="heading">
-				<h2>Cards in Space</h2>
-				<h2>Cards in Space</h2>
+				<h2>Cardboard in Space</h2>
+				<h2>Cardboard in Space</h2>
 			</div>
 			<nav>
 
@@ -39,35 +39,36 @@
 					<li><a id="hide">Background</a></li>
 				</ul>
 			</nav>
-			<!-- Hide/unhide background-->
-			<script>
-				document.addEventListener('DOMContentLoaded', function() {
-	
-					// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
-	
-					document.getElementById('hide').onclick = () => {
-							// hide/unhide canvas
-							let x = document.getElementById("bg");
-							let y = document.getElementById("body");
-							if (x.style.display == "none") {
-								x.style.display = "block";
-								y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
-
-								audioSun.muted = false;
-								audioFire.muted = false;
-							}
-							else {
-								x.style.display = "none";
-								y.style.backgroundImage = "none";
-
-								audioSun.muted = true;
-								audioFire.muted = true;
-			
-							}
-						}
-					});
-			</script>
 		</header>
+
+			<!-- Hide/unhide background-->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+	
+				// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
+	
+				document.getElementById('hide').onclick = () => {
+						// hide/unhide canvas
+						let x = document.getElementById("bg");
+						let y = document.getElementById("body");
+						if (x.style.display == "none") {
+							x.style.display = "block";
+							y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+
+							audioSun.muted = false;
+							audioFire.muted = false;
+						}
+						else {
+							x.style.display = "none";
+							y.style.backgroundImage = "none";
+
+							audioSun.muted = true;
+							audioFire.muted = true;
+			
+						}
+					}
+				});
+		</script>
 
 		<!-- force reload on "back button" to ensure object.model data reload -->
 		<script type="module">
@@ -347,6 +348,8 @@
 						var y = document.getElementById("form");
 						y.style.display = "none";
 						var z = document.getElementById("outer");
+						z.style.display = "none";
+						var z = document.getElementById("intro");
 						z.style.display = "none";
 
 
@@ -810,7 +813,7 @@
 			//fresnel
 			//float fres = (Fresnel(eyeVector, vNormal))*(time*0.02);
 			float fres = (Fresnel(eyeVector, vNormal));
-			brightness += pow(fres, 0.3);
+			brightness += pow(fres, 0.4);
 
 			vec3 col = brightnessToColor(brightness);
 			gl_FragColor = vec4(col, 1.);
@@ -1075,7 +1078,7 @@
 				geometry = new THREE.SphereBufferGeometry(280, 100, 150);
 
 				// sun outer glow geo
-				geometry3 = new THREE.SphereBufferGeometry(310, 100, 8);
+				geometry3 = new THREE.SphereBufferGeometry(315, 100, 8);
 
 				// Material (normal texture)
 				/*const material = new THREE.MeshStandardMaterial();
@@ -1246,6 +1249,7 @@
 
 			// nav bar dynamic on scroll
 			const nav = document.querySelector("header.nav");
+			const footer = document.querySelector("footer.footer");
 			let lastScrollY = window.scrollY;
 
 			// scroll function to zoom Object main
@@ -1285,10 +1289,13 @@
 				// nav bar dynamic on scroll
 				if (lastScrollY < window.scrollY) {
 					nav.style.top = "-6.25rem";
+					//footer.style.bottom = "-6.25rem";
 				}
 				else {
 					nav.style.top = "0";
+					//footer.style.bottom = "0";
 				}
+				
 
 				lastScrollY = window.scrollY;
 
@@ -1355,7 +1362,23 @@
 			animate();
 
 	</script>
+	<div id="intro">
+		Select a "Magic: The Gathering" set to view some cardboard in space
+		<!-- <h2>Select a Magic: The Gathering set of cards -> and go through that digital cardboard in space.</h2>
+		<a href="https://www.technologyreview.com/2019/05/07/135482/magic-the-gathering-is-officially-the-worlds-most-complex-game/">
+		<h3>“Magic: The Gathering is officially the world’s most complex game."</h3>
+		</a>
+		The article by Emerging Technology in which they summarize the paper submitted by 
+		independent researcher Alex Churchill and colleagues on March 24, 2019.
+		<a href="https://arxiv.org/abs/1904.09828#">Original Paper</a>
+		<a href="https://arxiv.org/pdf/1904.09828.pdf">PDF</a>
 
+		<p></p>
+		<h3>One of my favorite aspects of the game is going through a set, reading the cards effects, and enjoying the artwork.</h3>
+		With "Cardboard in Space" I can now do that with clearer images of the cards and my favorite backdrop.
+		-->
+		
+	</div>
 
 	<div class="outer" id="outer">
 		<!-- <form action="{% url 'result' %}" method="post" id="form"> -->
@@ -2176,5 +2199,19 @@
 
 	</main>
 	</body>
-
+	<footer class="footer">
+		<div id="dis">
+		“[Cardboard in Space] is unofficial Fan Content permitted under the Fan Content Policy.
+		<br> 
+		Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
+		©Wizards of the Coast LLC.”
+		</div>
+		<div id="links">
+			<ul>
+				<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
+				<li><a data-page="project" href="{% url 'test' %}">Projects</a></li>
+				<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
+			</ul>
+		</div>
+	</footer>
 </html>
