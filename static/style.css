@@ -20,7 +20,7 @@
   text-shadow: 0.05rem 0.05rem 0.1rem #000000;
 }
 header.nav {
-  box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: inset 0rem -0.25rem 0.2rem rgba(0, 0, 0, 0.5);
   position: sticky;
   top: 0px;
   display: flex;
@@ -449,12 +449,13 @@ img {
     cursor: default;
   }
   .heading h2:nth-child(1) {
-    color: #ffff00;
-    -webkit-text-stroke: 0.15rem #ff7b00;
-    text-shadow: 0.25rem 0.25rem 0.15rem #000000;
+    color: #000000;
+    -webkit-text-stroke: 0.15rem #000000;
+    text-shadow: 0.18rem 0.18rem 0.02rem #ffff00, 0.30rem 0.30rem 0.02rem #000000;
   }
   .heading h2:nth-child(2) {
     color: #ff7b00;
+    /*color: #ff7b00; */
     animation: animate 3.5s ease-in-out infinite;
   }
   
