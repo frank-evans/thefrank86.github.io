@@ -25,6 +25,7 @@
 
 	<body id="body">
 		<!-- sticky navigation bar -->
+		<span class="boxShadow">
 		<header class="nav">
 			<div class="heading">
 				<h2>Cardboard in Space</h2>
@@ -39,7 +40,14 @@
 					<li><a id="hide">Background</a></li>
 				</ul>
 			</nav>
+				<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+				<path fill="#0099ff" fill-opacity="1" d="M0,96L0,288L720,288L720,192L1440,192L1440,320L720,320L720,320L0,320L0,320Z"></path>
+			  	</svg>
+				<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
+				<path fill="#ff0000" fill-opacity="1" d="M0,350L250,350L300,300L800,300"></path>
+				</svg> -->
 		</header>
+		</span>
 
 			<!-- Hide/unhide background-->
 		<script>
@@ -160,10 +168,74 @@
 			audioSun.loop = true;
 
 			document.addEventListener('DOMContentLoaded', function() {
+				// name search example :  https://api.scryfall.com/cards/named?exact=${search_id}        doom-blade
+				document.querySelector('form.form2').onsubmit = () => {
+					// play audio
+					audioFire.muted = false; 
+					audioSun.muted = false
 
-				// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
+					// ***********  need update 
+					const search_id = document.getElementById('single').value;
+					//search_id = search_id.trim();
+					//search_id = search_id.replace(" ", "-");
 
-				document.querySelector('form').onsubmit = () => {
+					// fetch single card
+					fetch((`https://api.scryfall.com/cards/named?exact=${search_id}`))
+					.then(response => response.json())
+					.then(data => {
+						//var single1 = Object.assign({}, data);
+						single1 = data;
+
+						// set img1 for div used to iterate 
+						let img1 = document.getElementById('result');
+
+						if (typeof single1.image_uris === 'undefined') {
+							//check if all img data missing
+							if (typeof single1.card_faces !== 'undefined') {
+								img1.innerHTML +=
+								 `<img class="tilt" src="${single1.card_faces[0].image_uris.normal}">`;
+								img1.innerHTML +=
+								 `<img class="tilt" src="${single1.card_faces[1].image_uris.normal}">`;
+							}
+							else {
+								img1.innerHTML +=
+								 `<img class="notFound" src="https://i1.wp.com/strategy.channelfireball.com/wp-content/uploads/2020/02/oops-mtg-arena-twitter.png?fit=1048%2C524&ssl=1">`;
+							}
+						}
+						if (typeof single1.image_uris !== 'undefined') {
+						img1.innerHTML += `<img class="tilt" src="${single1.image_uris.normal}">`;
+						}
+
+						})
+						// call 3d hover effect function after new img's loaded
+						.then(setTimeout(hover, 2 * 1000))
+						.catch(error => {
+							console.log("Error:", error);
+						});
+						
+						// hide form on submit/search
+						var w = document.getElementById("outer");
+						w.style.display = "none";
+						var y = document.getElementById("outer2");
+						y.style.display = "none";
+						var z = document.getElementById("intro");
+						z.style.display = "none";
+
+						// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
+						setTimeout(hover, 8 * 1000);
+						
+						setTimeout(hover, 16 * 1000);
+
+						delete single1;
+
+						// stop form from submitting (bypass django dataframe search/result)
+						return false;
+					} 
+				});
+
+			document.addEventListener('DOMContentLoaded', function() {
+
+				document.querySelector('form.form1').onsubmit = () => {
 						// play audio
 						audioFire.muted = false; 
 						audioSun.muted = false;
@@ -339,24 +411,24 @@
 							}  */
 						})
 						// call 3d hover effect function after new img's loaded
-						.then(setTimeout(hover, 2 * 1000))
+						.then(setTimeout(hover, 4 * 1000))
 						.catch(error => {
 							console.log("Error:", error);
 						});
 						
 						// hide form on submit/search
-						var y = document.getElementById("form");
+						var w = document.getElementById("outer");
+						w.style.display = "none";
+						var y = document.getElementById("outer2");
 						y.style.display = "none";
-						var z = document.getElementById("outer");
-						z.style.display = "none";
 						var z = document.getElementById("intro");
 						z.style.display = "none";
 
 
 						// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
-						setTimeout(hover, 6 * 1000);
+						setTimeout(hover, 10 * 1000);
 						
-						setTimeout(hover, 12 * 1000);
+						setTimeout(hover, 20 * 1000);
 						
 
 						delete page1;
@@ -1288,7 +1360,7 @@
 
 				// nav bar dynamic on scroll
 				if (lastScrollY < window.scrollY) {
-					nav.style.top = "-6.25rem";
+					nav.style.top = "-9.375rem";
 					//footer.style.bottom = "-6.25rem";
 				}
 				else {
@@ -1382,7 +1454,7 @@
 
 	<div class="outer" id="outer">
 		<!-- <form action="{% url 'result' %}" method="post" id="form"> -->
-			<form id="form" method="post" autocomplete="off">
+			<form id="form" class="form1" method="post" autocomplete="off">
 			{% csrf_token %}
 	
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list">
@@ -2195,6 +2267,16 @@
 			<p></p>
 			<input id="input" type="submit" value="Submit" style="height:50px; width:100px">
 		</form>
+
+		</div>
+		<div class="outer2" id="outer2">
+			<form id="form2" class="form2" method="post" autocomplete="off">
+				{% csrf_token %}
+
+				<input id="single" type="text" placeholder="Search Card Name">
+				<p></p>
+				<input id="input2" type="submit" value="Submit" style="height:50px; width:100px">
+			</form>
 		</div>
 
 	</main>
