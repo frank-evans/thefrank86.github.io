@@ -284,7 +284,15 @@ img {
     transform: translateZ(12px);
   }
   .notFound {
-    width: 65%;
+    width: 33%;
+    opacity: 0.9;
+  }
+  span {
+    color: rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    text-shadow: 0.05rem 0.05rem 0.01rem #ffffff; 
   }
 
   @media (prefers-reduced-motion) {
