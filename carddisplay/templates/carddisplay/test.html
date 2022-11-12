@@ -1129,9 +1129,11 @@
 				const textureLoader = new THREE.TextureLoader();
 
 				// this texture being referenced from the static folder only loads in html (not.js)
-				const depthImage = textureLoader.load("{% static 'textures/mountainDepth1.png' %}");
+				//const depthImage = textureLoader.load("{% static 'textures/mountainDepth3.png' %}");
+				const depthImage = textureLoader.load("{% static 'textures/FpDepthBlur2.png' %}");
 
-				const originalImage = textureLoader.load("{% static 'textures/mountain1.png' %}");
+				//const originalImage = textureLoader.load("{% static 'textures/mountain1.png' %}");
+				const originalImage = textureLoader.load("{% static 'textures/FrankProfile1.png' %}");
 
 				//  particle texture loading
 				const star = textureLoader.load("{% static 'star/asteroid2.png' %}");
@@ -1242,14 +1244,16 @@
 				//scene.add(mesh2);
 
 				// 3d card Geo, Mat, Mesh
-				planeGeometry = new THREE.PlaneBufferGeometry(67, 93);
+				//planeGeometry = new THREE.PlaneBufferGeometry(67 * 1.0, 93 * 1.0);
+				planeGeometry = new THREE.PlaneBufferGeometry(512 *0.25, 361 *0.25);
 
 				planeMaterial = new THREE.ShaderMaterial({
 					uniforms: {
 						originalTexture: { value: originalImage },
 						depthTexture: { value: depthImage },
 						uMouse: { value: new THREE.Vector2(0, 0) },
-						uThreshold: { value: new THREE.Vector2(20. * 1, 35. * 1) },
+						//uThreshold: { value: new THREE.Vector2(20. * 0.85, 35. * 0.85) },
+						uThreshold: { value: new THREE.Vector2(20. * 1.2, 35. * 1.2) },
 					},
 					fragmentShader: `
 						precision mediump float;
@@ -1439,6 +1443,9 @@
 				return;
 			}
 
+			// 3d image clock
+			const clock = new THREE.Clock();
+
 			// dynamic mouse movement interaction Function					
 			function onDocumentMouseMove(event) {
 
@@ -1466,7 +1473,6 @@
 			}
 
 			// 3d image clock
-			const clock = new THREE.Clock();
 			let previousTime = 0;
 
 			// Animation
@@ -1490,8 +1496,11 @@
 				const parallaxX = cursor.x * 0.5;
   				const parallaxY = - cursor.y * 0.5;
 
-				cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
-				cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
+				// Temp set to consisten and NOT mouse move
+				//cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
+				//cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
+				cursor.lerpX  = Math.sin(elapsedTime*0.9) * 0.4;
+				cursor.lerpY = Math.sin(elapsedTime*1.3) * 0.8;
 
 				// 3d image positioning values
 				planeMaterial.uniforms.uMouse.value = new THREE.Vector2(cursor.lerpX , cursor.lerpY);
