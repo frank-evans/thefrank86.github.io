@@ -14,7 +14,8 @@
     <title>Get in Contact</title>
     
 </head>
-<body class="contactBody">
+<body class="contactBody" id="body">
+
     <!-- sticky navigation bar -->
 		<header class="nav">
             <div class="heading">
@@ -31,6 +32,24 @@
 			</nav>
 		</header>
     
+         <!-- Hide/unhide background-->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+	
+				document.getElementById('hide').onclick = () => {
+						// hide/unhide canvas
+						let y = document.getElementById("body");
+						if (y.style.backgroundImage == "none") {
+							y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+
+						}
+						else {
+							y.style.backgroundImage = "none";
+						}
+					}
+				});
+		</script>
+
     <div class="container">
         
         <form action="https://formspree.io/f/meqdzwgv" method="POST" class="contactForm">
