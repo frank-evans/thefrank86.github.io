@@ -11,6 +11,7 @@
   transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
   background: #bbc2ff;
   font-size: 85%;
+  margin-top: 13rem;
 }
 #input:hover {
   /*color: rgb(227, 255, 102, 1.0); */
@@ -102,7 +103,8 @@ nav a:hover {
 /* nav bar css above ********************************** */
 .outer {
   width: 30rem;
-  height: 37.5rem;
+  /*height: 37.5rem; */
+  height: 19.75rem;
   border-radius: 0.625rem;
   border: 2px solid #d8d8d8;
   padding: 4px 0px;
@@ -120,11 +122,30 @@ nav a:hover {
   opacity: 0.85;
   transition: 1s ease-in-out;
 }
+.outer2 {
+  display: block;
+  text-align: center;
+  margin-top: 5rem;
+
+  width: 30rem;
+  height: 6.3rem;
+  border-radius: 0.625rem;
+  border: 2px solid #d8d8d8;
+  padding: 4px 0px;
+  background: #d8d8d8;
+}
+input#single {
+  width: 29rem;
+  height: 1.5rem;
+  text-align: center;
+  border-radius: 0.25rem;
+}
 select {
     border-radius: 8px;
     overflow: auto;
     width:30rem;
-    height:37.5rem;
+    /*height:37.5rem; */
+    height:19.75rem;
     display: block;
     margin: 0 auto;
     background-color: #d8d8d8; 

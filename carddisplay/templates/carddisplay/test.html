@@ -8,8 +8,23 @@
 		<!-- style.css file -->
         <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
 
-		<!-- jquery code for loading "on submit" code -->
-		<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+		<!-- select box with search -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+		<script>
+			$(document).ready(function () {
+				$('select').selectize({
+					sortField: 'text'
+				});
+			});
+		</script>
+
+		<!-- jquery code for loading "on submit" code 
+		<script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
 
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -945,24 +960,9 @@
 				//scene.add(mesh2);
 
 				// 3d card Geo, Mat, Mesh
-				planeGeometry = new THREE.PlaneBufferGeometry(67.2 * 1.15, 93.6 * 1.15);
+				planeGeometry = new THREE.PlaneBufferGeometry(67.2 * 0.5, 93.6 * 0.5);
 				//planeGeometry = new THREE.PlaneBufferGeometry(512 *0.25, 361 *0.25);
 				//planeGeometry = new THREE.CircleBufferGeometry(512 *0.15, 80);
-
-				/* let x = 1; let y = 1; let width = (67.2 * 1.15); let height = (93.6 * 1.15); let radius = 5;
-        
-				let shape = new THREE.Shape();
-				shape.moveTo( x, y + radius );
-				shape.lineTo( x, y + height - radius );
-				shape.quadraticCurveTo( x, y + height, x + radius, y + height );
-				shape.lineTo( x + width - radius, y + height );
-				shape.quadraticCurveTo( x + width, y + height, x + width, y + height - radius );
-				shape.lineTo( x + width, y + radius );
-				shape.quadraticCurveTo( x + width, y, x + width - radius, y );
-				shape.lineTo( x + radius, y );
-				shape.quadraticCurveTo( x, y, x, y + radius );
-
-				planeGeometry = new THREE.ShapeBufferGeometry( shape ); */
 
 				planeMaterial = new THREE.ShaderMaterial({
 					uniforms: {
@@ -1011,9 +1011,9 @@
 
 				scene.add(plane);
 
-				plane.position.x = -70;
-				plane.position.y = -10;
-				plane.position.z = 390;
+				plane.position.x = -30;
+				plane.position.y = -7;
+				plane.position.z = 455;
 				plane.rotateZ(0.05);
 
 				// **************************
@@ -1221,7 +1221,7 @@
 				//cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
 				// * speed , * tolerance 
 				cursor.lerpX  = Math.sin(elapsedTime*0.7) * 0.6;
-				//cursor.lerpY = Math.sin(elapsedTime*0.9) * 0.7;
+				//cursor.lerpY = Math.sin(elapsedTime*0.9) * 0.7;   ***************
 				cursor.lerpY = Math.sin(elapsedTime*1.1) * 0.4;
 
 				// 3d image positioning values
@@ -1254,21 +1254,21 @@
 			}
 
 			animate();
+			//delete card on search *************************************************************************************
+			/* document.addEventListener('DOMContentLoaded', function() {
+				document.querySelector('form.form2').onsubmit = () => {
+					const SObject = scene.getObjectByName("plane1");
+					scene.remove(SObject);
+					SObject.geometry.dispose();
+					SObject.material.dispose();
+					SObject = undefined;
+				}
+			}) */
 
 	</script>
 
 	<!--  new javascript object api search   -->
 	<script>
-
-		function deleteFunction() {
-			const activeScene = THREE.Object3D.getElementByName(scene);
-			const object = activeScene.getObjectByName("plane1");
-
-			activeScene.remove(object);
-			//object.geometry.dispose();
-			//object.material.dispose();
-			//object = undefined;
-		}
 
 		//audio file script 
 		const audioFire = new Audio("{% static 'fire3.ogg' %}");
@@ -1591,13 +1591,14 @@
 	</div>
 
 	<div class="outer" id="outer">
-		<!-- <form action="{% url 'result' %}" method="post" id="form"> -->
+		<!-- <form action="{% url 'result' %}" method="post" id="form">    selected="selected" -->
 			<form id="form" class="form1" method="post" autocomplete="off">
 			{% csrf_token %}
 	
-			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" data-placeholder="Enter a set name or choose from the list">
+			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
+				<option value="">Select a set...</option>
 				<optgroup label="Expansions">
-				<option data-svg-code="default" value="bro"  selected="selected">The Brothers War (BRO)</option>
+				<option data-svg-code="default" value="bro">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
 				<option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
 				<option data-svg-code="neo" value="neo">Kamigawa: Neon Dynasty (NEO)</option>
@@ -2400,13 +2401,13 @@
 				<option data-svg-code="pz1" value="pz1">Legendary Cube Prize Pack (PZ1)</option></optgroup>
 				<optgroup label="Vanguard">
 				<option data-svg-code="mtgo" value="pmoa">Magic Online Avatars (PMOA)</option>
-				<option data-svg-code="van" value="pvan">Vanguard Series (PVAN)</option></optgroup></select>
+				<option data-svg-code="van" value="pvan">Vanguard Series (PVAN)</option></optgroup>
+			</select>
 			  
 			<p></p>
 			<input id="input" type="submit" value="Submit" style="height:50px; width:100px">
 		</form>
 
-	</div>
 		<div class="outer2" id="outer2">
 			<form id="form2" class="form2" method="post" autocomplete="off">
 				{% csrf_token %}
@@ -2416,6 +2417,8 @@
 				<input id="input2" type="submit" value="Submit" style="height:50px; width:100px">
 			</form>
 		</div>
+	</div>
+		
 
 	</main>
 	</body>
