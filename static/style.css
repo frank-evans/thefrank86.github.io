@@ -8,10 +8,11 @@
   cursor: pointer;
   border-radius: 0.5rem;
   font-weight: 500;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, 
+  margin-top 0.5s ease-in-out;
   background: #bbc2ff;
-  font-size: 85%;
-  margin-top: 13rem;
+  font-size: 1.0rem;
+  margin-top: 0rem;
 }
 #input:hover {
   /*color: rgb(227, 255, 102, 1.0); */
@@ -104,7 +105,7 @@ nav a:hover {
 .outer {
   width: 30rem;
   /*height: 37.5rem; */
-  height: 19.75rem;
+  height: 20rem;
   border-radius: 0.625rem;
   border: 2px solid #d8d8d8;
   padding: 4px 0px;
@@ -116,28 +117,29 @@ nav a:hover {
   display: block;
   text-align: center;
   opacity: 0.5;
-  transition: 1s ease-in-out;
+  transition: 1s ease-in-out, height 0.5s ease-in-out;
 }
 .outer:hover {
   opacity: 0.85;
   transition: 1s ease-in-out;
+  height: 32rem;
+}
+.outer:hover  #input {
+  margin-top: 13rem;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, 
+  margin-top 1.0s ease-in-out;
 }
 .outer2 {
   display: block;
   text-align: center;
   margin-top: 5rem;
-
-  width: 30rem;
-  height: 6.3rem;
-  border-radius: 0.625rem;
-  border: 2px solid #d8d8d8;
-  padding: 4px 0px;
-  background: #d8d8d8;
 }
 input#single {
-  width: 29rem;
+  width: 27rem;
   height: 1.5rem;
   text-align: center;
+  font-size: 1.0rem;
+  color: #c77100;
   border-radius: 0.25rem;
 }
 select {
@@ -145,19 +147,27 @@ select {
     overflow: auto;
     width:30rem;
     /*height:37.5rem; */
-    height:19.75rem;
+    height: 7rem;
     display: block;
     margin: 0 auto;
     background-color: #d8d8d8; 
     text-align: center;
     /*opacity: 0.5; */
-    transition: 0.7s ease-in-out;
+    transition: 0.7s ease-in-out, height 0.5s ease-in-out;
+}
+::placeholder { 
+  color: #5d6dff;
+  opacity: 1; /* Firefox */
+}
+.outer2 ::placeholder { 
+  color: #c77100;
+  opacity: 1; /* Firefox */
 }
 select:hover {
     /*opacity: 0.85; */
     transition: 0.7s ease-in-out;
+    height:19.75rem;
   }
-
 canvas {
     position: fixed;
     top: 0;
@@ -179,7 +189,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     /*cursor: url("ship6.png"), default; */
-    }
+  }
 .footer {
   box-shadow: inset 0px 3px 10px rgba(0, 0, 0, 0.5);
   position: relative;
@@ -274,7 +284,7 @@ optgroup {
 
 optgroup > option {
     font-size: 75%;
-    color: black;
+    color: #5d6dff;
 }
 
 img {

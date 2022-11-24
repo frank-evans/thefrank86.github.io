@@ -1572,7 +1572,7 @@
 	</script>
 
 	<div id="intro">
-		Select a "Magic: The Gathering" set to view some cardboard in space
+		Select a "Magic: The Gathering" set and 'Submit' to view some cardboard in space
 		<!-- <h2>Select a Magic: The Gathering set of cards -> and go through that digital cardboard in space.</h2>
 		<a href="https://www.technologyreview.com/2019/05/07/135482/magic-the-gathering-is-officially-the-worlds-most-complex-game/">
 		<h3>“Magic: The Gathering is officially the world’s most complex game."</h3>
@@ -1596,8 +1596,8 @@
 			{% csrf_token %}
 	
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
-				<option value="">Select a set...</option>
 				<optgroup label="Expansions">
+				<option data-svg-code="1" value="1" disabled>**Expansions</option>
 				<option data-svg-code="default" value="bro">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
 				<option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
@@ -1694,6 +1694,7 @@
 				<option data-svg-code="atq" value="atq">Antiquities (ATQ)</option>
 				<option data-svg-code="arn" value="arn">Arabian Nights (ARN)</option></optgroup>
 				<optgroup label="Core Sets">
+				<option data-svg-code="2" value="2" disabled>*Core Sets</option>
 				<option data-svg-code="m21" value="m21">Core Set 2021 (M21)</option>
 				<option data-svg-code="m20" value="m20">Core Set 2020 (M20)</option>
 				<option data-svg-code="m19" value="m19">Core Set 2019 (M19)</option>
