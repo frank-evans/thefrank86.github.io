@@ -4,7 +4,7 @@
 #img1 {
   margin: auto;
 }
-#input {
+.input {
   cursor: pointer;
   border-radius: 0.5rem;
   font-weight: 500;
@@ -14,27 +14,19 @@
   font-size: 1.0rem;
   margin-top: 0rem;
 }
-#input:hover {
-  /*color: rgb(227, 255, 102, 1.0); */
-  background: #5d6dff;
-  color: white;
-  transform: scale(1.2, 1.1);
-  text-shadow: 0.05rem 0.05rem 0.1rem #000000;
-}
 #input2 {
   cursor: pointer;
   border-radius: 0.5rem;
   font-weight: 500;
-  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   background: #ffba60;
-  font-size: 85%;
+  font-size: 1.0rem;
 }
 #input2:hover {
   /*color: rgb(227, 255, 102, 1.0); */
   background: #ff9100;
-  color: white;
-  transform: scale(1.2, 1.1);
-  text-shadow: 0.05rem 0.05rem 0.1rem #000000;
+  transform: translateY(-0.5rem) scale(1.05, 1.05);
+  box-shadow: 0.1rem 0.1rem 0.1rem black;
 }
 header.nav {
   position: sticky;
@@ -81,13 +73,19 @@ nav ul {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+nav li {
+  transition: all 0.3s ease-in-out;
+}
+nav li:hover {
+transform: translateY(-0.25rem);
+}
 nav a {
   color: black;
   text-decoration: none;
   /*background: rgba(255, 54, 54, 1); */
   border-radius: 0.9rem;
   padding: 0.9rem 0.9rem;
-  transition: background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   text-shadow: 0.05rem 0.05rem 0.1rem #ffbb00;
 }
 nav a:hover {
@@ -99,6 +97,7 @@ nav a:hover {
   box-shadow: 0.1rem 0.1rem 0.3rem black;
   position: sticky;
   z-index: 6;
+  transform: translateY(-0.5rem);
 }
 
 /* nav bar css above ********************************** */
@@ -119,15 +118,48 @@ nav a:hover {
   opacity: 0.5;
   transition: 1s ease-in-out, height 0.5s ease-in-out;
 }
-.outer:hover {
+/* .outer:hover {
   opacity: 0.85;
   transition: 1s ease-in-out;
   height: 32rem;
 }
-.outer:hover  #input {
+.outer:hover #input {
   margin-top: 13rem;
   transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, 
   margin-top 1.0s ease-in-out;
+} */
+.outer3 {
+  width: 30rem;
+  /*height: 37.5rem; */
+  height: 32rem;
+  border-radius: 0.625rem;
+  border: 2px solid #d8d8d8;
+  padding: 4px 0px;
+  background: #d8d8d8;
+
+  float: right;
+  margin-right: 8rem;
+
+  display: block;
+  text-align: center;
+  opacity: 0.85;
+  transition: 1s ease-in-out, height 0.5s ease-in-out;
+}
+.input3 {
+  cursor: pointer;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out, 
+  margin-top 0.5s ease-in-out;
+  background: #bbc2ff;
+  font-size: 1.0rem;
+  margin-top: 13rem;
+}
+.input3:hover {
+  /*color: rgb(227, 255, 102, 1.0); */
+  background: #5d6dff;
+  transform: translateY(-0.5rem) scale(1.05, 1.05);
+  box-shadow: 0.1rem 0.1rem 0.1rem black;
 }
 .outer2 {
   display: block;
@@ -237,11 +269,18 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
 }
+#links li {
+  transition: all 0.3s ease-in-out;
+}
+#links li:hover {
+  transform: translateY(-0.25rem);
+}
 #links a {
   color: rgb(92, 92, 92);
   text-decoration: none;
   border-radius: 0.9rem;
   padding: 0.9rem 0.9rem;
+  transition: all 0.3s ease-in-out;
 }
 #links a:hover {
   color: rgb(0, 0, 0);
@@ -371,6 +410,9 @@ img {
     img {
       transform: none !important;
     }
+    .hidden {
+      transition: none;
+    }
   }
  
   /*   loading test *************************************************************************************************   */
@@ -496,6 +538,10 @@ img {
     outline: 0;
     border: 0;
   }
+  .container ::placeholder { 
+    color: #000d83;
+    opacity: 1; /* Firefox */
+  }
   textarea {
     height: 6rem;
     font-size: 115%;
@@ -522,13 +568,12 @@ img {
     font-size: 100%;
     box-shadow: 2px 1px 5px black, 0px 0px 1px 1px black;
     border-radius: 10px;
-    transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
   .contactButton:hover {
-    transform: scale(1.1, 1.05);
+    transform: scale(1.05, 1.05) translateY(-0.5rem);
     background: #5d6dff;
-    color: white;
-    text-shadow: 0.05rem 0.05rem 0.1rem #000000;
+    box-shadow: 0.1rem 0.1rem 0.1rem black;
   }
   /* Logo animation ************************************************** */
   @import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
@@ -593,4 +638,16 @@ img {
         0% 100%
       );
     }
+  }
+  /* Text fade in animation ************************************************** */
+  .hidden {
+    opacity: 0;
+    filter: blur(3px);
+    transform: translateX(-100%);
+    transition: all 1s;
+  }
+  .show {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
   }

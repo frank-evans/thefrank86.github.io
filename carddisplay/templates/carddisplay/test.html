@@ -1004,6 +1004,8 @@
 						}
 					`,
 				});
+				planeMaterial.transparent = true;
+				planeMaterial.opacity = 0.75;
 
 				plane = new THREE.Mesh(planeGeometry, planeMaterial);
 
@@ -1572,6 +1574,7 @@
 	</script>
 
 	<div id="intro">
+		<section class="hidden">
 		Select a "Magic: The Gathering" set and 'Submit' to view some cardboard in space
 		<!-- <h2>Select a Magic: The Gathering set of cards -> and go through that digital cardboard in space.</h2>
 		<a href="https://www.technologyreview.com/2019/05/07/135482/magic-the-gathering-is-officially-the-worlds-most-complex-game/">
@@ -1587,8 +1590,25 @@
 		With "Cardboard in Space" I can now do that with clearer images of the cards and my favorite backdrop.
 		
 		<img id="frame" src="{% static 'textures/mFrame1.png' %}">  -->
-		
+		</section>
 	</div>
+	<!-- script for text fade in-->
+	<script>
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+			console.log(entry)
+			if (entry.isIntersecting) {
+				entry.target.classList.add('show');
+			} else {
+				entry.target.classList.remove('show');
+			}
+			});
+		});
+
+		const hiddenElements = document.querySelectorAll('.hidden');
+		hiddenElements.forEach((el) => observer.observe(el));
+		
+	</script>
 
 	<div class="outer" id="outer">
 		<!-- <form action="{% url 'result' %}" method="post" id="form">    selected="selected" -->
@@ -1720,6 +1740,7 @@
 				<option data-svg-code="leb" value="leb">Limited Edition Beta (LEB)</option>
 				<option data-svg-code="lea" value="lea">Limited Edition Alpha (LEA)</option></optgroup>
 				<optgroup label="Masters">
+				<option data-svg-code="3" value="3" disabled>*Masters</option>
 				<option data-svg-code="dmr" value="dmr">Dominaria Remastered (DMR)</option>
 				<option data-svg-code="uplist" value="uplist">The List (Unfinity Foil Edition) (UPLIST)</option>
 				<option data-svg-code="2x2" value="2x2">Double Masters 2022 (2X2)</option>
@@ -1748,6 +1769,7 @@
 				<option data-svg-code="rin" value="rin">Rinascimento (RIN)</option>
 				<option data-svg-code="chr" value="chr">Chronicles (CHR)</option></optgroup>
 				<optgroup label="Draft Innovation">
+				<option data-svg-code="4" value="4" disabled>*Draft Innovation</option>
 				<option data-svg-code="j22" value="j22">Jumpstart 2022 (J22)</option>
 				<option data-svg-code="clb" value="clb">Commander Legends: Battle for Baldur&#39;s Gate (CLB)</option>
 				<option data-svg-code="star" value="dbl">Innistrad: Double Feature (DBL)</option>
@@ -2406,7 +2428,7 @@
 			</select>
 			  
 			<p></p>
-			<input id="input" type="submit" value="Submit" style="height:50px; width:100px">
+			<input id="input" class="input" type="submit" value="Submit" style="height:50px; width:100px">
 		</form>
 
 		<div class="outer2" id="outer2">
@@ -2419,7 +2441,19 @@
 			</form>
 		</div>
 	</div>
-		
+	<!-- extend search form on hover -->
+	<script>
+		$('.outer').hover(
+       function(){ $(this).addClass('outer3') },
+       function(){ $(this).removeClass('outer') },
+		)
+
+		$('.outer').hover(
+		function(){ $('.input').addClass('input3') },
+		function(){ $('.input').removeClass('input') }
+		)
+
+	</script>
 
 	</main>
 	</body>
