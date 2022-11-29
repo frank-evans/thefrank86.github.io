@@ -32,7 +32,11 @@ def contact(request):
             #"carddisplay": card.objects.all()
         })
 
+def about(request):
 
+        return render(request, "carddisplay/about.html", {
+            #"carddisplay": card.objects.all()
+        })
 
 def result(request):
     if request.method == "POST":
