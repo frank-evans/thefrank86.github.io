@@ -705,3 +705,21 @@ img {
   .hidden2:nth-child(4) {
     transition-delay: 600ms;
   }
+  i {
+    font-size: 3.0rem;
+  }
+  img.logo {
+    width: 2.7rem; 
+    height: auto;
+    padding: 0rem 0.3rem;
+    opacity: 1.0;
+    /* transformed in result.html script  */
+    transition: none;
+    transform-style: none;
+    will-change: none;
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    z-index: 3;
+    border-radius: 0rem;
+    box-shadow: none;
+  }
