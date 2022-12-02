@@ -23,6 +23,9 @@
 			});
 		</script>
 
+		<!-- page counter script api -->
+        <script async src="https://api.countapi.xyz/hit/cardboardinspace/952b5c1c-1860-4b70-8f75-6ae7dd7d4a8a?callback=websiteVisits"></script>
+
 		<!-- jquery code for loading "on submit" code 
 		<script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
 
@@ -66,6 +69,11 @@
 
 			<!-- Hide/unhide background-->
 		<script>
+			// page counter script api 
+			function websiteVisits(response) {
+                document.querySelector("#visits").textContent = response.value;
+            }
+
 			document.addEventListener('DOMContentLoaded', function() {
 	
 				// name search example :  https://api.scryfall.com/cards/named?exact=doom+blade
@@ -960,7 +968,7 @@
 				//scene.add(mesh2);
 
 				// 3d card Geo, Mat, Mesh
-				planeGeometry = new THREE.PlaneBufferGeometry(67.2 * 0.4, 93.6 * 0.4);
+				planeGeometry = new THREE.PlaneBufferGeometry(67.2 * 0.45, 93.6 * 0.45);
 				//planeGeometry = new THREE.PlaneBufferGeometry(512 *0.25, 361 *0.25);
 				//planeGeometry = new THREE.CircleBufferGeometry(512 *0.15, 80);
 
@@ -1013,9 +1021,9 @@
 
 				scene.add(plane);
 
-				plane.position.x = -30;
+				plane.position.x = -35;
 				plane.position.y = -7;
-				plane.position.z = 455;
+				plane.position.z = 450;
 				plane.rotateZ(0.05);
 
 				// **************************
@@ -1162,7 +1170,7 @@
 				lastScrollY = window.scrollY;
 
 				// delete 'plane' 3d parallax display card on scroll***********************
-				if (camera.position.z > 400){
+				if (camera.position.z > 470){
 					scene.remove(plane);
 					plane.geometry.dispose();
 					plane.material.dispose();
@@ -1351,6 +1359,9 @@
 					//delete parallax 3d card ********************************************************************************
 					//deleteFunction();
 
+					// auto scroll for parallax card delete
+					window.scrollTo(0, 1);
+
 					// stop form from submitting (bypass django dataframe search/result)
 					return false;
 				} 
@@ -1359,6 +1370,7 @@
 		document.addEventListener('DOMContentLoaded', function() {
 
 			document.querySelector('form.form1').onsubmit = () => {
+
 					// play audio
 					audioFire.muted = false; 
 					audioSun.muted = false;
@@ -1560,6 +1572,8 @@
 					// reset form for proper load on refresh
 					//document.getElementById('form').reset();
 
+					// auto scroll for parallax card delete
+					window.scrollTo(0, 1);
 
 					// stop form from submitting (bypass django dataframe search/result)
 					return false;
@@ -2463,6 +2477,9 @@
 		Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
 		©Wizards of the Coast LLC.
 		</div>
+		<div id="counter">
+            Page Views: <span id="visits"></span>
+        </div>
 		<div id="links">
 			<ul>
 				<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
