@@ -107,7 +107,7 @@ nav a:hover {
   height: 20rem;
   border-radius: 0.625rem;
   border: 2px solid #202020;
-  padding: 6px 3px;
+  padding: 6px 6px;
   background-color: #202020;
 
   float: right;
@@ -135,8 +135,8 @@ nav a:hover {
   height: 32rem;
   border-radius: 0.625rem;
   border: 2px solid #202020;
-  padding: 6px 3px;
-  padding-top: 12px;
+  padding: 6px 6px;
+  padding-top: 24px;
   background-color: #202020;
 
   float: right;
@@ -747,4 +747,46 @@ img {
     z-index: 3;
     border-radius: 0rem;
     box-shadow: none;
+  }
+  /* New Loading cards ******************************************************* */
+  .wait {
+    opacity: 0.0;
+    font-size: 1.5rem;
+    text-align: center;
+    justify-content: center;
+    place-items: center;
+    position: absolute;
+    top: 50%;
+    left: 33%;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    border-radius: 0.625rem;
+    text-shadow: 0.25rem 0.25rem 0.1rem #000000;
+    cursor: default;
+    transition: all 0.3s ease-in-out;
+  }
+  .show2 {
+    opacity: 1;
+    filter: blur(3px);
+  }
+  .loading2 {
+    display: flex;
+    justify-content: center;
+  }
+  .loading2::after {
+    content: "";
+    width: 5rem;
+    height: 5rem;
+    border: 0.5rem solid transparent;
+    border-bottom-color: #eeeeee;
+    border-right-color: #eeeeee;
+    box-shadow: 0.1rem 0.1rem 0.1rem #000000;
+    border-radius: 50%;
+    animation: loading 2.0s ease-in-out infinite alternate;
+  }
+  @keyframes loading {
+    to {
+      transform: rotate(2.25turn);
+    }
   }

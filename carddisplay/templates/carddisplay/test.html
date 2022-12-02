@@ -1021,9 +1021,9 @@
 
 				scene.add(plane);
 
-				plane.position.x = -35;
+				plane.position.x = -30;
 				plane.position.y = -7;
-				plane.position.z = 450;
+				plane.position.z = 455;
 				plane.rotateZ(0.05);
 
 				// **************************
@@ -1277,6 +1277,10 @@
 	<!--  new javascript object api search   -->
 	<script>
 
+		function opacity() {
+			const waitElement = document.getElementsByClassName("wait");
+			waitElement[0].style.opacity = "0.0";
+		}
 		//audio file script 
 		const audioFire = new Audio("{% static 'fire3.ogg' %}");
 		audioFire.volume = (0.005);
@@ -1370,7 +1374,8 @@
 		document.addEventListener('DOMContentLoaded', function() {
 
 			document.querySelector('form.form1').onsubmit = () => {
-
+					const waitElement = document.getElementsByClassName("wait");
+					waitElement[0].style.opacity = "0.9";
 					// play audio
 					audioFire.muted = false; 
 					audioSun.muted = false;
@@ -1575,6 +1580,9 @@
 					// auto scroll for parallax card delete
 					window.scrollTo(0, 1);
 
+					//setTimeout(opacity, 4 * 1000);
+					  
+
 					// stop form from submitting (bypass django dataframe search/result)
 					return false;
 				}
@@ -1621,6 +1629,10 @@
 		
 	</script>
 
+	<div class="wait">
+		Just a moment while I grab those cards...
+		<div class="loading2"></div>
+	</div>
 	<div class="outer" id="outer">
 		<!-- <form action="{% url 'result' %}" method="post" id="form">    selected="selected" -->
 			<form id="form" class="form1" method="post" autocomplete="off">
