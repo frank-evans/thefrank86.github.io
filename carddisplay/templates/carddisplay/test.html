@@ -1371,6 +1371,12 @@
 				} 
 			});
 
+		// remove loading graphic
+		function loadingRing() {
+			const waitElement = document.getElementsByClassName("wait");
+			waitElement[0].remove();
+		}
+
 		document.addEventListener('DOMContentLoaded', function() {
 
 			document.querySelector('form.form1').onsubmit = () => {
@@ -1581,7 +1587,7 @@
 					window.scrollTo(0, 1);
 
 					//setTimeout(opacity, 4 * 1000);
-					  
+					setTimeout(loadingRing, 6 * 1000);  
 
 					// stop form from submitting (bypass django dataframe search/result)
 					return false;
@@ -2482,7 +2488,7 @@
 	</body>
 	<footer class="footer">
 		<div id="dis">
-		<span class="foot">Cardboard in Space code/design &copy; 2022 Frank Alarcon.</span>
+		<span class="foot">Cardboard in Space Code/Design &copy; 2022 Frank Alarcon.</span>
 		<br>	
 		Cardboard in Space is unofficial Fan Content permitted under the Fan Content Policy.
 		<br> 

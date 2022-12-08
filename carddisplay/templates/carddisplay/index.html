@@ -47,7 +47,6 @@
 				<h2>Frank's Digital Space</h2>
 			</div>
 			<nav>
-
 				<ul>
 					<li><a data-page="projects" href="{% url 'test' %}">Projects</a></li>
 					<li><a data-page="about" href="{% url 'about' %}">About</a></li>
@@ -1213,11 +1212,6 @@
 
 	<!--  new javascript object api search   -->
 	<script>
-
-		function opacity() {
-			const waitElement = document.getElementsByClassName("wait");
-			waitElement[0].style.opacity = "0.0";
-		}
 		//audio file script 
 		const audioFire = new Audio("{% static 'fire3.ogg' %}");
 		audioFire.volume = (0.005);
@@ -1308,7 +1302,16 @@
 				} 
 			});
 
-		document.addEventListener('DOMContentLoaded', function() {
+        // remove loading graphic
+        function loadingRing() {
+            const waitElement = document.getElementsByClassName("wait");
+            waitElement[0].remove();
+        }
+        // remove loading graphic on card load
+        //document.getElementById("result").addEventListener("change", loadingRing(), { once: true });
+        //document.getElementById("result").onchange = function() {loadingRing()};
+
+		document.addEventListener('DOMContentLoaded', function() {     
 
 			document.querySelector('form.form1').onsubmit = () => {
 					const waitElement = document.getElementsByClassName("wait");
@@ -1449,6 +1452,7 @@
 					window.scrollTo(0, 1);
 
 					//setTimeout(opacity, 4 * 1000);
+                    setTimeout(loadingRing, 6 * 1000);
 					  
 
 					// stop form from submitting (bypass django dataframe search/result)
@@ -1462,9 +1466,10 @@
 
 	<div id="intro">
 		<section class="hidden">
-		Hi, I'm Frank. 
-        <br> 
-        Thank you for visiting.  I hope you enjoy what you see.  If you have any questions or would like to just say Hi, please reach out!
+            <div id="introHead">Hey, I'm Frank.</div>
+        A Developer and Programmer based in Texas.  
+        <br>
+        I've recently been exploring for problems Software can't help solve.  I'll let everyone know when I find one.
 		</section>
 	</div>
 	<!-- script for text fade in-->
@@ -2338,7 +2343,7 @@
 	</body>
 	<footer class="footer">
 		<div id="dis">
-		<span class="foot">Frank's Space code/design &copy; 2022 Frank Alarcon.</span>
+		<span class="foot">Frank's Space Code/Design &copy; 2022 Frank Alarcon.</span>
 		</div>
 		<div id="counter">
             Page Views: <span id="visits"></span>

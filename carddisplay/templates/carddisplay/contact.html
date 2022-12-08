@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- style.css file -->
-    <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
+    <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'index.css' %}"/>
 
     <title>Get in Contact</title>
     
@@ -19,12 +19,12 @@
     <!-- sticky navigation bar -->
 		<header class="nav">
             <div class="heading">
-				<h2>Cardboard in Space</h2>
-				<h2>Cardboard in Space</h2>
+				<h2>Frank's Digital Space</h2>
+				<h2>Frank's Digital Space</h2>
 			</div>
 			<nav>
 				<ul>
-					<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
+					<li><a data-page="projects" href="{% url 'test' %}">Projects</a></li>
 					<li><a data-page="about" href="{% url 'about' %}">About</a></li>
 					<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
                     <li><a id="hide">Background</a></li>
@@ -69,16 +69,11 @@
 </body>
 <footer class="footer">
     <div id="dis">
-    <span class="foot">Cardboard in Space code/design &copy; 2022 Frank Alarcon.</span>
-	<br>
-    “[Cardboard in Space] is unofficial Fan Content permitted under the Fan Content Policy.
-    <br> 
-    Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
-    ©Wizards of the Coast LLC.”
+    <span class="foot">Cardboard in Space Code/Design &copy; 2022 Frank Alarcon.</span>
     </div>
     <div id="links">
         <ul>
-            <li><a data-page="home" href="{% url 'test' %}">Home</a></li>
+            <li><a data-page="projects" href="{% url 'test' %}">Projects</a></li>
             <li><a data-page="about" href="{% url 'about' %}">About</a></li>
             <li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
         </ul>

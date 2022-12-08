@@ -11,6 +11,7 @@
     transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, color 0.3s ease-in-out, text-shadow 0.3s ease-in-out, 
     margin-top 1.0s ease-in-out;
     background: #bbc2ff;
+    border: none;
     font-size: 1.0rem;
     margin-top: 0rem;
   }
@@ -20,6 +21,7 @@
     font-weight: 500;
     transition: all 0.3s ease-in-out;
     background: #ffba60;
+    border: none;
     font-size: 1.0rem;
   }
   #input2:hover {
@@ -37,7 +39,7 @@
     background: -o-linear-gradient(90deg, rgba(38,172,190,0) 0%, rgba(255,255,255,0.25) 25%, rgba(216,216,216,1) 100%);
     background: -ms-linear-gradient(90deg, rgba(38,172,190,0) 0%, rgba(255,255,255,0.25) 25%, rgba(216,216,216,1) 100%);
     background: linear-gradient(0deg, rgba(38,172,190,0) 0%, rgba(255,255,255,0.25) 25%, rgba(216,216,216,1) 100%);
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
     opacity: 0.85;
     z-index: 5;
     transition: top 0.7s ease-in-out;
@@ -91,6 +93,7 @@
     padding: 0.9rem 0.9rem;
     transition: all 0.3s ease-in-out;
     text-shadow: 0.05rem 0.05rem 0.1rem #ffff00;
+    border: none;
   }
   nav a:hover {
     color: black; 
@@ -111,6 +114,7 @@
   /* nav bar css above ********************************** */
   .outer {
     width: 30rem;
+    font-family: Helvetica, sans-serif;
     /*height: 37.5rem; */
     height: 20rem;
     border-radius: 0.625rem;
@@ -129,6 +133,7 @@
   }
   .outer3 {
     width: 30rem;
+    font-family: Helvetica, sans-serif;
     /*height: 37.5rem; */
     height: 32rem;
     border-radius: 0.625rem;
@@ -155,6 +160,7 @@
     transition: transform 0.3s ease-in-out, background 0.3s ease-in-out, box-shadow 0.3s ease-in-out, 
     margin-top 1.0s ease-in-out;
     background: #bbc2ff;
+    border: none;
     font-size: 1.0rem;
     margin-top: 13rem;
   }
@@ -178,6 +184,7 @@
     border-radius: 0.25rem;
   }
   select {
+      font-family: Helvetica, sans-serif;
       border-radius: 8px;
       overflow: auto;
       width:30rem;
@@ -242,7 +249,7 @@
     background: -o-linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(216,216,216,1) 100%);
     background: -ms-linear-gradient(270deg, rgba(255,255,255,0) 0%, rgba(216,216,216,1) 100%);
     background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(216,216,216,1) 100%);    
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Helvetica, sans-serif;
     font-size: 0.8rem;
     font-weight: 400;
     opacity: 0.75;
@@ -325,13 +332,19 @@
     color: white;
     width: 50%;
     float: left;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 3rem;
+    font-family: Helvetica, sans-serif;
+    font-size: 2rem;
     font-weight: 600;
-    border-radius: 0.625rem;
     text-shadow: 0.25rem 0.25rem 0.1rem #000000;
     cursor: default;
+    -webkit-text-stroke: 0.05rem #000000;
   }
+  #introHead{
+    font-size: 3.25rem;
+    padding: 1rem;
+    -webkit-text-stroke-width: 0.15rem;
+  }
+
   main {
     /* width: 96%; (hover overflow guard) */
       width: 96%;
@@ -384,7 +397,7 @@
       margin-bottom: 4rem;
       text-align: center;
       color: rgb(255, 255, 255);
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Helvetica, sans-serif;
       font-size: 2.5rem;
       font-weight: 600;
       text-shadow: 0.18rem 0.18rem 0.02rem #000000, 0.30rem 0.30rem 0.02rem #ff0000;
@@ -430,7 +443,7 @@
     }
     span.error {
       color: rgb(0, 0, 0);
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Helvetica, sans-serif;
       font-size: 1.1rem;
       font-weight: 600;
       text-shadow: 0.12rem 0.10rem 0.01rem #ffffff; 
@@ -471,7 +484,7 @@
       height: 78.5vh;
       /* background: #4f4d59; /* override star background */
       /*background: #ffffff; */
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Helvetica, sans-serif;
       display: grid;
       place-items: center;
       margin: 0;
@@ -505,6 +518,7 @@
       cursor: pointer;
       color: rgb(0, 0, 0);
       background: #bbc2ff;
+      border: none;
       font-weight: bold;
       font-size: 100%;
       box-shadow: 0px 0px 1px 1px black;
@@ -609,7 +623,7 @@
       text-indent: 3.5rem;
       color: white;
       float: right;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Helvetica, sans-serif;
       font-size: 1.5rem;
       font-weight: 400;
       border-radius: 0.625rem;
@@ -674,7 +688,7 @@
       top: 50%;
       left: 33%;
       color: #ffffff;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: Helvetica, sans-serif;
       font-weight: 600;
       border-radius: 0.625rem;
       text-shadow: 0.25rem 0.25rem 0.1rem #000000;
