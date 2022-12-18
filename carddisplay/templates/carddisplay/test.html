@@ -1069,8 +1069,9 @@
 				// Renderer
 				renderer = new THREE.WebGLRenderer( { 
 					canvas: document.querySelector('#bg'),
-					antialias: true, 
 					alpha: true,
+					antialias: false,
+  					powerPreference: "high-performance",
 				} );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
@@ -1170,7 +1171,7 @@
 				lastScrollY = window.scrollY;
 
 				// delete 'plane' 3d parallax display card on scroll***********************
-				if (camera.position.z > 470){
+				if (camera.position.z > 470 && typeof plane !== "undefined"){
 					scene.remove(plane);
 					plane.geometry.dispose();
 					plane.material.dispose();
@@ -1647,7 +1648,8 @@
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
 				<optgroup label="Expansions">
 				<option data-svg-code="1" value="1" disabled>**Expansions</option>
-				<option data-svg-code="default" value="bro">The Brothers War (BRO)</option>
+				<option data-svg-code="default" value="one">Phyrexia: All Will Be One (ONE)</option>
+				<option data-svg-code="bro" value="bro">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
 				<option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
 				<option data-svg-code="neo" value="neo">Kamigawa: Neon Dynasty (NEO)</option>
@@ -1840,6 +1842,7 @@
 				<option data-svg-code="dd2" value="dd2">Duel Decks: Jace vs. Chandra (DD2)</option>
 				<option data-svg-code="dd1" value="dd1">Duel Decks: Elves vs. Goblins (DD1)</option></optgroup>
 				<optgroup label="Alchemy">
+				<option data-svg-code="ybro" value="ybro">Alchemy: The Brother's War (YBRO)</option>
 				<option data-svg-code="hbg" value="hbg">Alchemy Horizons: Baldur&#39;s Gate (HBG)</option>
 				<option data-svg-code="y22" value="ysnc">Alchemy: New Capenna (YSNC)</option>
 				<option data-svg-code="y22" value="yneo">Alchemy: Kamigawa (YNEO)</option>
@@ -1958,6 +1961,7 @@
 				<option data-svg-code="mps" value="mps">Kaladesh Inventions (MPS)</option>
 				<option data-svg-code="exp" value="exp">Zendikar Expeditions (EXP)</option></optgroup>
 				<optgroup label="Memorabilia">
+				<option data-svg-code="fj22" value="fj22">Jumpstart 2022 Front Cards (FJ22)</option>
 				<option data-svg-code="30a" value="30a">30th Anniversary Edition (30A)</option>
 				<option data-svg-code="dmu" value="admu">Dominaria United Art Series (ADMU)</option>
 				<option data-svg-code="clb" value="aclb">Battle for Baldur&#39;s Gate Art Series (ACLB)</option>

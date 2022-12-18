@@ -1004,9 +1004,10 @@
 
 				// Renderer
 				renderer = new THREE.WebGLRenderer( { 
-					canvas: document.querySelector('#bg'),
-					antialias: true, 
+					canvas: document.querySelector('#bg'), 
 					alpha: true,
+					antialias: false,
+  					powerPreference: "high-performance",
 				} );
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
@@ -1106,7 +1107,7 @@
 				lastScrollY = window.scrollY;
 
 				// delete 'plane' 3d parallax display card on scroll***********************
-				if (camera.position.z > 470){
+				if (camera.position.z > 470 && typeof plane !== "undefined"){
 					scene.remove(plane);
 					plane.geometry.dispose();
 					plane.material.dispose();
@@ -1469,7 +1470,7 @@
             <div id="introHead">Hey, I'm Frank.</div>
         A Developer and Programmer based in Texas.
         <br>
-        Software changes everything.
+        Software continues to innovate at the speed of light.
 		</section>
 	</div>
 	<!-- script for text fade in-->
@@ -1502,7 +1503,8 @@
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
 				<optgroup label="Expansions">
 				<option data-svg-code="1" value="1" disabled>**Expansions</option>
-				<option data-svg-code="default" value="bro">The Brothers War (BRO)</option>
+				<option data-svg-code="default" value="one">Phyrexia: All Will Be One (ONE)</option>
+				<option data-svg-code="bro" value="bro">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
 				<option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
 				<option data-svg-code="neo" value="neo">Kamigawa: Neon Dynasty (NEO)</option>

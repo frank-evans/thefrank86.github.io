@@ -27,7 +27,7 @@
 #input2:hover {
   /*color: rgb(227, 255, 102, 1.0); */
   background: #ff9100;
-  transform: translateY(-0.25rem) translateX(-0.15rem);
+  transform: translateY(0.25rem) translateX(0.15rem);
   box-shadow: 0.1rem 0.1rem 0.1rem black;
 }
 header.nav {
@@ -177,7 +177,7 @@ nav a:hover {
 .input3:hover {
   /*color: rgb(227, 255, 102, 1.0); */
   background: #7e8bff;
-  transform: translateY(-0.25rem) translateX(-0.15rem);
+  transform: translateY(0.25rem) translateX(0.15rem);
   box-shadow: 0.1rem 0.1rem 0.1rem black;
 }
 .outer2 {
@@ -624,7 +624,7 @@ img {
     transition: all 0.3s ease-in-out;
   }
   .contactButton:hover {
-    transform: translateY(-0.25rem) translateX(-0.15rem);
+    transform: translateY(0.25rem) translateX(0.15rem);
     background: #5d6dff;
     box-shadow: 0.1rem 0.1rem 0.1rem black;
   }
