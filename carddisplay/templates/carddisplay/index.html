@@ -827,10 +827,10 @@
 
 				//const geometry = new THREE.DodecahedronGeometry(180, 2);
 				//const geometry = new THREE.IcosahedronGeometry(180, 2);
-				geometry = new THREE.SphereBufferGeometry(280, 100, 150);
+				geometry = new THREE.SphereGeometry(280, 100, 150);
 
 				// sun outer glow geo
-				geometry3 = new THREE.SphereBufferGeometry(315, 100, 8);
+				geometry3 = new THREE.SphereGeometry(315, 100, 8);
 
 				// Material (normal texture)
 				/*const material = new THREE.MeshStandardMaterial();
@@ -904,7 +904,7 @@
 				//scene.add(mesh2);
 
 				// 3d card Geo, Mat, Mesh
-				planeGeometry = new THREE.PlaneBufferGeometry(67.2 * 0.45, 93.6 * 0.45);
+				planeGeometry = new THREE.PlaneGeometry(67.2 * 0.45, 93.6 * 0.45);
 				//planeGeometry = new THREE.PlaneBufferGeometry(512 *0.25, 361 *0.25);
 				//planeGeometry = new THREE.CircleBufferGeometry(512 *0.15, 80);
 
@@ -1107,7 +1107,7 @@
 				lastScrollY = window.scrollY;
 
 				// delete 'plane' 3d parallax display card on scroll***********************
-				if (camera.position.z > 470 && typeof plane !== "undefined"){
+				if (typeof plane !== "undefined" && camera.position.z > 470){
 					scene.remove(plane);
 					plane.geometry.dispose();
 					plane.material.dispose();
@@ -1170,7 +1170,7 @@
 				//const parallaxX = cursor.x * 0.5;
   				//const parallaxY = - cursor.y * 0.5;
 
-				// Temp set to consisten and NOT mouse move
+				// Temp set to consistent and NOT mouse move
 				//cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
 				//cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
 				// * speed , * tolerance 
