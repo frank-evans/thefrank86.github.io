@@ -7,6 +7,9 @@
 		<!-- style.css file -->
         <link rel="stylesheet" type="text/css"  media="screen" href="./static/style.css"/>
 
+		<!-- base three.js files -->
+		<script type="module" src="./static/three/three.min.js"></script>
+
 		<!-- select box with search -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -186,9 +189,6 @@
 
 		<!-- added style margin top to prevent overflow on hover of top row -->
 		<div id="result"></div>
-
-	<!-- base three.js files -->
-	<script type="module" src="./static/three/three.min.js"></script>
 
 	<!-- (three) js for object 1 
 	<script type="module" src="{% static 'object1.js' %}"></script> -->
@@ -818,14 +818,14 @@
 				const textureLoader = new THREE.TextureLoader();
 
 				// this texture being referenced from the static folder only loads in html (not.js)
-				const depthImage = textureLoader.load("static/textures/mDepth2.png");
+				const depthImage = textureLoader.load("./static/textures/mDepth2.png");
 				//const depthImage = textureLoader.load("{% static 'textures/FpDepthBlur2.png' %}");
 
-				const originalImage = textureLoader.load("static/textures/mountain1.png");
+				const originalImage = textureLoader.load("./static/textures/mountain1.png");
 				//const originalImage = textureLoader.load("{% static 'textures/FrankProfile1.png' %}");
 
 				//  particle texture loading
-				const star = textureLoader.load("static/star/asteroid2.png");
+				const star = textureLoader.load("./static/star/asteroid2.png");
 				star.rotation = 0.3;
 
 
@@ -1257,13 +1257,13 @@
 			waitElement[0].style.opacity = "0.0";
 		}
 		//audio file script 
-		const audioFire = new Audio("static/fire3.ogg");
+		const audioFire = new Audio("./static/fire3.ogg");
 		audioFire.volume = (0.005);
 		audioFire.autoplay = true;
 		audioFire.muted = true;
 		audioFire.loop = true; 
 
-		const audioSun = new Audio("static/sun5.ogg");
+		const audioSun = new Audio("./static/sun5.ogg");
 		audioSun.volume = (0.1);
 		audioSun.autoplay = true;
 		audioSun.muted = true;
