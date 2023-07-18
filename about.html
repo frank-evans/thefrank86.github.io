@@ -56,10 +56,11 @@
 				document.getElementById('hide').onclick = () => {
 						// hide/unhide canvas
 						let x = document.getElementById("bg");
-						let y = document.getElementById("body");
+						//let y = document.getElementById("body");
+						let y = document.getElementById("background-image");
 						if (x.style.display == "none") {
 							x.style.display = "block";
-							y.style.backgroundImage = 'url("./static/stars.jpg")';
+							y.style.backgroundImage = 'url("static/stars.jpg")';
 
 							audioSun.muted = false;
 							audioFire.muted = false;
