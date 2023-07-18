@@ -1,88 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<head>
+		<meta charset="UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		
+		<!-- favicon image -->
+		<link rel="shortcut icon" type="image/ico" href="./static/favicon.ico"/>
 
-    <!-- style.css file -->
-    <link rel="stylesheet" type="text/css"  media="screen" href="./static/style.css"/>
+		<!-- style.css file -->
+		<link rel="stylesheet" type="text/css"  media="screen" href="./static/style.css"/>
 
-    <title>Get in Contact</title>
-    
-</head>
-<body class="contactBody" id="body">
-	
-	<div id="background-image">
-	</div>
+		<title>Get in Contact</title>
+		
+	</head>
+	<body class="contactBody" id="body">
+		
+		<div id="background-image">
+		</div>
 
-    <!-- sticky navigation bar -->
-		<header class="nav">
-            <div class="heading">
-				<h2>Cardboard in Space</h2>
-				<h2>Cardboard in Space</h2>
-			</div>
-			<nav>
-				<ul>
-					<li><a data-page="home" href="./index.html">Home</a></li>
-					<li><a data-page="about" href="./about.html">About</a></li>
-					<li><a data-page="contact" href="./contact.html">Contact</a></li>
-                    <li><a id="hide">Background</a></li>
-				</ul>
-			</nav>
-		</header>
-    
-         <!-- Hide/unhide background-->
-		<script>
-			document.addEventListener('DOMContentLoaded', function() {
-	
-				document.getElementById('hide').onclick = () => {
-						// hide/unhide canvas
-						//let y = document.getElementById("body");
-						let y = document.getElementById("background-image");
-						if (y.style.backgroundImage == "none") {
-							y.style.backgroundImage = 'url("static/stars.jpg")';
+		<!-- sticky navigation bar -->
+			<header class="nav">
+				<div class="heading">
+					<h2>Cardboard in Space</h2>
+					<h2>Cardboard in Space</h2>
+				</div>
+				<nav>
+					<ul>
+						<li><a data-page="home" href="./index.html">Home</a></li>
+						<li><a data-page="about" href="./about.html">About</a></li>
+						<li><a data-page="contact" href="./contact.html">Contact</a></li>
+						<li><a id="hide">Background</a></li>
+					</ul>
+				</nav>
+			</header>
+		
+			<!-- Hide/unhide background-->
+			<script>
+				document.addEventListener('DOMContentLoaded', function() {
+		
+					document.getElementById('hide').onclick = () => {
+							// hide/unhide canvas
+							//let y = document.getElementById("body");
+							let y = document.getElementById("background-image");
+							if (y.style.content == "none") {
+								y.style.content = 'url("static/stars.jpg")';
 
+							}
+							else {
+								y.style.content = "none";
+							}
 						}
-						else {
-							y.style.backgroundImage = "none";
-						}
-					}
-				});
-		</script>
+					});
+			</script>
 
-    <div class="container">
-        
-        <form action="https://formspree.io/f/meqdzwgv" method="POST" class="contactForm">
-            
-            <h1 class="contacth1">Contact Me</h1>
+		<div class="container">
+			
+			<form action="https://formspree.io/f/meqdzwgv" method="POST" class="contactForm">
+				
+				<h1 class="contacth1">Contact Me</h1>
 
-            <input type="text" name="Name" placeholder="Your Name/Company" class="contactOption" required>
-            
-            <input type="email" name"Email" placeholder="Your Email" class="contactOption" required>
-            
-            <textarea name="Message" placeholder="Your Message" class="contactOption" required></textarea>
-            
-            <input type="submit" value="Send" class="contactButton">
-        </form>
-    </div>
-    
-</body>
-<footer class="footer">
-    <div id="dis">
-    <span class="foot">Cardboard in Space Code/Design &copy; 2023 Frank Alarcon.</span>
-	<br>	
-	Cardboard in Space is unofficial Fan Content permitted under the Fan Content Policy.
-	<br> 
-	Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
-	©Wizards of the Coast LLC.
-    </div>
-    <div id="links">
-        <ul>
-            <li><a data-page="home" href="./index.html">Home</a></li>
-			<li><a data-page="about" href="./about.html">About</a></li>
-			<li><a data-page="contact" href="./contact.html">Contact</a></li>
-        </ul>
-    </div>
-</footer>
+				<input type="text" name="Name" placeholder="Your Name/Company" class="contactOption" required>
+				
+				<input type="email" name"Email" placeholder="Your Email" class="contactOption" required>
+				
+				<textarea name="Message" placeholder="Your Message" class="contactOption" required></textarea>
+				
+				<input type="submit" value="Send" class="contactButton">
+			</form>
+		</div>
+		
+	</body>
+	<footer class="footer">
+		<div id="dis">
+		<span class="foot">Cardboard in Space Code/Design &copy; 2023 Frank Alarcon.</span>
+		<br>	
+		Cardboard in Space is unofficial Fan Content permitted under the Fan Content Policy.
+		<br> 
+		Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
+		©Wizards of the Coast LLC.
+		</div>
+		<div id="links">
+			<ul>
+				<li><a data-page="home" href="./index.html">Home</a></li>
+				<li><a data-page="about" href="./about.html">About</a></li>
+				<li><a data-page="contact" href="./contact.html">Contact</a></li>
+			</ul>
+		</div>
+	</footer>
 </html>

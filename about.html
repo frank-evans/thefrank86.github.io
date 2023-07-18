@@ -60,18 +60,11 @@
 						let y = document.getElementById("background-image");
 						if (x.style.display == "none") {
 							x.style.display = "block";
-							y.style.backgroundImage = 'url("static/stars.jpg")';
-
-							audioSun.muted = false;
-							audioFire.muted = false;
+							y.style.content = 'url("static/stars.jpg")';
 						}
 						else {
 							x.style.display = "none";
-							y.style.backgroundImage = "none";
-
-							audioSun.muted = true;
-							audioFire.muted = true;
-			
+							y.style.content = "none";
 						}
 					}
 				});
@@ -1059,9 +1052,6 @@
 					//mesh.position.z += 1.5;
 					//mesh3.position.z += 1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
-
-					audioFire.volume += (0.00008);
-					audioSun.volume += (0.0010);
 				}
 				// lastScrollTop && mesh.position.z > 0
 				else if (st < lastScrollTop && camera.position.z < 500) {
@@ -1070,9 +1060,6 @@
 					//mesh.position.z += -1.5;
 					//mesh3.position.z += -1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
-
-					audioFire.volume -= (0.00008);
-					audioSun.volume -= (0.0010);
 				}
 				else {
 					lastScrollTop = st <= 0 ? 0 : st;
@@ -1189,24 +1176,6 @@
 
 	</script>
 
-	<!--  new javascript object api search   -->
-	<script>
-
-		//audio file script 
-		const audioFire = new Audio("./static/fire3.ogg");
-		audioFire.volume = (0.005);
-		audioFire.autoplay = true;
-		audioFire.muted = true;
-		audioFire.loop = true; 
-
-		const audioSun = new Audio("./static/sun5.ogg");
-		audioSun.volume = (0.1);
-		audioSun.autoplay = true;
-		audioSun.muted = true;
-		audioSun.loop = true;
-
-	</script>
-
 	<div id="about">
 		<div class="hidden2">
             <div class="hidden2 child"> <h4>
@@ -1234,7 +1203,7 @@
 	<script>
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-			console.log(entry)
+			//console.log(entry)
 			if (entry.isIntersecting) {
 				entry.target.classList.add('show');
 			} else {
