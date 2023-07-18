@@ -1,12 +1,11 @@
-{% load static %}
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- favicon image -->
-        <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
+        <link rel="shortcut icon" type="image/ico" href="./static/favicon.ico"/>
 
 		<!-- style.css file -->
-        <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
+        <link rel="stylesheet" type="text/css"  media="screen" href="./static/style.css"/>
 
 		<!-- select box with search -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -90,7 +89,7 @@
 						let y = document.getElementById("background-image");
 						if (x.style.display == "none") {
 							x.style.display = "block";
-							y.style.content = 'url("{% static 'stars.jpg' %}")';
+							y.style.content = 'url("static/stars.jpg")';
 
 							audioSun.muted = false;
 							audioFire.muted = false;
@@ -188,48 +187,8 @@
 		<!-- added style margin top to prevent overflow on hover of top row -->
 		<div id="result"></div>
 
-		<section id="loading">
-			<div class="loader">
-				<div class="dot" style="--i:0;"></div>
-				<div class="dot" style="--i:1;"></div>
-				<div class="dot" style="--i:2;"></div>
-				<div class="dot" style="--i:3;"></div>
-				<div class="dot" style="--i:4;"></div>
-				<div class="dot" style="--i:5;"></div>
-				<div class="dot" style="--i:6;"></div>
-				<div class="dot" style="--i:7;"></div>
-				<div class="dot" style="--i:8;"></div>
-				<div class="dot" style="--i:9;"></div>
-			</div>
-
-			<h2>Getting Up-to-date Cards in real time...</h2>
-
-			<div class="loader">
-				<div class="dot" style="--i:0;"></div>
-				<div class="dot" style="--i:1;"></div>
-				<div class="dot" style="--i:2;"></div>
-				<div class="dot" style="--i:3;"></div>
-				<div class="dot" style="--i:4;"></div>
-				<div class="dot" style="--i:5;"></div>
-				<div class="dot" style="--i:6;"></div>
-				<div class="dot" style="--i:7;"></div>
-				<div class="dot" style="--i:8;"></div>
-				<div class="dot" style="--i:9;"></div>
-			</div>
-		</section>
-		<!-- Test button <button onclick="myFunction()">Click</button> -->
-	<script>
-		function myFunction() {
-			var x = document.getElementById("loading");
-			if (x.style.display === "none") {
-			  x.style.display = "flex";
-			} else {
-			  x.style.display = "none";
-			}
-		  } 
-	</script>
 	<!-- base three.js files -->
-	<script type="module" src="{% static 'three/three.js' %}"></script>
+	<script type="module" src="./static/three/three.min.js"></script>
 
 	<!-- (three) js for object 1 
 	<script type="module" src="{% static 'object1.js' %}"></script> -->
@@ -859,14 +818,14 @@
 				const textureLoader = new THREE.TextureLoader();
 
 				// this texture being referenced from the static folder only loads in html (not.js)
-				const depthImage = textureLoader.load("{% static 'textures/mDepth2.png' %}");
+				const depthImage = textureLoader.load("static/textures/mDepth2.png");
 				//const depthImage = textureLoader.load("{% static 'textures/FpDepthBlur2.png' %}");
 
-				const originalImage = textureLoader.load("{% static 'textures/mountain1.png' %}");
+				const originalImage = textureLoader.load("static/textures/mountain1.png");
 				//const originalImage = textureLoader.load("{% static 'textures/FrankProfile1.png' %}");
 
 				//  particle texture loading
-				const star = textureLoader.load("{% static 'star/asteroid2.png' %}");
+				const star = textureLoader.load("static/star/asteroid2.png");
 				star.rotation = 0.3;
 
 
@@ -1298,13 +1257,13 @@
 			waitElement[0].style.opacity = "0.0";
 		}
 		//audio file script 
-		const audioFire = new Audio("{% static 'fire3.ogg' %}");
+		const audioFire = new Audio("static/fire3.ogg");
 		audioFire.volume = (0.005);
 		audioFire.autoplay = true;
 		audioFire.muted = true;
 		audioFire.loop = true; 
 
-		const audioSun = new Audio("{% static 'sun5.ogg' %}");
+		const audioSun = new Audio("static/sun5.ogg");
 		audioSun.volume = (0.1);
 		audioSun.autoplay = true;
 		audioSun.muted = true;
