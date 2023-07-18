@@ -1,12 +1,11 @@
-{% load static %}
 <!DOCTYPE html>
 <html>
 	<head>
 		<!-- favicon image -->
-        <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
+        <link rel="shortcut icon" type="image/ico" href="./static/favicon.ico"/>
 
 		<!-- style.css file -->
-        <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
+        <link rel="stylesheet" type="text/css"  media="screen" href="./static/style.css"/>
 
         <!-- standardized icons -->
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
@@ -56,7 +55,7 @@
 						let y = document.getElementById("body");
 						if (x.style.display == "none") {
 							x.style.display = "block";
-							y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+							y.style.backgroundImage = 'url("./static/stars.jpg")';
 
 							audioSun.muted = false;
 							audioFire.muted = false;
@@ -141,7 +140,7 @@
 		<div id="result"></div>
 
 	<!-- base three.js files -->
-	<script type="module" src="{% static 'three/three.js' %}"></script>
+	<script type="module" src="./static/three/three.js"></script>
 
 	<!-- (three) js for object 1 
 	<script type="module" src="{% static 'object1.js' %}"></script> -->
@@ -771,14 +770,14 @@
 				const textureLoader = new THREE.TextureLoader();
 
 				// this texture being referenced from the static folder only loads in html (not.js)
-				const depthImage = textureLoader.load("{% static 'textures/mDepth2.png' %}");
+				const depthImage = textureLoader.load("./static/textures/mDepth2.png");
 				//const depthImage = textureLoader.load("{% static 'textures/FpDepthBlur2.png' %}");
 
-				const originalImage = textureLoader.load("{% static 'textures/mountain1.png' %}");
+				const originalImage = textureLoader.load("./static/textures/mountain1.png");
 				//const originalImage = textureLoader.load("{% static 'textures/FrankProfile1.png' %}");
 
 				//  particle texture loading
-				const star = textureLoader.load("{% static 'star/asteroid2.png' %}");
+				const star = textureLoader.load("./static/star/asteroid2.png");
 				star.rotation = 0.3;
 
 
@@ -1189,13 +1188,13 @@
 	<script>
 
 		//audio file script 
-		const audioFire = new Audio("{% static 'fire3.ogg' %}");
+		const audioFire = new Audio("./static/fire3.ogg");
 		audioFire.volume = (0.005);
 		audioFire.autoplay = true;
 		audioFire.muted = true;
 		audioFire.loop = true; 
 
-		const audioSun = new Audio("{% static 'sun5.ogg' %}");
+		const audioSun = new Audio("./static/sun5.ogg");
 		audioSun.volume = (0.1);
 		audioSun.autoplay = true;
 		audioSun.muted = true;
@@ -1222,7 +1221,7 @@
             <br>Javascript, HTML, CSS, Django, Python, Three.js, JQuery, and the Scryfall.com API.
             </p> </div>
             <div class="hidden2 child">
-            <i class="devicon-javascript-plain"></i> <i class="devicon-html5-plain-wordmark"></i> <i class="devicon-css3-plain-wordmark"></i> <i class="devicon-django-plain-wordmark"></i> <i class="devicon-python-plain-wordmark"></i> <i class="devicon-threejs-original-wordmark"></i> <i class="devicon-jquery-plain-wordmark"></i> <img class="logo" src="{% static 'scryfall-logo1.png' %}">
+            <i class="devicon-javascript-plain"></i> <i class="devicon-html5-plain-wordmark"></i> <i class="devicon-css3-plain-wordmark"></i> <i class="devicon-django-plain-wordmark"></i> <i class="devicon-python-plain-wordmark"></i> <i class="devicon-threejs-original-wordmark"></i> <i class="devicon-jquery-plain-wordmark"></i> <img class="logo" src="./static/scryfall-logo1.png">
             </p> </div>
 		</div>
 	</div>
