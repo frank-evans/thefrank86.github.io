@@ -1617,7 +1617,6 @@
 	<div class="outer" id="outer">
 		<!-- <form action="{% url 'result' %}" method="post" id="form">    selected="selected" -->
 			<form id="form" class="form1" method="post" autocomplete="off">
-			{% csrf_token %}
 	
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
 				<optgroup label="Expansions">
@@ -2494,7 +2493,6 @@
 
 		<div class="outer2" id="outer2">
 			<form id="form2" class="form2" method="post" autocomplete="off">
-				{% csrf_token %}
 
 				<input id="single" type="text" placeholder="Specific Card Name">
 				<p></p>
