@@ -818,10 +818,11 @@
 				const textureLoader = new THREE.TextureLoader();
 
 				// this texture being referenced from the static folder only loads in html (not.js)
-				const depthImage = textureLoader.load("./static/textures/mDepth2.png");
+
+				// ** const depthImage = textureLoader.load("./static/textures/mDepth2.png");
 				//const depthImage = textureLoader.load("{% static 'textures/FpDepthBlur2.png' %}");
 
-				const originalImage = textureLoader.load("./static/textures/mountain1.png");
+				// ** const originalImage = textureLoader.load("./static/textures/mountain1.png");
 				//const originalImage = textureLoader.load("{% static 'textures/FrankProfile1.png' %}");
 
 				//  particle texture loading
@@ -932,8 +933,11 @@
 				//mesh2.position.set(0,0,0);
 				//scene.add(mesh2);
 
+				// ****************************************************************************
+				/*
 				// 3d card Geo, Mat, Mesh
 				planeGeometry = new THREE.PlaneGeometry(67.2 * 0.45, 93.6 * 0.45);
+
 				//planeGeometry = new THREE.PlaneBufferGeometry(512 *0.25, 361 *0.25);
 				//planeGeometry = new THREE.CircleBufferGeometry(512 *0.15, 80);
 
@@ -991,7 +995,8 @@
 				plane.position.z = 455;
 				plane.rotateZ(0.05);
 
-				// **************************
+				*/
+				// ****************************************************************************
 
 				// Other small stars object
 				// Particles geometry
