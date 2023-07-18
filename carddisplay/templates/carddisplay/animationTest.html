@@ -10,13 +10,29 @@
 			body {
 				background-color: #bfe3dd;
 				color: #000;
+				overflow: hidden;
+			}
+
+			.scene,
+			canvas {
+				position: absolute;
+				width: 100%;
+				height: 100%;
 			}
 
 			a {
 				color: #2983ff;
 			}
 		</style>
-        
+
+
+	</head>
+
+	<body>
+
+		<!-- base three.js files -->
+		<script type="module" src="{% static 'three/three.js' %}"></script>
+
         <script src="{% static './animationTest/three.module.js' %}"></script>
         <script src="{% static './animationTest/stats.module.js' %}"></script>
 
@@ -25,10 +41,7 @@
 
         <script src="{% static './animationTest/GLTFLoader.js' %}"></script>
         <script src="{% static './animationTest/DRACOLoader.js' %}"></script>
-
-	</head>
-
-	<body>
+		
 
 		<div id="container"></div>
 
@@ -66,7 +79,7 @@
 			scene.environment = pmremGenerator.fromScene( new RoomEnvironment(), 0.04 ).texture;
 
 			const camera = new THREE.PerspectiveCamera( 40, window.innerWidth / window.innerHeight, 1, 100 );
-			camera.position.set( 5, 2, 8 );
+			camera.position.set( 0, 0, 8 );
 
 			const controls = new OrbitControls( camera, renderer.domElement );
 			controls.target.set( 0, 0.5, 0 );

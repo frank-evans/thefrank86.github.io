@@ -6,7 +6,10 @@
         <link rel="shortcut icon" type="image/ico" href="{% static 'favicon.ico' %}"/>
 
 		<!-- style.css file -->
-        <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'style.css' %}"/>
+        <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'index.css' %}"/>
+
+		<!-- standardized icons -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@v2.15.1/devicon.min.css">
 
 		<!-- select box with search -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -23,13 +26,8 @@
 			});
 		</script>
 
-		<!-- page counter script api ***sold to company, no longer functinal ** -->
-
-        <!-- <script async src="https://api.countapi.xyz/hit/cardboardinspace/952b5c1c-1860-4b70-8f75-6ae7dd7d4a8a?callback=websiteVisits"></script> 
-        <script async src="https://api.countapi.xyz/hit/cardboardinspace/visits?callback=websiteVisits"></script> -->
-
-		<!-- jquery code for loading "on submit" code 
-		<script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
+		<!-- page counter script api -->
+        <script async src="https://api.countapi.xyz/hit/cardboardinspace/952b5c1c-1860-4b70-8f75-6ae7dd7d4a8a?callback=websiteVisits"></script>
 
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -44,30 +42,21 @@
 	</head>
 
 	<body id="body">
-		<div id="background-image">
-        </div>
 		<!-- sticky navigation bar -->
 		<span class="boxShadow">
 		<header class="nav">
 			<div class="heading">
-				<h2>Cardboard in Space</h2>
-				<h2>Cardboard in Space</h2>
+				<h2>Frank's Digital Space</h2>
+				<h2>Frank's Digital Space</h2>
 			</div>
 			<nav>
-
 				<ul>
-					<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
+					<li><a data-page="projects" href="{% url 'test' %}">Projects</a></li>
 					<li><a data-page="about" href="{% url 'about' %}">About</a></li>
 					<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
 					<li><a id="hide">Background</a></li>
 				</ul>
 			</nav>
-				<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-				<path fill="#0099ff" fill-opacity="1" d="M0,96L0,288L720,288L720,192L1440,192L1440,320L720,320L720,320L0,320L0,320Z"></path>
-			  	</svg>
-				<!-- <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
-				<path fill="#ff0000" fill-opacity="1" d="M0,350L250,350L300,300L800,300"></path>
-				</svg> -->
 		</header>
 		</span>
 
@@ -75,8 +64,7 @@
 		<script>
 			// page counter script api 
 			function websiteVisits(response) {
-                //document.querySelector("#visits").textContent = response.value;
-                document.getElementById("visits").innerText = response.value;
+                document.querySelector("#visits").textContent = response.value;
             }
 
 			document.addEventListener('DOMContentLoaded', function() {
@@ -86,18 +74,17 @@
 				document.getElementById('hide').onclick = () => {
 						// hide/unhide canvas
 						let x = document.getElementById("bg");
-						//let y = document.getElementById("body");
-						let y = document.getElementById("background-image");
+						let y = document.getElementById("body");
 						if (x.style.display == "none") {
 							x.style.display = "block";
-							y.style.content = 'url("{% static 'stars.jpg' %}")';
+							y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
 
 							audioSun.muted = false;
 							audioFire.muted = false;
 						}
 						else {
 							x.style.display = "none";
-							y.style.content = "none";
+							y.style.backgroundImage = "none";
 
 							audioSun.muted = true;
 							audioFire.muted = true;
@@ -123,8 +110,6 @@
 			// image 3D effect on hover scripting
 			
 			// function to add hover effects after all img's added
-			//document.addEventListener('scroll', function() {
-			//var hover = function () {	
 			function hover() {
 				document.querySelectorAll('img').forEach(item => {
 					item.addEventListener('mousemove', handleHover, false)
@@ -135,22 +120,6 @@
 				})
 
 			}
-			// throttle function for scroll
-			/* function throttle(fn, wait) {
-				var time = Date.now();
-				return function() {
-				  if ((time + wait - Date.now()) < 0) {
-					fn();
-					time = Date.now();
-				  }
-				}
-			  } */
-			// throttled scroll listener for img hover
-			//window.addEventListener('scroll', throttle(hover, 2000));
-
-			//const hoverId = setInterval(hover, 4000);
-
-
 				// hover angle threshold
 				const THRESHOLD = 6;
 	
@@ -188,46 +157,6 @@
 		<!-- added style margin top to prevent overflow on hover of top row -->
 		<div id="result"></div>
 
-		<section id="loading">
-			<div class="loader">
-				<div class="dot" style="--i:0;"></div>
-				<div class="dot" style="--i:1;"></div>
-				<div class="dot" style="--i:2;"></div>
-				<div class="dot" style="--i:3;"></div>
-				<div class="dot" style="--i:4;"></div>
-				<div class="dot" style="--i:5;"></div>
-				<div class="dot" style="--i:6;"></div>
-				<div class="dot" style="--i:7;"></div>
-				<div class="dot" style="--i:8;"></div>
-				<div class="dot" style="--i:9;"></div>
-			</div>
-
-			<h2>Getting Up-to-date Cards in real time...</h2>
-
-			<div class="loader">
-				<div class="dot" style="--i:0;"></div>
-				<div class="dot" style="--i:1;"></div>
-				<div class="dot" style="--i:2;"></div>
-				<div class="dot" style="--i:3;"></div>
-				<div class="dot" style="--i:4;"></div>
-				<div class="dot" style="--i:5;"></div>
-				<div class="dot" style="--i:6;"></div>
-				<div class="dot" style="--i:7;"></div>
-				<div class="dot" style="--i:8;"></div>
-				<div class="dot" style="--i:9;"></div>
-			</div>
-		</section>
-		<!-- Test button <button onclick="myFunction()">Click</button> -->
-	<script>
-		function myFunction() {
-			var x = document.getElementById("loading");
-			if (x.style.display === "none") {
-			  x.style.display = "flex";
-			} else {
-			  x.style.display = "none";
-			}
-		  } 
-	</script>
 	<!-- base three.js files -->
 	<script type="module" src="{% static 'three/three.js' %}"></script>
 
@@ -405,7 +334,7 @@
 			float noiseStrength = snoise(vec4(position * uFrequency, time * 0.35)) * uStrength;
 			vPos += normal * noiseStrength;
 
-			vec4 viewPosition = viewMatrix * vec4(vPos, 1.0);
+			vec4 viewPosition = viewMatrix * vec4(vPos+vec3(0, 0, 0), 1.0);
 			// fresnal
 			vNormal = normal;
 			vec4 worldPosition = modelMatrix * vec4( position, 1.0);
@@ -581,7 +510,7 @@
 
 		vec3 brightnessToColor(float b) {
 			b *= 0.25;
-			return (vec3(b, b*b, b*b*b*b)/0.25)*0.8;
+			return (vec3(b*b*b*b, b*b, b)/0.25)*0.8;
 		}
 
 		float Fresnel(vec3 eyeVector, vec3 worldNormal) {
@@ -784,7 +713,7 @@
 			float nStrength = snoise(vec4(position * uFrequency, time * 0.45)) * uStrength;
 			vPosition += normal * nStrength;
 
-			vec4 viewPos = viewMatrix * vec4(vPosition, 1.0);
+			vec4 viewPos = viewMatrix * vec4(vPosition+vec3(0, 0, 0), 1.0);
 	
 			//gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0);
 			gl_Position = projectionMatrix * viewPos;
@@ -799,7 +728,7 @@
 
 		vec3 brightnessToColor(float b) {
 			b *= 0.25;
-			return (vec3(b, b*b, b*b*b*b)/0.25)*0.8;
+			return (vec3(b*b*b*b, b*b, b)/0.25)*0.8;
 		}
 
 		void main() {
@@ -852,6 +781,11 @@
 				camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 43, 1000 );
 				camera.position.set(0, 0, 400);
 
+                // rotate so planet isn't centered
+                camera.rotation.y = 0.3;  // Y first
+                camera.rotation.x = 0;  // X second
+                camera.rotation.z = 0;
+
 				// orbit controls 
 				// controls = new THREE.OrbitControls(camera);
 
@@ -896,10 +830,12 @@
 
 				//const geometry = new THREE.DodecahedronGeometry(180, 2);
 				//const geometry = new THREE.IcosahedronGeometry(180, 2);
-				geometry = new THREE.SphereGeometry(280, 100, 150);
+				// (og) geometry = new THREE.SphereGeometry(280, 100, 150);
+				geometry = new THREE.SphereGeometry(210, 100, 150);
 
 				// sun outer glow geo
-				geometry3 = new THREE.SphereGeometry(315, 100, 8);
+				// (og) geometry3 = new THREE.SphereGeometry(315, 100, 8);
+				geometry3 = new THREE.SphereGeometry(236, 100, 8);
 
 				// Material (normal texture)
 				/*const material = new THREE.MeshStandardMaterial();
@@ -959,7 +895,6 @@
 				scene.add(mesh);
 
 				scene.add(mesh3);
-
 
 				//second object 
 
@@ -1074,7 +1009,7 @@
 
 				// Renderer
 				renderer = new THREE.WebGLRenderer( { 
-					canvas: document.querySelector('#bg'),
+					canvas: document.querySelector('#bg'), 
 					alpha: true,
 					antialias: false,
   					powerPreference: "high-performance",
@@ -1139,7 +1074,7 @@
 				var st = window.pageYOffset || document.documentElement.scrollTop;
 				// lastScrollTop && mesh.position.z < 140
 				// camera.position.set(0, 0, 400);
-				if (st > lastScrollTop && camera.position.z > 365){
+				/* if (st > lastScrollTop && camera.position.z > 365){
 					camera.position.z += -1.0;
 					//mesh.position.z += 1.5;
 					//mesh3.position.z += 1.5;
@@ -1162,7 +1097,7 @@
 				else {
 					lastScrollTop = st <= 0 ? 0 : st;
 					
-				}
+				} */
 
 				// nav bar dynamic on scroll
 				if (lastScrollY < window.scrollY) {
@@ -1237,24 +1172,12 @@
 				const deltaTime = elapsedTime - previousTime;
 				previousTime = elapsedTime;
 
-				//rotate background stars.jpg ****************************************************************************************
-				//let backgroundImage = document.getElementById("background-image");
-				//let tilt = Math.sin(elapsedTime /5.0) * 1.5;
-				//backgroundImage.style.transform = `rotate(${tilt}deg)`;
-
-				// ^^ let magnify = 1 + (Math.sin(elapsedTime /4) * 0.0005);
-
-				//backgroundImage.style.transform = `rotate(${elapsedTime / 4}deg)`;
-
-				// Nope (performance) *************         **************            ************            *******************    ***********
-				//backgroundImage.style.transform = `scale(${magnify})`;
-
 				//const parallaxX = cursor.x * 0.5;
   				//const parallaxY = - cursor.y * 0.5;
 
 				// Temp set to consistent and NOT mouse move
-				// cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
-				// cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
+				//cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
+				//cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
 				// * speed , * tolerance 
 				cursor.lerpX  = Math.sin(elapsedTime*0.7) * 0.6;
 				//cursor.lerpY = Math.sin(elapsedTime*0.9) * 0.7;   ***************
@@ -1284,6 +1207,9 @@
 				//composer.render();
 
 				requestAnimationFrame(animate);
+
+				
+
 			}
 
 			animate();
@@ -1292,11 +1218,6 @@
 
 	<!--  new javascript object api search   -->
 	<script>
-
-		function opacity() {
-			const waitElement = document.getElementsByClassName("wait");
-			waitElement[0].style.opacity = "0.0";
-		}
 		//audio file script 
 		const audioFire = new Audio("{% static 'fire3.ogg' %}");
 		audioFire.volume = (0.005);
@@ -1342,7 +1263,7 @@
 						}
 						else {
 							img1.innerHTML +=
-							 `<a href="https://nicksazani.tumblr.com/post/141268107445" target=_blank>
+							 `<a href="https://nicksazani.tumblr.com/post/141268107445">
 								<img class="notFound" srcset="https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_100.gifv 100w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_250.gifv 250w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_400.gifv 400w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_500.gifv 500w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_540.gifv 540w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_640.gifv 640w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_1280.gifv 994w" sizes="(max-width: 994px) 100vw, 994px" alt="Wizard Magic-ing" loading="lazy">
 							</a>
 							<br><br>Consider consulting Wizards on your Spelling
@@ -1387,13 +1308,16 @@
 				} 
 			});
 
-		// remove loading graphic
-		function loadingRing() {
-			const waitElement = document.getElementsByClassName("wait");
-			waitElement[0].remove();
-		}
+        // remove loading graphic
+        function loadingRing() {
+            const waitElement = document.getElementsByClassName("wait");
+            waitElement[0].remove();
+        }
+        // remove loading graphic on card load
+        //document.getElementById("result").addEventListener("change", loadingRing(), { once: true });
+        //document.getElementById("result").onchange = function() {loadingRing()};
 
-		document.addEventListener('DOMContentLoaded', function() {
+		document.addEventListener('DOMContentLoaded', function() {     
 
 			document.querySelector('form.form1').onsubmit = () => {
 					const waitElement = document.getElementsByClassName("wait");
@@ -1442,13 +1366,13 @@
 						}
 
 						for (let j = 1; j < 10; j++) {
-							// timeout to comply with scryfall api use rules && last page < 175 data = quick load correction
-							setTimeout( () => {
-								delay(j);
-							}, j * 200); 
+							delay(j);
 						}
 						
 						function delay(j) {
+							// timeout to comply with scryfall api use rules
+							setTimeout( () => {
+							//`promise${k}` = setTimeout( () => {
 								if (page1.has_more) {
 									k = j + 1;
 									fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=${k}&q=e%3A${search_id}&unique=prints`))
@@ -1496,78 +1420,12 @@
 									});
 									
 								}
+
+							}, 200);
+
 							
 						}
 
-
-						// fetch page 2 (175-350 entries)
-						/* if (page1.has_more) {
-							fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=2&q=e%3A${search_id}&unique=prints`))
-							.then(response => response.json())
-							.then(data => {
-								page2 = data;
-
-
-								// loop through each page adding images 
-								for (let i = 0; i < Object.keys( page2.data ).length; i++) {
-									//check if double face card
-									if (typeof page2.data[i].image_uris === 'undefined') {
-										//check if all img data missing
-										if (typeof page2.data[i].card_faces === 'undefined') {
-
-											continue;
-										}
-										else {
-											img1.innerHTML +=
-											`<img class="tilt" width="20%" src="${page2.data[i].card_faces[0].image_uris.normal}">`;
-											img1.innerHTML +=
-											`<img class="tilt" width="20%" src="${page2.data[i].card_faces[1].image_uris.normal}">`;
-
-											continue;
-										}
-									}
-									img1.innerHTML += `<img class="tilt" width="20%" src="${page2.data[i].image_uris.normal}">`;
-								}
-							})
-							.catch(error => {
-								console.log("Error:", error);
-							});
-						}  */
-
-
-						// fetch page 3 (350-? entries)
-						/* if (page2.has_more) {
-							fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=3&q=e%3A${search_id}&unique=prints`))
-							.then(response => response.json())
-							.then(data => {
-								page3 = data;
-
-								// loop through each page adding images 
-								for (let i = 0; i < Object.keys( page3.data ).length; i++) {
-									//check if double face card.
-									if (typeof page3.data[i].image_uris === 'undefined') {
-										//check if all img data missing
-										if (typeof page3.data[i].card_faces === 'undefined') {
-
-											continue;
-										}
-										else {
-											img1.innerHTML +=
-											`<img class="tilt" width="20%" src="${page3.data[i].card_faces[0].image_uris.normal}">`;
-											img1.innerHTML +=
-											`<img class="tilt" width="20%" src="${page3.data[i].card_faces[1].image_uris.normal}">`;
-
-											continue;
-										}
-									}
-									img1.innerHTML += `<img class="tilt" width="20%" src="${page3.data[i].image_uris.normal}">`;
-								}
-							})
-							.catch(error => {
-								console.log("Error:", error);
-							}); 
-
-						}  */
 					})
 					// call 3d hover effect function after new img's loaded
 					.then(setTimeout(hover, 4 * 1000))
@@ -1582,6 +1440,7 @@
 					y.style.display = "none";
 					var z = document.getElementById("intro");
 					z.style.display = "none";
+
 
 					// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
 					setTimeout(hover, 10 * 1000);
@@ -1599,7 +1458,8 @@
 					window.scrollTo(0, 1);
 
 					//setTimeout(opacity, 4 * 1000);
-					setTimeout(loadingRing, 6 * 1000);  
+                    setTimeout(loadingRing, 6 * 1000);
+					  
 
 					// stop form from submitting (bypass django dataframe search/result)
 					return false;
@@ -1612,27 +1472,15 @@
 
 	<div id="intro">
 		<section class="hidden">
-		Select a "Magic: The Gathering" set and 'Submit' to view some cardboard in space
-		<!-- <h2>Select a Magic: The Gathering set of cards -> and go through that digital cardboard in space.</h2>
-		<a href="https://www.technologyreview.com/2019/05/07/135482/magic-the-gathering-is-officially-the-worlds-most-complex-game/">
-		<h3>“Magic: The Gathering is officially the world’s most complex game."</h3>
-		</a>
-		The article by Emerging Technology in which they summarize the paper submitted by 
-		independent researcher Alex Churchill and colleagues on March 24, 2019.
-		<a href="https://arxiv.org/abs/1904.09828#">Original Paper</a>
-		<a href="https://arxiv.org/pdf/1904.09828.pdf">PDF</a>
-
-		<p></p>
-		<h3>One of my favorite aspects of the game is going through a set, reading the cards effects, and enjoying the artwork.</h3>
-		With "Cardboard in Space" I can now do that with clearer images of the cards and my favorite backdrop.
-		
-		<img id="frame" src="{% static 'textures/mFrame1.png' %}">  -->
+            <div id="introHead">Hey, I'm Frank.</div>
+        A Developer and Programmer based in Texas.
 		</section>
 	</div>
-	<!-- script for text fade in-->
+	<!-- script for text fade in
 	<script>
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
+			console.log(entry)
 			if (entry.isIntersecting) {
 				entry.target.classList.add('show');
 			} else {
@@ -1643,8 +1491,8 @@
 
 		const hiddenElements = document.querySelectorAll('.hidden');
 		hiddenElements.forEach((el) => observer.observe(el));
-		
 	</script>
+	-->
 
 	<div class="wait">
 		Just a moment while I grab those cards...
@@ -1658,8 +1506,6 @@
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
 				<optgroup label="Expansions">
 				<option data-svg-code="1" value="1" disabled>**Expansions</option>
-				<option data-svg-code="mat" value="mat">March of the Machine: The Aftermath (MAT)</option>
-				<option data-svg-code="mom" value="mom">March of the Machine (MOM)</option>
 				<option data-svg-code="default" value="one">Phyrexia: All Will Be One (ONE)</option>
 				<option data-svg-code="bro" value="bro">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
@@ -1784,8 +1630,6 @@
 				<option data-svg-code="lea" value="lea">Limited Edition Alpha (LEA)</option></optgroup>
 				<optgroup label="Masters">
 				<option data-svg-code="3" value="3" disabled>*Masters</option>
-				<option data-svg-code="cmm" value="cmm">Commander Masters (CMM)</option>
-				<option data-svg-code="sir" value="sir">Shadows Over Innistrad Remastered (SIR)</option>
 				<option data-svg-code="dmr" value="dmr">Dominaria Remastered (DMR)</option>
 				<option data-svg-code="uplist" value="uplist">The List (Unfinity Foil Edition) (UPLIST)</option>
 				<option data-svg-code="2x2" value="2x2">Double Masters 2022 (2X2)</option>
@@ -1815,7 +1659,6 @@
 				<option data-svg-code="chr" value="chr">Chronicles (CHR)</option></optgroup>
 				<optgroup label="Draft Innovation">
 				<option data-svg-code="4" value="4" disabled>*Draft Innovation</option>
-				<option data-svg-code="ltr" value="ltr">Lord of the Rings: Tales of Middle-Earth (LTR)</option>
 				<option data-svg-code="j22" value="j22">Jumpstart 2022 (J22)</option>
 				<option data-svg-code="clb" value="clb">Commander Legends: Battle for Baldur&#39;s Gate (CLB)</option>
 				<option data-svg-code="star" value="dbl">Innistrad: Double Feature (DBL)</option>
@@ -1857,8 +1700,6 @@
 				<option data-svg-code="dd2" value="dd2">Duel Decks: Jace vs. Chandra (DD2)</option>
 				<option data-svg-code="dd1" value="dd1">Duel Decks: Elves vs. Goblins (DD1)</option></optgroup>
 				<optgroup label="Alchemy">
-				<option data-svg-code="yone" value="yone">Alchemy: Phyrexia (YONE)</option>
-				<option data-svg-code="ybro" value="ybro">Alchemy: The Brother's War (YBRO)</option>
 				<option data-svg-code="hbg" value="hbg">Alchemy Horizons: Baldur&#39;s Gate (HBG)</option>
 				<option data-svg-code="y22" value="ysnc">Alchemy: New Capenna (YSNC)</option>
 				<option data-svg-code="y22" value="yneo">Alchemy: Kamigawa (YNEO)</option>
@@ -1874,8 +1715,6 @@
 				<option data-svg-code="cc1" value="cc1">Commander Collection: Green (CC1)</option>
 				<option data-svg-code="cm1" value="cm1">Commander&#39;s Arsenal (CM1)</option></optgroup>
 				<optgroup label="Box">
-				<option data-svg-code="ea2" value="ea2">Explorer Anthology 2 (EA2)</option>
-				<option data-svg-code="q08" value="q08">Pioneer Challenger Decks 2022 (W08)</option>
 				<option data-svg-code="gn3" value="gn3">Game Night 2022 (GN3)</option>
 				<option data-svg-code="mtga" value="ea1">Explorer Anthology 1 (EA1)</option>
 				<option data-svg-code="ha1" value="ha6">Historic Anthology 6 (HA6)</option>
@@ -1911,11 +1750,6 @@
 				<option data-svg-code="vis" value="mgb">Multiverse Gift Box (MGB)</option>
 				<option data-svg-code="default" value="rqs">Rivals Quick Start Set (RQS)</option></optgroup>
 				<optgroup label="Commander">
-				<option data-svg-code="ltc" value="who">Doctor Who (WHO)</option>
-				<option data-svg-code="ltc" value="ltc">Tales of Middle-earth Commander (LTC)</option>
-				<option data-svg-code="ltc" value="pctb">From Cute to Brute (PCTB)</option>
-				<option data-svg-code="moc" value="moc">March of the Machine Commander (MOC)</option>
-				<option data-svg-code="moc" value="onc">Phyrexia: All Will Be One Commander (ONC)</option>
 				<option data-svg-code="scd" value="scd">Starter Commander Decks (SCD)</option>
 				<option data-svg-code="brc" value="brc">The Brother's War Commander (BRC)</option>	
 				<option data-svg-code="40k" value="40k">Warhammer 40,000 (40K)</option>
@@ -1952,8 +1786,6 @@
 				<option data-svg-code="v09" value="v09">From the Vault: Exiled (V09)</option>
 				<option data-svg-code="drb" value="drb">From the Vault: Dragons (DRB)</option></optgroup>
 				<optgroup label="Funny">
-				<option data-svg-code="uplist" value="uplist">The List (Unfinity Foil Edition) (UPLIST)</option>
-				<option data-svg-code="sunf" value="sunf">Unfinity Sticker Sheets (SUNF)</option>
 				<option data-svg-code="unf" value="unf">Unfinity (UNF)</option>
 				<option data-svg-code="vow" value="mvow">Innistrad: Crimson Vow Minigames (MVOW)</option>
 				<option data-svg-code="planeswalker" value="cmb2">Mystery Booster Playtest Cards 2021 (CMB2)</option>
@@ -1976,7 +1808,6 @@
 				<option data-svg-code="unh" value="unh">Unhinged (UNH)</option>
 				<option data-svg-code="ugl" value="ugl">Unglued (UGL)</option></optgroup>
 				<optgroup label="Masterpiece">
-				<option data-svg-code="mul" value="mul">Multiverse Legends (MUL)</option>
 				<option data-svg-code="brr" value="brr">The Brother's War Retro Artifacts (BRR)</option>
 				<option data-svg-code="bot" value="bot">Transformers (BOT)</option>
 				<option data-svg-code="sta" value="sta">Strixhaven Mystical Archive (STA)</option>
@@ -1987,13 +1818,6 @@
 				<option data-svg-code="mps" value="mps">Kaladesh Inventions (MPS)</option>
 				<option data-svg-code="exp" value="exp">Zendikar Expeditions (EXP)</option></optgroup>
 				<optgroup label="Memorabilia">
-				<option data-svg-code="aone" value="fltr">Tales of Middle-earth Front Cards (FLTR)</option>
-				<option data-svg-code="aone" value="altr">Tales of Middle-earth Art Series (ALTR)</option>
-				<option data-svg-code="aone" value="fmom">March of the Machine Jumpstart Front Cards (FMOM)</option>
-				<option data-svg-code="aone" value="amom">March of the Machine Art Series (AMOM)</option>
-				<option data-svg-code="aone" value="aone">Phyrexia: All Will Be One Art Series (AONE)</option>
-				<option data-svg-code="fone" value="fone">Phyrexia: All Will Be One Jumpstart Front Cards (FONE)</option>
-				<option data-svg-code="fj22" value="fj22">Jumpstart 2022 Front Cards (FJ22)</option>
 				<option data-svg-code="30a" value="30a">30th Anniversary Edition (30A)</option>
 				<option data-svg-code="dmu" value="admu">Dominaria United Art Series (ADMU)</option>
 				<option data-svg-code="clb" value="aclb">Battle for Baldur&#39;s Gate Art Series (ACLB)</option>
@@ -2046,20 +1870,6 @@
 				<option data-svg-code="star" value="o90p">Oversized 90&#39;s Promos (O90P)</option>
 				<option data-svg-code="cei" value="cei">Intl. Collectors’ Edition (CEI)</option>
 				<option data-svg-code="ced" value="ced">Collectors’ Edition (CED)</option></optgroup>
-				<optgroup label="Minigame">
-				<option data-svg-code="mone" value="mone">Phyrexia: All Will Be One Minigames (MONE)</option>
-				<option data-svg-code="mbro" value="mbro">The Brother's War Minigames (MBRO)</option>
-				<option data-svg-code="mdmu" value="mdmu">Dominaria United Minigames (MDMU)</option>
-				<option data-svg-code="mclb" value="mclb">Commander Legends: Battle for Baldur's Gate Minigames (MCLB)</option>
-				<option data-svg-code="msnc" value="msnc">Streets of New Capenna Minigames (MSNC)</option>
-				<option data-svg-code="mneo" value="mneo">Kamigawa: Neon Dynasty Minigames (MNEO)</option>
-				<option data-svg-code="mvow" value="mvow">Innistad: Crimson Vow Minigames (MVOW)</option>
-				<option data-svg-code="mmid" value="mmid">Innistad: Midnight Hunt Minigames (MMID)</option>
-				<option data-svg-code="mafr" value="mafr">Adventures in the Forgotten Realms Minigames (MAFR)</option>
-				<option data-svg-code="mmh2" value="mmh2">Modern Horizons 2 Minigames (MMH2)</option>
-				<option data-svg-code="mstx" value="mstx">Strixhaven: School of Mages Minigames (MSTX)</option>
-				<option data-svg-code="mkhm" value="mkhm">Kaldheim Minigames (MKHM)</option>
-				<option data-svg-code="mznr" value="mznr">Zendikar Rising Minigames (MZNR)</option></optgroup>
 				<optgroup label="Planechase">
 				<option data-svg-code="pca" value="opca">Planechase Anthology Planes (OPCA)</option>
 				<option data-svg-code="pca" value="pca">Planechase Anthology (PCA)</option>
@@ -2072,12 +1882,6 @@
 				<option data-svg-code="pd2" value="pd2">Premium Deck Series: Fire and Lightning (PD2)</option>
 				<option data-svg-code="h09" value="h09">Premium Deck Series: Slivers (H09)</option></optgroup>
 				<optgroup label="Promo">
-				<option data-svg-code="slp" value="pf23">MagicFest 2023 (PF23)</option>
-				<option data-svg-code="slp" value="pltr">Tales of Middle-earth Promos (PLTR)</option>
-				<option data-svg-code="slp" value="pmom">March of the Machine Promos (PMOM)</option>
-				<option data-svg-code="slp" value="slp">Secret Lair Showdown (SLP)</option>
-				<option data-svg-code="pl23" value="pl23">Year of the Rabbit 2023 (PL23)</option>
-				<option data-svg-code="pone" value="pone">Phyrexia: All Will Be One Promos (PONE)</option>
 				<option data-svg-code="pr23" value="pr23">Regional Championship Qualifiers 2022 (PR23)</option>
 				<option data-svg-code="pewk" value="pewk">Eternal Weekend 2022 (PEWK)</option>
 				<option data-svg-code="slc" value="slc">Secret Lair 30th Anniversary Countdown Kit (SLC)</option>
@@ -2357,18 +2161,6 @@
 				<option data-svg-code="por" value="por">Portal (POR)</option>
 				<option data-svg-code="x2ps" value="itp">Introductory Two-Player Set (ITP)</option></optgroup>
 				<optgroup label="Token">
-				<option data-svg-code="tonc" value="tltc">Tales of Middle-earth Commander Tokens (TLTC)</option>
-				<option data-svg-code="tonc" value="tltr">Tales of Middle-earth Tokens (TLTR)</option>
-				<option data-svg-code="tonc" value="tmoc">March of the Machine Commander Tokens (TMOC)</option>
-				<option data-svg-code="tonc" value="tmom">March of the Machine Tokens (TMOM)</option>
-				<option data-svg-code="tonc" value="wmom">March of the Machine Japanese Promo Tokens (WMOM)</option>
-				<option data-svg-code="tonc" value="tmul">Multiverse Legends Tokens (TMUL)</option>
-				<option data-svg-code="tonc" value="smom">March of the Machine Subsitute Cards (SMOM)</option>
-				<option data-svg-code="tonc" value="tonc">Phyrexia: All Will Be One Commander Tokens (TONC)</option>
-				<option data-svg-code="tone" value="tone">Phyrexia: All Will Be One Tokens (TONE)</option>
-				<option data-svg-code="wone" value="wone">Phyrexia: All Will Be One Japanses Promo Tokens (WONE)</option>
-				<option data-svg-code="tdmr" value="tdmr">Dominaria Remastered Tokens (TDMR)</option>
-				<option data-svg-code="tscd" value="tscd">Starter Commander Deck Tokens (TSCD)</option>
 				<option data-svg-code="t30a" value="t30a">30th Anniversary Tokens (T30A)</option>
 				<option data-svg-code="tbot" value="tbot">Transformers Tokens (TBOT)</option>
 				<option data-svg-code="tgn3" value="tgn3">Game Night: Free-for-All Tokens (TGN3)</option>
@@ -2551,24 +2343,63 @@
 		)
 
 	</script>
+	<!-- test for main-->
+	<div id="about">
+		<div class="hidden2">
+            <div class="hidden2 child"> <h4>
+            Hey, I'm Frank.  I love going through the cards of new and older "<a href="https://en.wikipedia.org/wiki/Magic:_The_Gathering">Magic: The Gathering</a>" sets.  I built this site to make that visually more enjoyable.
+            </h4> </div>
+            <div class="hidden2 child"> <p>
+            The background was inspired by one of the newer sets at the time "Unfinity," a humorous set of cards with a space theme.
+            <br>
+            (The "Mountain" card from the Unfinity set is pictured to the left.)
+            </p> </div>
+            <div class="hidden2 child"> <p>
+            I enjoy the interesting card abilities, amazing style/art of the cards, and always want an up-close and detailed look at them if possible.  To help accomplish this, Cardboard in Space utilizes the "Scryfall.com" API to fetch the desired card image data from <a href="https://www.technologyreview.com/2019/05/07/135482/magic-the-gathering-is-officially-the-worlds-most-complex-game/">over 20,000 cards</a>.
+            </p> </div>
+            <div class="hidden2 child"> <p>
+            This was my first larger project after starting to learn programming and web development in 2022.
+            This site uses:
+            <br>Javascript, HTML, CSS, Django, Python, Three.js, JQuery, and the Scryfall.com API.
+            </p> </div>
+            <div class="hidden2 child">
+            <i class="devicon-javascript-plain"></i> <i class="devicon-html5-plain-wordmark"></i> <i class="devicon-css3-plain-wordmark"></i> <i class="devicon-django-plain-wordmark"></i> <i class="devicon-python-plain-wordmark"></i> <i class="devicon-threejs-original-wordmark"></i> <i class="devicon-jquery-plain-wordmark"></i> <img class="logo" src="{% static 'scryfall-logo1.png' %}">
+            </p> </div>
+		</div>
+	</div>
+	<!-- script for text fade in -->
+	<script>
+		const observer = new IntersectionObserver((entries) => {
+			entries.forEach((entry) => {
+			console.log(entry)
+			if (entry.isIntersecting) {
+				entry.target.classList.add('show');
+			} else {
+				entry.target.classList.remove('show');
+			}
+			});
+		});
 
+		const hiddenElements = document.querySelectorAll('.hidden');
+		hiddenElements.forEach((el) => observer.observe(el));
+
+		const hiddenElements2 = document.querySelectorAll('.hidden2');
+		hiddenElements2.forEach((el) => observer.observe(el));
+		
+	</script>
+	
 	</main>
 	</body>
 	<footer class="footer">
 		<div id="dis">
-		<span class="foot">Cardboard in Space Code/Design &copy; 2023 Frank Alarcon.</span>
-		<br>	
-		Cardboard in Space is unofficial Fan Content permitted under the Fan Content Policy.
-		<br> 
-		Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
-		©Wizards of the Coast LLC.
+		<span class="foot">Frank's Space Code/Design &copy; 2023 Frank Alarcon.</span>
 		</div>
 		<div id="counter">
             Page Views: <span id="visits"></span>
         </div>
 		<div id="links">
 			<ul>
-				<li><a data-page="home" href="{% url 'test' %}">Home</a></li>
+				<li><a data-page="projects" href="{% url 'test' %}">Projects</a></li>
 				<li><a data-page="about" href="{% url 'about' %}">About</a></li>
 				<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
 			</ul>

@@ -23,8 +23,10 @@
 			});
 		</script>
 
-		<!-- page counter script api -->
-        <script async src="https://api.countapi.xyz/hit/cardboardinspace/952b5c1c-1860-4b70-8f75-6ae7dd7d4a8a?callback=websiteVisits"></script>
+		<!-- page counter script api ***sold to company, no longer functinal ** -->
+
+        <!-- <script async src="https://api.countapi.xyz/hit/cardboardinspace/952b5c1c-1860-4b70-8f75-6ae7dd7d4a8a?callback=websiteVisits"></script> 
+        <script async src="https://api.countapi.xyz/hit/cardboardinspace/visits?callback=websiteVisits"></script> -->
 
 		<!-- jquery code for loading "on submit" code 
 		<script src="https://code.jquery.com/jquery-3.5.0.js"></script> -->
@@ -42,6 +44,8 @@
 	</head>
 
 	<body id="body">
+		<div id="background-image">
+        </div>
 		<!-- sticky navigation bar -->
 		<span class="boxShadow">
 		<header class="nav">
@@ -71,7 +75,8 @@
 		<script>
 			// page counter script api 
 			function websiteVisits(response) {
-                document.querySelector("#visits").textContent = response.value;
+                //document.querySelector("#visits").textContent = response.value;
+                document.getElementById("visits").innerText = response.value;
             }
 
 			document.addEventListener('DOMContentLoaded', function() {
@@ -81,17 +86,18 @@
 				document.getElementById('hide').onclick = () => {
 						// hide/unhide canvas
 						let x = document.getElementById("bg");
-						let y = document.getElementById("body");
+						//let y = document.getElementById("body");
+						let y = document.getElementById("background-image");
 						if (x.style.display == "none") {
 							x.style.display = "block";
-							y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+							y.style.content = 'url("{% static 'stars.jpg' %}")';
 
 							audioSun.muted = false;
 							audioFire.muted = false;
 						}
 						else {
 							x.style.display = "none";
-							y.style.backgroundImage = "none";
+							y.style.content = "none";
 
 							audioSun.muted = true;
 							audioFire.muted = true;
@@ -1231,12 +1237,24 @@
 				const deltaTime = elapsedTime - previousTime;
 				previousTime = elapsedTime;
 
+				//rotate background stars.jpg ****************************************************************************************
+				//let backgroundImage = document.getElementById("background-image");
+				//let tilt = Math.sin(elapsedTime /5.0) * 1.5;
+				//backgroundImage.style.transform = `rotate(${tilt}deg)`;
+
+				// ^^ let magnify = 1 + (Math.sin(elapsedTime /4) * 0.0005);
+
+				//backgroundImage.style.transform = `rotate(${elapsedTime / 4}deg)`;
+
+				// Nope (performance) *************         **************            ************            *******************    ***********
+				//backgroundImage.style.transform = `scale(${magnify})`;
+
 				//const parallaxX = cursor.x * 0.5;
   				//const parallaxY = - cursor.y * 0.5;
 
 				// Temp set to consistent and NOT mouse move
-				//cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
-				//cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
+				// cursor.lerpX  += (parallaxX - cursor.lerpX ) * 5 * deltaTime;
+				// cursor.lerpY += (parallaxY - cursor.lerpY) * 5 * deltaTime;
 				// * speed , * tolerance 
 				cursor.lerpX  = Math.sin(elapsedTime*0.7) * 0.6;
 				//cursor.lerpY = Math.sin(elapsedTime*0.9) * 0.7;   ***************
@@ -1324,7 +1342,7 @@
 						}
 						else {
 							img1.innerHTML +=
-							 `<a href="https://nicksazani.tumblr.com/post/141268107445">
+							 `<a href="https://nicksazani.tumblr.com/post/141268107445" target=_blank>
 								<img class="notFound" srcset="https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_100.gifv 100w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_250.gifv 250w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_400.gifv 400w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_500.gifv 500w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_540.gifv 540w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_640.gifv 640w, https://64.media.tumblr.com/f5892dd6042256098268e36fcf237dc7/tumblr_o485qw8Hke1qjmnzro1_1280.gifv 994w" sizes="(max-width: 994px) 100vw, 994px" alt="Wizard Magic-ing" loading="lazy">
 							</a>
 							<br><br>Consider consulting Wizards on your Spelling
@@ -1424,13 +1442,13 @@
 						}
 
 						for (let j = 1; j < 10; j++) {
-							delay(j);
+							// timeout to comply with scryfall api use rules && last page < 175 data = quick load correction
+							setTimeout( () => {
+								delay(j);
+							}, j * 200); 
 						}
 						
 						function delay(j) {
-							// timeout to comply with scryfall api use rules
-							setTimeout( () => {
-							//`promise${k}` = setTimeout( () => {
 								if (page1.has_more) {
 									k = j + 1;
 									fetch((`https://api.scryfall.com/cards/search?format=json&include_extras=true&include_multilingual=false&include_variations=true&order=set&page=${k}&q=e%3A${search_id}&unique=prints`))
@@ -1478,9 +1496,6 @@
 									});
 									
 								}
-
-							}, 200);
-
 							
 						}
 
@@ -1568,7 +1583,6 @@
 					var z = document.getElementById("intro");
 					z.style.display = "none";
 
-
 					// call for img 3d hover AFTER new img's load  ******** 3 seconds current MINIMUM  *************   called again for larger searches 
 					setTimeout(hover, 10 * 1000);
 					
@@ -1619,7 +1633,6 @@
 	<script>
 		const observer = new IntersectionObserver((entries) => {
 			entries.forEach((entry) => {
-			console.log(entry)
 			if (entry.isIntersecting) {
 				entry.target.classList.add('show');
 			} else {
@@ -1645,6 +1658,8 @@
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
 				<optgroup label="Expansions">
 				<option data-svg-code="1" value="1" disabled>**Expansions</option>
+				<option data-svg-code="mat" value="mat">March of the Machine: The Aftermath (MAT)</option>
+				<option data-svg-code="mom" value="mom">March of the Machine (MOM)</option>
 				<option data-svg-code="default" value="one">Phyrexia: All Will Be One (ONE)</option>
 				<option data-svg-code="bro" value="bro">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
@@ -1769,6 +1784,8 @@
 				<option data-svg-code="lea" value="lea">Limited Edition Alpha (LEA)</option></optgroup>
 				<optgroup label="Masters">
 				<option data-svg-code="3" value="3" disabled>*Masters</option>
+				<option data-svg-code="cmm" value="cmm">Commander Masters (CMM)</option>
+				<option data-svg-code="sir" value="sir">Shadows Over Innistrad Remastered (SIR)</option>
 				<option data-svg-code="dmr" value="dmr">Dominaria Remastered (DMR)</option>
 				<option data-svg-code="uplist" value="uplist">The List (Unfinity Foil Edition) (UPLIST)</option>
 				<option data-svg-code="2x2" value="2x2">Double Masters 2022 (2X2)</option>
@@ -1798,6 +1815,7 @@
 				<option data-svg-code="chr" value="chr">Chronicles (CHR)</option></optgroup>
 				<optgroup label="Draft Innovation">
 				<option data-svg-code="4" value="4" disabled>*Draft Innovation</option>
+				<option data-svg-code="ltr" value="ltr">Lord of the Rings: Tales of Middle-Earth (LTR)</option>
 				<option data-svg-code="j22" value="j22">Jumpstart 2022 (J22)</option>
 				<option data-svg-code="clb" value="clb">Commander Legends: Battle for Baldur&#39;s Gate (CLB)</option>
 				<option data-svg-code="star" value="dbl">Innistrad: Double Feature (DBL)</option>
@@ -1839,6 +1857,7 @@
 				<option data-svg-code="dd2" value="dd2">Duel Decks: Jace vs. Chandra (DD2)</option>
 				<option data-svg-code="dd1" value="dd1">Duel Decks: Elves vs. Goblins (DD1)</option></optgroup>
 				<optgroup label="Alchemy">
+				<option data-svg-code="yone" value="yone">Alchemy: Phyrexia (YONE)</option>
 				<option data-svg-code="ybro" value="ybro">Alchemy: The Brother's War (YBRO)</option>
 				<option data-svg-code="hbg" value="hbg">Alchemy Horizons: Baldur&#39;s Gate (HBG)</option>
 				<option data-svg-code="y22" value="ysnc">Alchemy: New Capenna (YSNC)</option>
@@ -1855,6 +1874,8 @@
 				<option data-svg-code="cc1" value="cc1">Commander Collection: Green (CC1)</option>
 				<option data-svg-code="cm1" value="cm1">Commander&#39;s Arsenal (CM1)</option></optgroup>
 				<optgroup label="Box">
+				<option data-svg-code="ea2" value="ea2">Explorer Anthology 2 (EA2)</option>
+				<option data-svg-code="q08" value="q08">Pioneer Challenger Decks 2022 (W08)</option>
 				<option data-svg-code="gn3" value="gn3">Game Night 2022 (GN3)</option>
 				<option data-svg-code="mtga" value="ea1">Explorer Anthology 1 (EA1)</option>
 				<option data-svg-code="ha1" value="ha6">Historic Anthology 6 (HA6)</option>
@@ -1890,6 +1911,11 @@
 				<option data-svg-code="vis" value="mgb">Multiverse Gift Box (MGB)</option>
 				<option data-svg-code="default" value="rqs">Rivals Quick Start Set (RQS)</option></optgroup>
 				<optgroup label="Commander">
+				<option data-svg-code="ltc" value="who">Doctor Who (WHO)</option>
+				<option data-svg-code="ltc" value="ltc">Tales of Middle-earth Commander (LTC)</option>
+				<option data-svg-code="ltc" value="pctb">From Cute to Brute (PCTB)</option>
+				<option data-svg-code="moc" value="moc">March of the Machine Commander (MOC)</option>
+				<option data-svg-code="moc" value="onc">Phyrexia: All Will Be One Commander (ONC)</option>
 				<option data-svg-code="scd" value="scd">Starter Commander Decks (SCD)</option>
 				<option data-svg-code="brc" value="brc">The Brother's War Commander (BRC)</option>	
 				<option data-svg-code="40k" value="40k">Warhammer 40,000 (40K)</option>
@@ -1926,6 +1952,8 @@
 				<option data-svg-code="v09" value="v09">From the Vault: Exiled (V09)</option>
 				<option data-svg-code="drb" value="drb">From the Vault: Dragons (DRB)</option></optgroup>
 				<optgroup label="Funny">
+				<option data-svg-code="uplist" value="uplist">The List (Unfinity Foil Edition) (UPLIST)</option>
+				<option data-svg-code="sunf" value="sunf">Unfinity Sticker Sheets (SUNF)</option>
 				<option data-svg-code="unf" value="unf">Unfinity (UNF)</option>
 				<option data-svg-code="vow" value="mvow">Innistrad: Crimson Vow Minigames (MVOW)</option>
 				<option data-svg-code="planeswalker" value="cmb2">Mystery Booster Playtest Cards 2021 (CMB2)</option>
@@ -1948,6 +1976,7 @@
 				<option data-svg-code="unh" value="unh">Unhinged (UNH)</option>
 				<option data-svg-code="ugl" value="ugl">Unglued (UGL)</option></optgroup>
 				<optgroup label="Masterpiece">
+				<option data-svg-code="mul" value="mul">Multiverse Legends (MUL)</option>
 				<option data-svg-code="brr" value="brr">The Brother's War Retro Artifacts (BRR)</option>
 				<option data-svg-code="bot" value="bot">Transformers (BOT)</option>
 				<option data-svg-code="sta" value="sta">Strixhaven Mystical Archive (STA)</option>
@@ -1958,6 +1987,12 @@
 				<option data-svg-code="mps" value="mps">Kaladesh Inventions (MPS)</option>
 				<option data-svg-code="exp" value="exp">Zendikar Expeditions (EXP)</option></optgroup>
 				<optgroup label="Memorabilia">
+				<option data-svg-code="aone" value="fltr">Tales of Middle-earth Front Cards (FLTR)</option>
+				<option data-svg-code="aone" value="altr">Tales of Middle-earth Art Series (ALTR)</option>
+				<option data-svg-code="aone" value="fmom">March of the Machine Jumpstart Front Cards (FMOM)</option>
+				<option data-svg-code="aone" value="amom">March of the Machine Art Series (AMOM)</option>
+				<option data-svg-code="aone" value="aone">Phyrexia: All Will Be One Art Series (AONE)</option>
+				<option data-svg-code="fone" value="fone">Phyrexia: All Will Be One Jumpstart Front Cards (FONE)</option>
 				<option data-svg-code="fj22" value="fj22">Jumpstart 2022 Front Cards (FJ22)</option>
 				<option data-svg-code="30a" value="30a">30th Anniversary Edition (30A)</option>
 				<option data-svg-code="dmu" value="admu">Dominaria United Art Series (ADMU)</option>
@@ -2011,6 +2046,20 @@
 				<option data-svg-code="star" value="o90p">Oversized 90&#39;s Promos (O90P)</option>
 				<option data-svg-code="cei" value="cei">Intl. Collectors’ Edition (CEI)</option>
 				<option data-svg-code="ced" value="ced">Collectors’ Edition (CED)</option></optgroup>
+				<optgroup label="Minigame">
+				<option data-svg-code="mone" value="mone">Phyrexia: All Will Be One Minigames (MONE)</option>
+				<option data-svg-code="mbro" value="mbro">The Brother's War Minigames (MBRO)</option>
+				<option data-svg-code="mdmu" value="mdmu">Dominaria United Minigames (MDMU)</option>
+				<option data-svg-code="mclb" value="mclb">Commander Legends: Battle for Baldur's Gate Minigames (MCLB)</option>
+				<option data-svg-code="msnc" value="msnc">Streets of New Capenna Minigames (MSNC)</option>
+				<option data-svg-code="mneo" value="mneo">Kamigawa: Neon Dynasty Minigames (MNEO)</option>
+				<option data-svg-code="mvow" value="mvow">Innistad: Crimson Vow Minigames (MVOW)</option>
+				<option data-svg-code="mmid" value="mmid">Innistad: Midnight Hunt Minigames (MMID)</option>
+				<option data-svg-code="mafr" value="mafr">Adventures in the Forgotten Realms Minigames (MAFR)</option>
+				<option data-svg-code="mmh2" value="mmh2">Modern Horizons 2 Minigames (MMH2)</option>
+				<option data-svg-code="mstx" value="mstx">Strixhaven: School of Mages Minigames (MSTX)</option>
+				<option data-svg-code="mkhm" value="mkhm">Kaldheim Minigames (MKHM)</option>
+				<option data-svg-code="mznr" value="mznr">Zendikar Rising Minigames (MZNR)</option></optgroup>
 				<optgroup label="Planechase">
 				<option data-svg-code="pca" value="opca">Planechase Anthology Planes (OPCA)</option>
 				<option data-svg-code="pca" value="pca">Planechase Anthology (PCA)</option>
@@ -2023,6 +2072,12 @@
 				<option data-svg-code="pd2" value="pd2">Premium Deck Series: Fire and Lightning (PD2)</option>
 				<option data-svg-code="h09" value="h09">Premium Deck Series: Slivers (H09)</option></optgroup>
 				<optgroup label="Promo">
+				<option data-svg-code="slp" value="pf23">MagicFest 2023 (PF23)</option>
+				<option data-svg-code="slp" value="pltr">Tales of Middle-earth Promos (PLTR)</option>
+				<option data-svg-code="slp" value="pmom">March of the Machine Promos (PMOM)</option>
+				<option data-svg-code="slp" value="slp">Secret Lair Showdown (SLP)</option>
+				<option data-svg-code="pl23" value="pl23">Year of the Rabbit 2023 (PL23)</option>
+				<option data-svg-code="pone" value="pone">Phyrexia: All Will Be One Promos (PONE)</option>
 				<option data-svg-code="pr23" value="pr23">Regional Championship Qualifiers 2022 (PR23)</option>
 				<option data-svg-code="pewk" value="pewk">Eternal Weekend 2022 (PEWK)</option>
 				<option data-svg-code="slc" value="slc">Secret Lair 30th Anniversary Countdown Kit (SLC)</option>
@@ -2302,6 +2357,18 @@
 				<option data-svg-code="por" value="por">Portal (POR)</option>
 				<option data-svg-code="x2ps" value="itp">Introductory Two-Player Set (ITP)</option></optgroup>
 				<optgroup label="Token">
+				<option data-svg-code="tonc" value="tltc">Tales of Middle-earth Commander Tokens (TLTC)</option>
+				<option data-svg-code="tonc" value="tltr">Tales of Middle-earth Tokens (TLTR)</option>
+				<option data-svg-code="tonc" value="tmoc">March of the Machine Commander Tokens (TMOC)</option>
+				<option data-svg-code="tonc" value="tmom">March of the Machine Tokens (TMOM)</option>
+				<option data-svg-code="tonc" value="wmom">March of the Machine Japanese Promo Tokens (WMOM)</option>
+				<option data-svg-code="tonc" value="tmul">Multiverse Legends Tokens (TMUL)</option>
+				<option data-svg-code="tonc" value="smom">March of the Machine Subsitute Cards (SMOM)</option>
+				<option data-svg-code="tonc" value="tonc">Phyrexia: All Will Be One Commander Tokens (TONC)</option>
+				<option data-svg-code="tone" value="tone">Phyrexia: All Will Be One Tokens (TONE)</option>
+				<option data-svg-code="wone" value="wone">Phyrexia: All Will Be One Japanses Promo Tokens (WONE)</option>
+				<option data-svg-code="tdmr" value="tdmr">Dominaria Remastered Tokens (TDMR)</option>
+				<option data-svg-code="tscd" value="tscd">Starter Commander Deck Tokens (TSCD)</option>
 				<option data-svg-code="t30a" value="t30a">30th Anniversary Tokens (T30A)</option>
 				<option data-svg-code="tbot" value="tbot">Transformers Tokens (TBOT)</option>
 				<option data-svg-code="tgn3" value="tgn3">Game Night: Free-for-All Tokens (TGN3)</option>
@@ -2489,7 +2556,7 @@
 	</body>
 	<footer class="footer">
 		<div id="dis">
-		<span class="foot">Cardboard in Space Code/Design &copy; 2022 Frank Alarcon.</span>
+		<span class="foot">Cardboard in Space Code/Design &copy; 2023 Frank Alarcon.</span>
 		<br>	
 		Cardboard in Space is unofficial Fan Content permitted under the Fan Content Policy.
 		<br> 
