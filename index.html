@@ -10,7 +10,7 @@
 		<!-- base three.js files -->
 		<script type="module" src="./static/three/three.js"></script>
 
-		<!-- select box with search -->
+		<!-- select box with search "selectize.js"-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
@@ -1371,7 +1371,14 @@
 				
 					// get submitted selected option 
 					const select = document.getElementById('set');
-					const search_id = select.options[select.selectedIndex].value;
+					//let search_id = select.options[select.selectedIndex].value;
+					let search_id;
+					if (typeof select.options[select.selectedIndex] === 'undefined'){
+						search_id = "ltr";
+					}
+					else {
+						search_id = select.options[select.selectedIndex].value;
+					}
 			
 					// fetch page 1 (0-174 entries)   =request.getparameter("setselect");
 					fetch((`https://api.scryfall.com/cards/search?include_extras=true&include_variations=true&order=set&q=e%3A${search_id}&unique=prints`))
@@ -1423,39 +1430,43 @@
 
 										pagek = data;
 	
-										// loop through each page adding images 
-										// for (let i = 0; i < Object.keys( pagek.data ).length; i++) {    *** old ***
-										for (let i = 0; i < 175; i++) {
-											//check if double face card
-											if (typeof pagek.data[i].image_uris === 'undefined') {
-												//check if all img data missing
-												if (typeof pagek.data[i].card_faces === 'undefined') {
-
-													// attempt to slow last page load for proper order (fail)
-													img1.innerHTML += 
-													`<img class="tilt" hidden="hidden" src="${page1.data[i].image_uris.normal}">`;
-
-													img1.innerHTML +=
-													`<img class="tilt" hidden="hidden" scr="${page1.data[i].card_faces[0].image_uris.normal}">`;
-
-													continue;
-												}
-												else {
-													img1.innerHTML +=
-													`<img class="tilt" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
-													img1.innerHTML +=
-													`<img class="tilt" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
-	
-													continue;
-												}
-											}
-											img1.innerHTML += `<img class="tilt" src="${pagek.data[i].image_uris.normal}">`;
-
-										}
-
-										if (pagek.has_more !== true) {
+										if (typeof pagek.data === 'undefined') {
 											page1.has_more = false;
 										}
+										else {
+											// loop through each page adding images 
+											// for (let i = 0; i < Object.keys( pagek.data ).length; i++) {    *** old ***
+											for (let i = 0; i < 175; i++) {
+												//check if double face card
+												if (typeof pagek.data[i].image_uris === 'undefined') {
+													//check if all img data missing
+													if (typeof pagek.data[i].card_faces === 'undefined') {
+
+														// attempt to slow last page load for proper order (fail)
+														img1.innerHTML += 
+														`<img class="tilt" hidden="hidden" src="${page1.data[i].image_uris.normal}">`;
+
+														img1.innerHTML +=
+														`<img class="tilt" hidden="hidden" scr="${page1.data[i].card_faces[0].image_uris.normal}">`;
+
+														continue;
+													}
+													else {
+														img1.innerHTML +=
+														`<img class="tilt" src="${pagek.data[i].card_faces[0].image_uris.normal}">`;
+														img1.innerHTML +=
+														`<img class="tilt" src="${pagek.data[i].card_faces[1].image_uris.normal}">`;
+		
+														continue;
+													}
+												}
+												img1.innerHTML += `<img class="tilt" src="${pagek.data[i].image_uris.normal}">`;
+
+											}
+										}
+										//if (pagek.has_more !== true) {
+										//	page1.has_more = false;
+										//}
 									})
 									.catch(error => {
 										console.log("Error:", error);
@@ -1618,9 +1629,9 @@
 			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
 				<optgroup label="Expansions">
 				<option data-svg-code="1" value="1" disabled>**Expansions</option>
-				<option data-svg-code="mat" value="mat">March of the Machine: The Aftermath (MAT)</option>
+				<option data-svg-code="default" value="mat">March of the Machine: The Aftermath (MAT)</option>
 				<option data-svg-code="mom" value="mom">March of the Machine (MOM)</option>
-				<option data-svg-code="default" value="one">Phyrexia: All Will Be One (ONE)</option>
+				<option data-svg-code="one" value="one">Phyrexia: All Will Be One (ONE)</option>
 				<option data-svg-code="bro" value="bro">The Brothers War (BRO)</option>
 				<option data-svg-code="dmu" value="dmu">Dominaria United (DMU)</option>
 				<option data-svg-code="snc" value="snc">Streets of New Capenna (SNC)</option>
