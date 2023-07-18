@@ -1,0 +1,82 @@
+<!-- load static folder for .js and images -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- style.css file -->
+    <link rel="stylesheet" type="text/css"  media="screen" href="{% static 'index.css' %}"/>
+
+    <title>Get in Contact</title>
+    
+</head>
+<body class="contactBody" id="body">
+
+    <!-- sticky navigation bar -->
+		<header class="nav">
+            <div class="heading">
+				<h2>Frank's Digital Space</h2>
+				<h2>Frank's Digital Space</h2>
+			</div>
+			<nav>
+				<ul>
+					<li><a data-page="projects" href="{% url 'test' %}">Projects</a></li>
+					<li><a data-page="about" href="{% url 'about' %}">About</a></li>
+					<li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
+                    <li><a id="hide">Background</a></li>
+				</ul>
+			</nav>
+		</header>
+    
+         <!-- Hide/unhide background-->
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+	
+				document.getElementById('hide').onclick = () => {
+						// hide/unhide canvas
+						let y = document.getElementById("body");
+						if (y.style.backgroundImage == "none") {
+							y.style.backgroundImage = 'url("{% static 'stars.jpg' %}")';
+
+						}
+						else {
+							y.style.backgroundImage = "none";
+						}
+					}
+				});
+		</script>
+
+    <div class="container">
+        
+        <form action="https://formspree.io/f/meqdzwgv" method="POST" class="contactForm">
+            
+            <h1 class="contacth1">Contact Me</h1>
+
+            <input type="text" name="Name" placeholder="Your Name/Company" class="contactOption" required>
+            
+            <input type="email" name"Email" placeholder="Your Email" class="contactOption" required>
+            
+            <textarea name="Message" placeholder="Your Message" class="contactOption" required></textarea>
+            
+            <input type="submit" value="Send" class="contactButton">
+        </form>
+    </div>
+    
+</body>
+<footer class="footer">
+    <div id="dis">
+    <span class="foot">Cardboard in Space Code/Design &copy; 2023 Frank Alarcon.</span>
+    </div>
+    <div id="links">
+        <ul>
+            <li><a data-page="projects" href="{% url 'test' %}">Projects</a></li>
+            <li><a data-page="about" href="{% url 'about' %}">About</a></li>
+            <li><a data-page="contact" href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </div>
+</footer>
+</html>
