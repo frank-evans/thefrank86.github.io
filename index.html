@@ -20,9 +20,10 @@
 		<script>
 			$(document).ready(function () {
 				$('select').selectize({
-					sortField: 'text'
+					sortField: 'text',
 				});
 			});
+			//selectized[0].selectize.focus();
 		</script>
 
 		<!-- page counter script api ***sold to company, no longer functinal ** -->
@@ -77,7 +78,7 @@
 
 			<!-- Hide/unhide background-->
 		<script>
-			// page counter script api 
+			// page counter script api **************************************************************
 			function websiteVisits(response) {
                 //document.querySelector("#visits").textContent = response.value;
                 document.getElementById("visits").innerText = response.value;
@@ -124,11 +125,7 @@
 		</script>
 
 		<script>
-			// image 3D effect on hover scripting
-			
 			// function to add hover effects after all img's added
-			//document.addEventListener('scroll', function() {
-			//var hover = function () {	
 			function hover() {
 				document.querySelectorAll('img').forEach(item => {
 					item.addEventListener('mousemove', handleHover, false)
@@ -139,21 +136,6 @@
 				})
 
 			}
-			// throttle function for scroll
-			/* function throttle(fn, wait) {
-				var time = Date.now();
-				return function() {
-				  if ((time + wait - Date.now()) < 0) {
-					fn();
-					time = Date.now();
-				  }
-				}
-			  } */
-			// throttled scroll listener for img hover
-			//window.addEventListener('scroll', throttle(hover, 2000));
-
-			//const hoverId = setInterval(hover, 4000);
-
 
 				// hover angle threshold
 				const THRESHOLD = 6;
@@ -1107,6 +1089,8 @@
 				// camera.position.set(0, 0, 400);
 				if (st > lastScrollTop && camera.position.z > 365){
 					camera.position.z += -1.0;
+					//camera.position.x += 0.5;
+
 					//mesh.position.z += 1.5;
 					//mesh3.position.z += 1.5;
 					lastScrollTop = st <= 0 ? 0 : st;
@@ -1117,6 +1101,8 @@
 				// lastScrollTop && mesh.position.z > 0
 				else if (st < lastScrollTop && camera.position.z < 500) {
 					camera.position.z += 1.0;
+					//camera.position.x += -0.5;
+					
 					//mesh.position.z += window.scrollY * -.0007;
 					//mesh.position.z += -1.5;
 					//mesh3.position.z += -1.5;
@@ -1143,12 +1129,12 @@
 				lastScrollY = window.scrollY;
 
 				// delete 'plane' 3d parallax display card on scroll***********************
-				if (typeof plane !== "undefined" && camera.position.z > 470){
+				/* if (typeof plane !== "undefined" && camera.position.z > 470){
 					scene.remove(plane);
 					plane.geometry.dispose();
 					plane.material.dispose();
 					plane = undefined;
-				}
+				} */
 
 				return;
 			}
@@ -1590,15 +1576,6 @@
 	<div id="intro">
 		<section class="hidden">
 		Select a "Magic: The Gathering" set and <span class="blue">Submit</span> to view some Cardboard in Space
-		<!-- <h2>Select a Magic: The Gathering set of cards -> and go through that digital cardboard in space.</h2>
-		<a href="https://www.technologyreview.com/2019/05/07/135482/magic-the-gathering-is-officially-the-worlds-most-complex-game/">
-		<h3>“Magic: The Gathering is officially the world’s most complex game."</h3>
-
-		<p></p>
-		<h3>One of my favorite aspects of the game is going through a set, reading the cards effects, and enjoying the artwork.</h3>
-		With "Cardboard in Space" I can now do that with clearer images of the cards and my favorite backdrop.
-		
-		<img id="frame" src="{% static 'textures/mFrame1.png' %}">  -->
 		</section>
 	</div>
 	<!-- script for text fade in-->
@@ -1622,11 +1599,12 @@
 		Just a moment while I grab those cards...
 		<div class="loading2"></div>
 	</div>
+	
 	<div class="outer" id="outer">
 		<!-- <form action="{% url 'result' %}" method="post" id="form">    selected="selected" -->
 			<form id="form" class="form1" method="post" autocomplete="off">
 	
-			<select name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Enter a set name or choose from the list">
+			<select class="selectize" name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Search and Select a Set">
 				<optgroup label="Expansions">
 				<option data-svg-code="1" value="1" disabled>**Expansions</option>
 				<option data-svg-code="default" value="mat">March of the Machine: The Aftermath (MAT)</option>
