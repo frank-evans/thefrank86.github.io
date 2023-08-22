@@ -9,7 +9,7 @@ export const footer = /* html */ `
         ©Wizards of the Coast LLC.
     </div>
 
-    <img id="counter" src="https://kounter.tk/badge/cardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views&silent=true"> 
+    <img id="counter" src="https://kounter.tk/badge/CardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views&silent=true"> 
     <!-- <img id="counter" src="https://kounter.tk/badge/cardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views">  -->
 
     <div id="links">
