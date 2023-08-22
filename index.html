@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 	<head>
+
 		<title>Cardboard in Space</title>
+
+		<!-- main interactive js file -->
+		<script type="module" src="./js/main.js" defer></script> 
+
+		<!-- style.css file -->
+        <link rel="stylesheet" type="text/css"  media="screen" href="./static/css/style.css"/>
 
 		<!-- favicon image -->
         <link rel="shortcut icon" type="image/ico" href="./static/favicon.ico"/>
 
-		<!-- style.css file -->
-        <link rel="stylesheet" type="text/css"  media="screen" href="./static/style.css"/>
-
 		<!-- select box with search "selectize.js" -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-
 		<script>
 			$(document).ready(function () {
 				$('select').selectize({
 					sortField: 'text',
 				});
 			});
-			//selectized[0].selectize.focus();
 		</script>
 
-		<!-- main interactive js file -->
-		<script type="module" defer src="./js/main.js"></script> 
-
-		<!-- Common meta tags -->
+		<!-- Common device meta tags -->
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,40 +35,36 @@
 	</head>
 
 	<body id="body">
+		<!-- *** load the header.js as Template Literal *** -->
+		<span class="boxShadow"><header class="nav"></header></span>
+		<script type="module" src="./js/html-js/header.js"></script>
+
 		<!-- css animated background -->
 		<div id="background-image"></div>
 
-		<!-- sticky navigation bar -->
-		<span class="boxShadow">
-		<header class="nav">
-			<div class="heading">
-				<h2>Cardboard in Space</h2>
-				<h2>Cardboard in Space</h2>
-			</div>
-			<nav>
-
-				<ul>
-					<li><a data-page="home" href="./index.html">Home</a></li>
-					<li><a data-page="about" href="./about.html">About</a></li>
-					<li><a data-page="contact" href="./contact.html">Contact</a></li>
-					<li><a id="hide">Background</a></li>
-				</ul>
-			</nav>
-		</header>
-		</span>
-
 		<!-- Three.js background canvas -->
-		<canvas id="bg"></canvas>
+		<div id="background3js">
+			<canvas id="bg"></canvas>
+		</div>
 
 	<main>
-		<p></p>
+		<!-- flash text on starToggle fragGreen shader -->
+		<div class="flash"> <span class="corrupt">&#9762;</span> CORRUPTED <span class="corrupt">&#9762;</span> </div>
 
-		<!-- added style margin top to prevent overflow on hover of top row -->
+		<!-- added style margin top to prevent overflow on card hover of top row -->
 		<div id="result"></div>
 
+		<!-- Welcom text -->
 		<div id="intro">
 			<section class="hidden">
 			Select a "Magic: The Gathering" set and <span class="blue">Submit</span> to view some Cardboard in Space
+			<p></p>
+			<video id="tutorial" autoplay loop>
+				<source src="./static/CardSiteSearchDemo.mp4" type="video/mp4">
+				Your browser does not support the video tag.
+			</video> 
+			<!-- <img id="tutorial" class="tilt" src="./static/CardSiteSearchDemo.gif" loading="lazy">
+			<img id="tutorial" class="tilt" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTR0cHdvN21zMGQ0MXJwb2w4ZWxxamMzOHg3aHU3eG5vdDNvZzB6MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ldpEg0Ca8DmqAT999b/giphy.gif" loading="lazy">-->
 			</section>
 		</div>
 
@@ -79,10 +72,9 @@
 			<!-- Set Search form -->
 			<form id="form" class="form1" method="post" autocomplete="off">
 
-				<select class="selectize" name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Search, Select, and click Submit">
-					<!-- load the setDataContents.js -->
-					<script type="module" src="./js/setData.js"></script>
-				</select>
+				<select class="selectize" name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Search, Select, and click Submit"></select>
+				<!-- *** load the setDataContents.js as Template Literal *** -->
+				<script type="module" src="./js/html-js/setData.js"></script>
 
 				<p></p>
 				<input id="input" class="input" type="submit" value="Submit" style="height:50px; width:100px">
@@ -109,25 +101,14 @@
 	</main>
 	</body>
 
-	<footer class="footer">
-		<div id="dis">
-			<span class="foot">Cardboard in Space Code/Design &copy; 2023 Frank Alarcon.</span>
-			<br>	
-			Cardboard in Space is unofficial Fan Content permitted under the Fan Content Policy.
-			<br> 
-			Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
-			©Wizards of the Coast LLC.
+		<!-- star shader toggle / music toggle -->
+		<div class="toggle">
+			<img id="music" src="./static/star/mNoteRed.png" alt="white and Black Music Note">
+			<img id="sToggle" src="./static/star/sunOrBlue.png" alt="Orange and Blue Star">
 		</div>
-		<!-- <div id="counter">
-            Page Views: <span id="visits"></span>
-        </div> -->
-		<div id="links">
-			<ul>
-				<li><a data-page="home" href="./index.html">Home</a></li>
-				<li><a data-page="about" href="./about.html">About</a></li>
-				<li><a data-page="contact" href="./contact.html">Contact</a></li>
-			</ul>
-		</div>
-	</footer>
 
+		<!-- *** load the footer.js as Template Literal *** -->
+		<div id="footer"></div>
+		<script type="module" src="./js/html-js/footer.js"></script>
+		
 </html>

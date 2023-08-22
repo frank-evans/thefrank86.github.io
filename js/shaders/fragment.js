@@ -56,8 +56,19 @@ export const fragment = noiseFilter + /* glsl */ `
 			//fresnel
 			//float fres = (Fresnel(eyeVector, vNormal))*(time*0.02);
 			float fres = (Fresnel(eyeVector, vNormal));
+			//normal ********************************************************************************
 			brightness += pow(fres, 0.4);
+
+			//corrupted ***************************************************************************
+			//brightness -= (time * 0.02);       while "time" less than 90
+			//brightness -= 1.8;
 
 			vec3 col = brightnessToColor(brightness);
 			gl_FragColor = vec4(col, 1.);
+
+			// START
+			//gl_FragColor = vec4(vertexUV, 0., time);  
+
+			//float noisy = snoise(vec4(vPos/50., time));
+			//gl_FragColor = vec4(noisy);
 		}`;
