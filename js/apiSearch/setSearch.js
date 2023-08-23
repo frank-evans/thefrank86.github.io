@@ -34,7 +34,7 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
             const select = document.getElementById('set');
             let search_id;
             if (typeof select.options[select.selectedIndex] === 'undefined'){
-                search_id = "ltr";
+                search_id = "woe";
             }
             else {
                 search_id = select.options[select.selectedIndex].value;

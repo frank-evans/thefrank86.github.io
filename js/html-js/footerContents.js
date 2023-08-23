@@ -8,9 +8,9 @@ export const footer = /* html */ `
         Not approved/endorsed by Wizards. Portions of the materials used are property of Wizards of the Coast. 
         ©Wizards of the Coast LLC.
     </div>
-
+    <!-- first image is "silent=ture" to uneffect counts during testing -->
     <img id="counter" src="https://kounter.tk/badge/CardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views&silent=true"> 
-    <!-- <img id="counter" src="https://kounter.tk/badge/cardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views">  -->
+    <!-- <img id="counter" src="https://kounter.tk/badge/CardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views">  -->
 
     <div id="links">
         <ul>
