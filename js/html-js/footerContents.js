@@ -9,8 +9,8 @@ export const footer = /* html */ `
         ©Wizards of the Coast LLC.
     </div>
     <!-- first image is "silent=ture" to uneffect counts during testing -->
-    <img id="counter" src="https://kounter.tk/badge/CardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views&silent=true"> 
-    <!-- <img id="counter" src="https://kounter.tk/badge/CardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views">  -->
+    <img id="counter" src="https://kounter.tk/badge/CardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views&silent=true" alt="view counter"> 
+    <!-- <img id="counter" src="https://kounter.tk/badge/CardSite?label=&color=rgba(210,210,210,1)&style=for-the-badge&cntSuffix=%20Views" alt="view counter">  -->
 
     <div id="links">
         <ul>
