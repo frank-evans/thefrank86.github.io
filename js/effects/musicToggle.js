@@ -1,5 +1,5 @@
 // import audio music
-import {audioYellow, audioBlue, audioGreen, audioSun, audioE} from './audio.js';
+import {audioYellow, audioBlue, audioGreen, audioSun, audioE, audioSunInit} from './audio.js';
 import {lastPlayed} from './starToggle.js';
 
 export const musicToggle = document.addEventListener('DOMContentLoaded', function() {
@@ -10,29 +10,34 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
 
         // if all muted
         if (audioYellow.muted == true && audioBlue.muted == true && audioGreen.muted == true) {
+            if (lastPlayed.song == undefined) {
+                lastPlayed.song = audioYellow;
+            }
             // update music !mute image
             music.src = "../../static/star/mNote.png";
             // select last played song and load
-            lastPlayed.play();
-            lastPlayed.muted = false;
-            audioSun.muted = false;
+            lastPlayed.song.play();
+            lastPlayed.song.muted = false;
+            
+            audioSunInit();
+            audioSun.play();
 
           // else mute music
         } else if (audioYellow.muted == false) {
             music.src = "../../static/star/mNoteRed.png";
             audioYellow.pause();
             audioYellow.muted = true;
-            audioSun.muted = true;
+            audioSun.pause();
         } else if (audioBlue.muted == false) {
             music.src = "../../static/star/mNoteRed.png";
             audioBlue.pause();
             audioBlue.muted = true;
-            audioSun.muted = true;
+            audioSun.pause();
         } else if (audioGreen.muted == false) {
             music.src = "../../static/star/mNoteRed.png";
             audioGreen.pause();
             audioGreen.muted = true;
-            audioSun.muted = true;
+            audioSun.pause();
         }
     }
     // testing song, remove before release
@@ -41,6 +46,8 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
         if (audioE.muted == false) {
             audioE.pause();
             audioE.muted = true;
+            audioSunInit();
+            audioSun.pause();
         }else if (audioYellow.muted == true && audioBlue.muted == true && audioGreen.muted == true) {
             audioE.load();
             audioE.muted = false;

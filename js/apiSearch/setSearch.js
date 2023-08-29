@@ -1,6 +1,6 @@
-import {audioSun, audioGreen, audioBlue, audioYellow} from '../effects/audio.js'; 
-import {hover} from '../effects/hover.js'; 
+import {audioSun, audioGreen, audioBlue, audioYellow, audioSunInit} from '../effects/audio.js'; 
 import {lastPlayed} from '../effects/starToggle.js';
+import {hover} from '../effects/hover.js'; 
 
 export const setSearch = document.addEventListener('DOMContentLoaded', function() {
 
@@ -14,14 +14,16 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
 
         document.querySelector('form.form1').onsubmit = () => {
             //  check if no music is playing or paused to start audioYellow
-            if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.paused == false) {
+            if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
                 // update music mute image
                 document.getElementById('music').src = "../../static/star/mNote.png";
+                
                 audioYellow.load();
                 audioYellow.muted = false;
                 // play star effect audio
-                //audioFire.muted = false; 
-                audioSun.muted = false;
+                
+                audioSunInit();
+                audioSun.play(); 
             }
 
             // initialize variables for form set search
@@ -73,10 +75,10 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
                 }
 
                 for (let j = 1; j < 10; j++) {
-                    // timeout to comply with scryfall api use rules && last page < 175 data = quick load correction
+                    // timeout to comply with scryfall api use rules && last page < 175 data = quick load correction ( , j * 200)
                     setTimeout( () => {
                         delay(j);
-                    }, j * 200); 
+                    }, j * 400); 
                 }
                 
                 function delay(j) {

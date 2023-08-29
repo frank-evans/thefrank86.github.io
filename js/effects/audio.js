@@ -1,14 +1,18 @@
-//export const audioFire = new Audio("../../static/audio/fire3.ogg");
-//	audioFire.volume = (0.005);
-//	audioFire.autoplay = true;
-//	audioFire.muted = true;
-//	audioFire.loop = true; 
-
-export const audioSun = new Audio("../../static/audio/sun5.ogg");
-	audioSun.volume = (0.1);
+export let audioSun;
+export function audioSunInit() {
+	if (audioSun === undefined) {
+		audioSun = new Gapless5();
+		audioSun.addTrack("../../static/audio/sun5.ogg");
+		audioSun.volume = (0.10);
+		audioSun.loop = true;
+		//console.log(audioSun);
+	}
+}
+/*export const audioSun = new Audio("../../static/audio/sun5.ogg");
+	audioSun.volume = (0.05);
 	audioSun.autoplay = true;
 	audioSun.muted = true;
-	audioSun.loop = true;
+	audioSun.loop = true; */
 
 //export const audioYellow = new Audio("../../static/audio/NexusEdit.ogg");
 export const audioYellow = new Audio("../../static/audio/AnimaEdit.ogg");

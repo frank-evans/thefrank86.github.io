@@ -1,7 +1,7 @@
 // import star shader material
 import {material, material3, time} from '../main.js';
 // import audio music
-import {audioYellow, audioBlue, audioGreen, audioSun} from './audio.js';
+import {audioYellow, audioBlue, audioGreen, audioSun, audioSunInit} from './audio.js';
 // import shader logic
 import {fragmentBlue} from '../shaders/fragmentBlue.js'; 
 import {fragGlowBlue} from '../shaders/fragGlowBlue.js'; 
@@ -11,7 +11,9 @@ import {fragGreen} from '../shaders/fragGreen.js';
 import {fragGlowGreen} from '../shaders/fragGlowGreen.js';
 
 // last played song for musicToggle.js
-export let lastPlayed = audioYellow;
+export let lastPlayed = {
+    song : undefined,
+}
 
 export const starToggle = document.addEventListener('DOMContentLoaded', function() {
 		
@@ -26,9 +28,10 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioYellow.muted = true;
             audioBlue.load();
             audioBlue.muted = false;
-            lastPlayed = audioBlue;
+            lastPlayed.song = audioBlue;
 
-            audioSun.muted = false;
+            audioSunInit();
+            audioSun.play();
 
             document.getElementById('music').src = "../../static/star/mNote.png";
 
@@ -52,9 +55,9 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioBlue.muted = true;
             audioGreen.load();
             audioGreen.muted = false;
-            lastPlayed = audioGreen;
+            lastPlayed.song = audioGreen;
 
-            audioSun.muted = false;
+            audioSun.play();
 
             document.getElementById('music').src = "../../static/star/mNote.png";
 
@@ -68,9 +71,9 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioGreen.muted = true;
             audioYellow.load();
             audioYellow.muted = false;
-            lastPlayed = audioYellow;
+            lastPlayed.song = audioYellow;
 
-            audioSun.muted = false;
+            audioSun.play();
 
             document.getElementById('music').src = "../../static/star/mNote.png";
             

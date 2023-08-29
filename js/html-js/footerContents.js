@@ -16,7 +16,6 @@ export const footer = /* html */ `
         <ul>
             <li><a data-page="home" href="./index.html">Search</a></li>
             <li><a data-page="about" href="./about.html">About</a></li>
-            <!--<li><a data-page="contact" href="./contact.html">Contact</a></li>-->
         </ul>
     </div>
 

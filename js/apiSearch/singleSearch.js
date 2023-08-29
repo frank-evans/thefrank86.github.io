@@ -1,4 +1,5 @@
-import {audioSun} from '../effects/audio.js'; 
+import {audioSun, audioGreen, audioBlue, audioYellow, audioSunInit} from '../effects/audio.js';  
+import {lastPlayed} from '../effects/starToggle.js';
 import {hover} from '../effects/hover.js'; 
 
 export const singleSearch = document.addEventListener('DOMContentLoaded', function() {
@@ -7,9 +8,18 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
         // initialize variable for single card search
         let single1;
         document.querySelector('form.form2').onsubmit = () => {
-            // play audio
-            //audioFire.muted = false; 
-            audioSun.muted = false
+            //  check if no music is playing or paused to start audioYellow
+            if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
+                // update music mute image
+                document.getElementById('music').src = "../../static/star/mNote.png";
+                
+                audioYellow.load();
+                audioYellow.muted = false;
+                // play star effect audio
+                
+                audioSunInit();
+                audioSun.play(); 
+            }
 
             // Retrieve selected value from search field
             const search_id = document.getElementById('single').value;
@@ -43,7 +53,7 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
                     }
                 }
                 if (typeof single1.image_uris !== 'undefined') {
-                img1.innerHTML += `<img class="tilt" src="${single1.image_uris.normal}">`;
+                    img1.innerHTML += `<img class="tilt" src="${single1.image_uris.normal}">`;
                 }
                 })
                 // call 3d hover effect function after new img's loaded (imported)

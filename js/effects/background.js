@@ -1,4 +1,4 @@
-import {audioSun} from './audio.js'; 
+import {audioSun, audioSunInit} from './audio.js'; 
 
 export const backgroundToggle = document.addEventListener('DOMContentLoaded', function() {
 
@@ -12,14 +12,13 @@ export const backgroundToggle = document.addEventListener('DOMContentLoaded', fu
                 x.style.display = "block";
                 y.style.content = 'url("static/stars.jpg")';
 
-                audioSun.muted = false;
-                //audioFire.muted = false;
+                audioSun.play();
             } else {
                 x.style.display = "none";
                 y.style.content = "none";
 
-                audioSun.muted = true;
-                //audioFire.muted = true;
+                audioSunInit();
+                audioSun.pause();
             }
         }
     });
