@@ -18,7 +18,8 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
                 // play star effect audio
                 
                 audioSunInit();
-                audioSun.play(); 
+                //audioSun.play(); 
+                audioSun.resume();
             }
 
             // Retrieve selected value from search field

@@ -20,24 +20,28 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
             lastPlayed.song.muted = false;
             
             audioSunInit();
-            audioSun.play();
+            //audioSun.play();
+            audioSun.resume();
 
           // else mute music
         } else if (audioYellow.muted == false) {
             music.src = "../../static/star/mNoteRed.png";
             audioYellow.pause();
             audioYellow.muted = true;
-            audioSun.pause();
+            //audioSun.pause();
+            audioSun.suspend();
         } else if (audioBlue.muted == false) {
             music.src = "../../static/star/mNoteRed.png";
             audioBlue.pause();
             audioBlue.muted = true;
-            audioSun.pause();
+            //audioSun.pause();
+            audioSun.suspend();
         } else if (audioGreen.muted == false) {
             music.src = "../../static/star/mNoteRed.png";
             audioGreen.pause();
             audioGreen.muted = true;
-            audioSun.pause();
+            //audioSun.pause();
+            audioSun.suspend();
         }
     }
     // testing song, remove before release
@@ -47,7 +51,8 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
             audioE.pause();
             audioE.muted = true;
             audioSunInit();
-            audioSun.pause();
+            //audioSun.pause();
+            audioSun.suspend();
         }else if (audioYellow.muted == true && audioBlue.muted == true && audioGreen.muted == true) {
             audioE.load();
             audioE.muted = false;

@@ -23,7 +23,8 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
                 // play star effect audio
                 
                 audioSunInit();
-                audioSun.play(); 
+                //audioSun.play(); 
+                audioSun.resume();
             }
 
             // initialize variables for form set search

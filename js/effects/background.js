@@ -12,13 +12,15 @@ export const backgroundToggle = document.addEventListener('DOMContentLoaded', fu
                 x.style.display = "block";
                 y.style.content = 'url("static/stars.jpg")';
 
-                audioSun.play();
+                //audioSun.play();
+                audioSun.resume();
             } else {
                 x.style.display = "none";
                 y.style.content = "none";
 
                 audioSunInit();
-                audioSun.pause();
+                //audioSun.pause();
+                audioSun.suspend();
             }
         }
     });

@@ -31,7 +31,8 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             lastPlayed.song = audioBlue;
 
             audioSunInit();
-            audioSun.play();
+            //audioSun.play();
+            audioSun.resume();
 
             document.getElementById('music').src = "../../static/star/mNote.png";
 
@@ -57,7 +58,8 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioGreen.muted = false;
             lastPlayed.song = audioGreen;
 
-            audioSun.play();
+            //audioSun.play();
+            audioSun.resume();
 
             document.getElementById('music').src = "../../static/star/mNote.png";
 
@@ -73,7 +75,8 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioYellow.muted = false;
             lastPlayed.song = audioYellow;
 
-            audioSun.play();
+            //audioSun.play();
+            audioSun.resume();
 
             document.getElementById('music').src = "../../static/star/mNote.png";
             

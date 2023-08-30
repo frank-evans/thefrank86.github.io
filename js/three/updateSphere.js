@@ -1,5 +1,5 @@
 import {scrollContainer, camera} from '../main.js';
-import {audioSun} from '../effects/audio.js';
+import {audioSun, gainNode} from '../effects/audio.js';
 
 // scroll function to zoom Star Planet and nav bar
 export function updateSphere(event) {
@@ -12,7 +12,8 @@ export function updateSphere(event) {
         scrollContainer.lastScrollTop = st <= 0 ? 0 : st;
 
         if (audioSun) {
-            audioSun.volume += (0.0005);
+            //audioSun.volume += (0.0005);
+            gainNode.gain.value += (0.0005);
         }
     }
     // lastScrollTop && mesh.position.z > 0
@@ -21,7 +22,8 @@ export function updateSphere(event) {
         
         scrollContainer.lastScrollTop = st <= 0 ? 0 : st;
         if (audioSun) {
-            audioSun.volume -= (0.0005);
+            //audioSun.volume -= (0.0005);
+            gainNode.gain.value -= (0.0005);
         }
     }
     else {
