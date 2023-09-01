@@ -66,26 +66,26 @@ export function audioSunInit() {
 }
 
 //export const audioYellow = new Audio("../../static/audio/NexusEdit.ogg");
-export const audioYellow = new Audio("../../static/audio/AnimaEdit.ogg");
+export const audioYellow = new Audio("../../static/audio/AnimaEdit.wav");
 	audioYellow.volume = (0.3);
 	audioYellow.autoplay = true;
 	audioYellow.muted = true;
 	audioYellow.loop = true;
 
-export const audioBlue = new Audio("../../static/audio/LightsEdit.ogg");
+export const audioBlue = new Audio("../../static/audio/LightsEdit.wav");
 	audioBlue.volume = (0.4);
 	audioBlue.autoplay = true;
 	audioBlue.muted = true;
 	audioBlue.loop = true;
 
-export const audioGreen = new Audio("../../static/audio/PlasmaEdit.ogg");
+export const audioGreen = new Audio("../../static/audio/PlasmaEdit.wav");
 	audioGreen.volume = (0.3);
 	audioGreen.autoplay = true;
 	audioGreen.muted = true;
 	audioGreen.loop = true;
 
 // testing song, remove before release
-export const audioE = new Audio("../../static/audio/E-edit.ogg");
+export const audioE = new Audio("../../static/audio/E-edit.wav");
 	audioE.volume = (0.3);
 	audioE.autoplay = true;
 	audioE.muted = true;
