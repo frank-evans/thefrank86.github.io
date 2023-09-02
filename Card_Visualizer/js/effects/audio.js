@@ -1,50 +1,20 @@
-/*export let audioSun;
-export function audioSunInit() {
-	if (audioSun === undefined) {
-		audioSun = new Gapless5();
-		audioSun.addTrack("../../static/audio/sun5.ogg");
-		audioSun.volume = (0.10);
-		audioSun.loop = true;
-		//console.log(audioSun);
-	}
-}
-	audioSun.volume = (0.05); */
-
-//import { AudioContext as audioCtx, decodeAudioData } from 'https://jspm.dev/standardized-audio-context';
 let url  = "../../Card_Visualizer/static/audio/sun5.mp3";
-//let url  = `<audio src="../../static/audio/sun5.ogg"></audio>`;
-//let audioElement = document.querySelector("audio");
 export let audioSun;
 export let gainNode;
 
 export function audioSunInit() {
 	if (audioSun === undefined) {
-		//audioSun = new audioCtx();
 		audioSun = new AudioContext();
 		audioSun.suspend();
 		gainNode = audioSun.createGain();
 
-		//audioSun.createBuffer(2, 22050, 44100);
 		console.log(audioSun);
 		let source = audioSun.createBufferSource();
 				//connect it to the destination so you can hear it.
 			source.connect(gainNode);
-			//let track = audioSun.createMediaElementSource(audioElement);
-			//track.connect(gainNode);
 			gainNode.connect(audioSun.destination);
-			gainNode.gain.value = 0.05;
+			gainNode.gain.value = 0.07;
 			//gainNode.gain.value = 0.1;
-
-			//audioElement.loop = true;
-			//audioElement.play();
-			//audioSun.suspend();
-
-			/*async function safariAudio() {
-				const response = await fetch("../../static/audio/sun5.ogg");
-				const arrayBuffer = await response.arrayBuffer();
-				const audioBuffer = await decodeAudioData(audioSun, arrayBuffer);
-			}
-			safariAudio(); */
 				
 				/* --- load buffer --- */
 			let request = new XMLHttpRequest();
@@ -52,7 +22,7 @@ export function audioSunInit() {
 			request.open('GET', url, true); 
 				//webaudio paramaters
 			request.responseType = 'arraybuffer';
-				//Once the request has completed... do this
+				//Once the request has completed... continue
 			request.onload = function() {
 				audioSun.decodeAudioData(request.response, function(response) {
 						/* --- play the sound AFTER the buffer loaded --- */

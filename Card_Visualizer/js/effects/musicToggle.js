@@ -20,7 +20,6 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
             lastPlayed.song.play();
             lastPlayed.song.muted = false;
             audioSunInit();
-            //audioSun.play();
             audioSun.resume();
 
           // else mute music
@@ -28,19 +27,16 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
             music.src = "../../Card_Visualizer/static/star/mNoteRed.png";
             audioYellow.pause();
             audioYellow.muted = true;
-            //audioSun.pause();
             audioSun.suspend();
         } else if (audioBlue.muted == false) {
             music.src = "../../Card_Visualizer/static/star/mNoteRed.png";
             audioBlue.pause();
             audioBlue.muted = true;
-            //audioSun.pause();
             audioSun.suspend();
         } else if (audioGreen.muted == false) {
             music.src = "../../Card_Visualizer/static/star/mNoteRed.png";
             audioGreen.pause();
             audioGreen.muted = true;
-            //audioSun.pause();
             audioSun.suspend();
         }
     }
@@ -51,7 +47,6 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
             audioE.pause();
             audioE.muted = true;
             audioSunInit();
-            //audioSun.pause();
             audioSun.suspend();
         }else if (audioYellow.muted == true && audioBlue.muted == true && audioGreen.muted == true) {
             audioE.load();

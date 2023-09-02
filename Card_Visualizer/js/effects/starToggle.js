@@ -19,8 +19,7 @@ export let lastPlayed = {
 export const starToggle = document.addEventListener('DOMContentLoaded', function() {
 		
     document.getElementById('sToggle').onclick = () => {
-        // hide/unhide canvas
-        //let y = document.getElementById("body");
+        // Change star shader and corresponding music
         if (material.fragmentShader == fragment) {
             material.fragmentShader = fragmentBlue;
             material3.fragmentShader = fragGlowBlue;
@@ -32,7 +31,6 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioBlue.muted = false;
             lastPlayed.song = audioBlue;
             audioSunInit();
-            //audioSun.play();
             audioSun.resume();
 
             document.getElementById('music').src = "../../Card_Visualizer/static/star/mNote.png";
@@ -58,7 +56,6 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioGreen.play();
             audioGreen.muted = false;
             lastPlayed.song = audioGreen;
-            //audioSun.play();
             audioSun.resume();
 
             document.getElementById('music').src = "../../Card_Visualizer/static/star/mNote.png";
@@ -74,7 +71,6 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             audioYellow.play();
             audioYellow.muted = false;
             lastPlayed.song = audioYellow;
-            //audioSun.play();
             audioSun.resume();
 
             document.getElementById('music').src = "../../Card_Visualizer/static/star/mNote.png";

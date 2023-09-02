@@ -7,7 +7,7 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
     if (document.querySelector('form.form2')) {
     // name search example :  https://api.scryfall.com/cards/named?exact=${search_id}        named?exact=doom-blade
         // initialize variable for single card search
-        let single1;
+        let single1, prints;
         document.querySelector('form.form2').onsubmit = (event) => {
             event.preventDefault();
             //  check if no music is playing or paused to start audioYellow
@@ -55,9 +55,20 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
                     }
                 }
                 if (typeof single1.image_uris !== 'undefined') {
-                    img1.innerHTML += `<img class="tilt" src="${single1.image_uris.normal}">`;
+                    // fetch all prints of card
+                    fetch((single1.prints_search_uri))
+                    .then(response => response.json())
+                    .then(data => {
+
+                        prints = data;
+
+                        // load each print of the card
+                        for (let i = 0; i < Object.keys( prints.data ).length; i++) {
+                            img1.innerHTML += `<img class="tilt" src="${prints.data[i].image_uris.normal}">`;
+                        }
+                    })
                 }
-                })
+            })
                 // call 3d hover effect function after new img's loaded (imported)
                 .then(setTimeout(hover, 2 * 1000))
                 .catch(error => {
