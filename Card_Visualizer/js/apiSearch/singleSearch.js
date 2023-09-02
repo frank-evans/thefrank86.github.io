@@ -8,13 +8,10 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
     // name search example :  https://api.scryfall.com/cards/named?exact=${search_id}        named?exact=doom-blade
         // initialize variable for single card search
         let single1;
-        document.querySelector('form.form2').onsubmit = () => {
+        document.querySelector('form.form2').onsubmit = (event) => {
             //  check if no music is playing or paused to start audioYellow
             if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
-                console.log(lastPlayed.song);
-                console.log(audioBlue.muted);
-                
-                //audioYellow.load();
+                //audioYellow.load(); ********************************
                 audioYellow.muted = false;
                 // play star effect audio
                 audioSunInit();
@@ -77,8 +74,13 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
 
                 // auto scroll to top while loading cards
                 window.scrollTo(0, 1);
+
+                event.preventDefault();
                 // stop form from submitting 
-                return false;
+                setTimeout(()=> {
+                    return false;
+                }, 2 * 1000)
+                //return false;
         }
     } 
 });
