@@ -9,6 +9,7 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
         // initialize variable for single card search
         let single1;
         document.querySelector('form.form2').onsubmit = (event) => {
+            event.preventDefault();
             //  check if no music is playing or paused to start audioYellow
             if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
                 //audioYellow.load(); ********************************
@@ -75,12 +76,8 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
                 // auto scroll to top while loading cards
                 window.scrollTo(0, 1);
 
-                event.preventDefault();
                 // stop form from submitting 
-                setTimeout(()=> {
-                    return false;
-                }, 2 * 1000)
-                //return false;
+                return false;
         }
     } 
 });

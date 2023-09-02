@@ -14,6 +14,8 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
         }
 
         document.querySelector('form.form1').onsubmit = (event) => {
+            event.preventDefault();
+
             //  check if no music is playing or paused to start audioYellow
             if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
                 audioYellow.load();
@@ -141,12 +143,8 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
             window.scrollTo(0, 1);
             setTimeout(loadingRing, 6 * 1000);  
 
-            event.preventDefault();
             // stop form from submitting 
-            setTimeout(()=> {
-                return false;
-            }, 2 * 1000)
-            //return false;
+            return false;
         }
     }
 });
