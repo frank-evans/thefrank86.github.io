@@ -144,7 +144,7 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
             setTimeout(loadingRing, 6 * 1000);  
 
             // stop form from submitting 
-            return false;
+            //return false;
         }
     }
 });

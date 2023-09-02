@@ -77,7 +77,7 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
                 window.scrollTo(0, 1);
 
                 // stop form from submitting 
-                return false;
+                //return false;
         }
     } 
 });
