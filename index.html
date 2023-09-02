@@ -11,110 +11,26 @@
 		<meta http-equiv='X-Content-Type-Options' content='nosniff'>
 		<meta http-equiv="Permissions-Policy" content="interest-cohort=(), user-id=()" />
 
-		<title>Cardboard in Space</title>
-
-		<!-- seamless audio looping library for mulitple browsers -->
-		<script src="./js/effects/gapless5.js" language="JavaScript" type="text/javascript"></script>
-
-		<!-- main interactive js file -->
-		<script type="module" src="./js/main.js" defer></script> 
-
-		<!-- style.css file -->
-        <link rel="stylesheet" type="text/css"  media="screen" href="./static/css/style.css"/>
+		<title>Landing Temp</title>
 
 		<!-- favicon image -->
         <link rel="shortcut icon" type="image/ico" href="./static/favicon.ico"/>
 
-		<!-- select box with search "selectize.js" -->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
-		<script>
-			$(document).ready(function () {
-				$('select').selectize({
-					sortField: 'text',
-				});
-			});
-		</script>
-
 	</head>
 
 	<body id="body">
-		<audio src="./static/audio/sun5.mp3" crossOrigin = "anonymous"></audio>
-		<!-- *** load the header.js as Template Literal *** -->
-		<span class="boxShadow"><header class="nav"></header></span>
-		<script type="module" src="./js/html-js/header.js"></script>
-
-		<!-- css animated background -->
-		<div id="background-image"></div>
-
-		<!-- Three.js background canvas -->
-		<div id="background3js">
-			<canvas id="bg"></canvas>
-		</div>
-
 	<main>
-		<!-- flash text on starToggle fragGreen shader -->
-		<div class="flash"> <span class="corrupt">&#9762;</span> CORRUPTED <span class="corrupt">&#9762;</span> </div>
-
-		<!-- added style margin top to prevent overflow on card hover of top row -->
-		<div id="result"></div>
-
 		<!-- Welcom text -->
 		<div id="intro">
 			<section class="hidden">
-			Select a "Magic: The Gathering" set and <span class="blue">Submit</span> to view some Cardboard in Space
-			<p></p>
-			<video id="tutorial" autoplay muted loop>
-				<source src="https://thefrank86.github.io/static/CardSiteSearchDemo.mp4" type="video/mp4">
-				Your browser does not support the video tag.
-			</video> 
-			<!-- <img id="tutorial" class="tilt" src="./static/CardSiteSearchDemo.gif" loading="lazy">
-			<img id="tutorial" class="tilt" src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTR0cHdvN21zMGQ0MXJwb2w4ZWxxamMzOHg3aHU3eG5vdDNvZzB6MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ldpEg0Ca8DmqAT999b/giphy.gif" loading="lazy">-->
+			    <h1><a href="https://thefrank86.github.io/Card_Visualizer/index.html">Click to go to current live project</a></h1>
+			    <p></p>
+                <video id="tutorial" autoplay muted loop style="width: 50%;">
+                    <source src="https://thefrank86.github.io/static/CardSiteSearchDemo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video> 
 			</section>
 		</div>
-
-		<div class="outer" id="outer">
-			<!-- Set Search form -->
-			<form id="form" class="form1" method="post" autocomplete="off">
-
-				<select class="selectize" name="setselect" id="set" multiple="multiple" data-component="advanced-search-autocomplete" placeholder="Search, Select, and click Submit"></select>
-				<!-- *** load the setDataContents.js as Template Literal *** -->
-				<script type="module" src="./js/html-js/setData.js"></script>
-
-				<p></p>
-				<input id="input" class="input" type="submit" value="Submit">
-			</form>
-
-		<!-- Specific Card Search form -->
-			<div class="outer2" id="outer2">
-				<form id="form2" class="form2" method="post" autocomplete="off">
-
-					<input id="single" type="text" placeholder="Specific Card Name">
-					<p></p>
-					<input id="input2" type="submit" value="Submit">
-
-				</form>
-			</div>
-		</div>
-
-		<!-- loading graphic/text -->
-		<div class="wait">
-			Just a moment while I grab those cards...
-			<div class="loading2"></div>
-		</div>
-
 	</main>
 	</body>
-
-		<!-- star shader toggle / music toggle -->
-		<div class="toggle">
-			<img id="music" src="./static/star/mNoteRed.png" alt="white and Black Music Note">
-			<img id="sToggle" src="./static/star/sunOrBlue.png" alt="Orange and Blue Star">
-		</div>
-
-		<!-- *** load the footer.js as Template Literal *** -->
-		<div id="footer"></div>
-		<script type="module" src="./js/html-js/footer.js"></script>
-		
 </html>
