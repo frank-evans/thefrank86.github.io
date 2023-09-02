@@ -14,7 +14,7 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
                 console.log(lastPlayed.song);
                 console.log(audioBlue.muted);
                 
-                audioYellow.load();
+                //audioYellow.load();
                 audioYellow.muted = false;
                 // play star effect audio
                 audioSunInit();
