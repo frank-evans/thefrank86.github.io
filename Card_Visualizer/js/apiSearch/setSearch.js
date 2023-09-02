@@ -13,7 +13,7 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
             waitElement[0].remove();
         }
 
-        document.querySelector('form.form1').onsubmit = () => {
+        document.querySelector('form.form1').onsubmit = (event) => {
             //  check if no music is playing or paused to start audioYellow
             if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
                 audioYellow.load();
@@ -140,8 +140,13 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
             // auto scroll to top while loading cards
             window.scrollTo(0, 1);
             setTimeout(loadingRing, 6 * 1000);  
-            // stop form from submitting
-            return false;
+
+            event.preventDefault();
+            // stop form from submitting 
+            setTimeout(()=> {
+                return false;
+            }, 2 * 1000)
+            //return false;
         }
     }
 });
