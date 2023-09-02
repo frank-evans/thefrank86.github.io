@@ -12,6 +12,8 @@ export const singleSearch = document.addEventListener('DOMContentLoaded', functi
             //  check if no music is playing or paused to start audioYellow
             if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
                 console.log(lastPlayed.song);
+                console.log(audioBlue.muted);
+                
                 audioYellow.load();
                 audioYellow.muted = false;
                 // play star effect audio
