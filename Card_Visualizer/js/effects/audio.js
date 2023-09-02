@@ -13,7 +13,7 @@ export function audioSunInit() {
 				//connect it to the destination so you can hear it.
 			source.connect(gainNode);
 			gainNode.connect(audioSun.destination);
-			gainNode.gain.value = 0.07;
+			gainNode.gain.value = 0.08;
 			//gainNode.gain.value = 0.1;
 				
 				/* --- load buffer --- */
