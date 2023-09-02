@@ -55,6 +55,7 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
             audioSun.suspend();
         }else if (audioYellow.muted == true && audioBlue.muted == true && audioGreen.muted == true) {
             audioE.load();
+            audioE.play();
             audioE.muted = false;
         }
     }

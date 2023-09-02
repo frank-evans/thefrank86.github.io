@@ -28,6 +28,7 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             // switch audio track
             audioYellow.muted = true;
             audioBlue.load();
+            audioBlue.play();
             audioBlue.muted = false;
             lastPlayed.song = audioBlue;
             audioSunInit();
@@ -54,6 +55,7 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             // switch audio track
             audioBlue.muted = true;
             audioGreen.load();
+            audioGreen.play();
             audioGreen.muted = false;
             lastPlayed.song = audioGreen;
             //audioSun.play();
@@ -69,6 +71,7 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             // switch audio track
             audioGreen.muted = true;
             audioYellow.load();
+            audioYellow.play();
             audioYellow.muted = false;
             lastPlayed.song = audioYellow;
             //audioSun.play();
