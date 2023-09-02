@@ -34,7 +34,7 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             //audioSun.play();
             audioSun.resume();
 
-            document.getElementById('music').src = "../../static/star/mNote.png";
+            document.getElementById('music').src = "../../Card_Visualizer/static/star/mNote.png";
             material.needsUpdate = true;
             material3.needsUpdate = true;
         } else if (material.fragmentShader == fragmentBlue){
@@ -59,7 +59,7 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             //audioSun.play();
             audioSun.resume();
 
-            document.getElementById('music').src = "../../static/star/mNote.png";
+            document.getElementById('music').src = "../../Card_Visualizer/static/star/mNote.png";
             material.needsUpdate = true;
             material3.needsUpdate = true;
         } else {
@@ -74,7 +74,7 @@ export const starToggle = document.addEventListener('DOMContentLoaded', function
             //audioSun.play();
             audioSun.resume();
 
-            document.getElementById('music').src = "../../static/star/mNote.png";
+            document.getElementById('music').src = "../../Card_Visualizer/static/star/mNote.png";
             material.needsUpdate = true;
             material3.needsUpdate = true;
         }

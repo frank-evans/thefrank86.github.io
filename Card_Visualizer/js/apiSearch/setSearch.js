@@ -17,7 +17,7 @@ export const setSearch = document.addEventListener('DOMContentLoaded', function(
             //  check if no music is playing or paused to start audioYellow
             if (audioGreen.muted == true && audioYellow.muted == true && audioBlue.muted == true && lastPlayed.song == undefined) {
                 // update music mute image
-                document.getElementById('music').src = "../../static/star/mNote.png";
+                document.getElementById('music').src = "../../Card_Visualizer/static/star/mNote.png";
                 audioYellow.load();
                 audioYellow.muted = false;
                 // play star effect audio
