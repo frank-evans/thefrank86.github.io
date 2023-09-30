@@ -263,7 +263,7 @@ export const cardData = /* html */ `
     <option data-svg-code="lcc" value="lcc">Lost Caverns of Ixalan Commander (LCC)</option>
     <option data-svg-code="who" value="who">Doctor Who (WHO)</option>
     <option data-svg-code="woc" value="woc">Wilds of Eldraine Commander (WOC)</option>
-    <option data-svg-code="pagl" value="pagl">Angles: They're Just Like Us but Cooler and with Wings (PAGL)</option>
+    <option data-svg-code="pagl" value="pagl">Angels: They're Just Like Us but Cooler and with Wings (PAGL)</option>
     <option data-svg-code="ltc" value="ltc">Tales of Middle-earth Commander (LTC)</option>
     <option data-svg-code="pctb" value="pctb">From Cute to Brute (PCTB)</option>
     <option data-svg-code="moc" value="moc">March of the Machine Commander (MOC)</option>
