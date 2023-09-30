@@ -1,6 +1,7 @@
 export const cardData = /* html */ `
 <optgroup label="Expansions">
     <option data-svg-code="1" value="1" disabled>'Expansions</option>
+    <option data-svg-code="lci" value="lci">Lost Caverns of Ixalan (LCI)</option>
     <option data-svg-code="default" value="woe">Wilds of Eldraine (WOE)</option>
     <option data-svg-code="mat" value="mat">March of the Machine: The Aftermath (MAT)</option>
     <option data-svg-code="mom" value="mom">March of the Machine (MOM)</option>
@@ -259,9 +260,12 @@ export const cardData = /* html */ `
     <option data-svg-code="vis" value="mgb">Multiverse Gift Box (MGB)</option>
     <option data-svg-code="default" value="rqs">Rivals Quick Start Set (RQS)</option></optgroup>
     <optgroup label="Commander">
-    <option data-svg-code="ltc" value="who">Doctor Who (WHO)</option>
+    <option data-svg-code="lcc" value="lcc">Lost Caverns of Ixalan Commander (LCC)</option>
+    <option data-svg-code="who" value="who">Doctor Who (WHO)</option>
+    <option data-svg-code="woc" value="woc">Wilds of Eldraine Commander (WOC)</option>
+    <option data-svg-code="pagl" value="pagl">Angles: They're Just Like Us but Cooler and with Wings (PAGL)</option>
     <option data-svg-code="ltc" value="ltc">Tales of Middle-earth Commander (LTC)</option>
-    <option data-svg-code="ltc" value="pctb">From Cute to Brute (PCTB)</option>
+    <option data-svg-code="pctb" value="pctb">From Cute to Brute (PCTB)</option>
     <option data-svg-code="moc" value="moc">March of the Machine Commander (MOC)</option>
     <option data-svg-code="moc" value="onc">Phyrexia: All Will Be One Commander (ONC)</option>
     <option data-svg-code="scd" value="scd">Starter Commander Decks (SCD)</option>
@@ -324,6 +328,8 @@ export const cardData = /* html */ `
     <option data-svg-code="unh" value="unh">Unhinged (UNH)</option>
     <option data-svg-code="ugl" value="ugl">Unglued (UGL)</option></optgroup>
     <optgroup label="Masterpiece">
+    <option data-svg-code="spg" value="spg">Special Guests (SPG)</option>
+    <option data-svg-code="rex" value="rex">Jurassic World Collection (REX)</option>
     <option data-svg-code="wot" value="wot">Wilds of Eldraine: Enchangting Tales (WOT)</option>
     <option data-svg-code="mul" value="mul">Multiverse Legends (MUL)</option>
     <option data-svg-code="brr" value="brr">The Brother's War Retro Artifacts (BRR)</option>
@@ -423,6 +429,7 @@ export const cardData = /* html */ `
     <option data-svg-code="pd2" value="pd2">Premium Deck Series: Fire and Lightning (PD2)</option>
     <option data-svg-code="h09" value="h09">Premium Deck Series: Slivers (H09)</option></optgroup>
     <optgroup label="Promo">
+    <option data-svg-code="pwoe" value="pwoe">Wilds of Eldraine Promos (PWOE)</option>
     <option data-svg-code="pmda" value="pmda">Magic x Duel Masters Promos (PMDA)</option>
     <option data-svg-code="p30t" value="p30t">30th Anniversary Celebration Tokyo (P30T)</option>
     <option data-svg-code="pf23" value="pf23">MagicFest 2023 (PF23)</option>
@@ -710,9 +717,11 @@ export const cardData = /* html */ `
     <option data-svg-code="por" value="por">Portal (POR)</option>
     <option data-svg-code="x2ps" value="itp">Introductory Two-Player Set (ITP)</option></optgroup>
     <optgroup label="Token">
+    <option data-svg-code="tlci" value="tlci">Lost Caverns of Ixalan Tokens (TLCI)</option>
     <option data-svg-code="twho" value="twho">Doctor Who Tokens (TWHO)</option>
     <option data-svg-code="twoe" value="twoe">Wilds of Eldraine Tokens (TWOE)</option>
     <option data-svg-code="twoc" value="twoc">Wilds of Eldraine Commander Tokens (TWOC)</option>
+    <option data-svg-code="wwoe" value="wwoe">Wilds of Eldraine Japanese Promo Tokens (WWOE)</option>
     <option data-svg-code="tcmm" value="tcmm">Commander Masters Tokens (TCMM)</option>
     <option data-svg-code="tltc" value="tltc">Tales of Middle-earth Commander Tokens (TLTC)</option>
     <option data-svg-code="tltr" value="tltr">Tales of Middle-earth Tokens (TLTR)</option>
