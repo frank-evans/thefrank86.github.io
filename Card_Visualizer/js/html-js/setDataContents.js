@@ -1,6 +1,7 @@
 export const cardData = /* html */ `
 <optgroup label="Expansions">
     <option data-svg-code="1" value="1" disabled>'Expansions</option>
+    <option data-svg-code="mkm" value="mkm">Murders at Karlov Manor (MKM)</option>
     <option data-svg-code="lci" value="lci">Lost Caverns of Ixalan (LCI)</option>
     <option data-svg-code="default" value="woe">Wilds of Eldraine (WOE)</option>
     <option data-svg-code="mat" value="mat">March of the Machine: The Aftermath (MAT)</option>
@@ -162,6 +163,7 @@ export const cardData = /* html */ `
     <option data-svg-code="chr" value="chr">Chronicles (CHR)</option></optgroup>
     <optgroup label="Draft Innovation">
     <option data-svg-code="4" value="4" disabled>.Draft Innovation</option>
+    <option data-svg-code="clu" value="clu">Ravnica: Clue Edition (CLU)</option>
     <option data-svg-code="ltr" value="ltr">Lord of the Rings: Tales of Middle-Earth (LTR)</option>
     <option data-svg-code="j22" value="j22">Jumpstart 2022 (J22)</option>
     <option data-svg-code="clb" value="clb">Commander Legends: Battle for Baldur&#39;s Gate (CLB)</option>
@@ -204,6 +206,8 @@ export const cardData = /* html */ `
     <option data-svg-code="dd2" value="dd2">Duel Decks: Jace vs. Chandra (DD2)</option>
     <option data-svg-code="dd1" value="dd1">Duel Decks: Elves vs. Goblins (DD1)</option></optgroup>
     <optgroup label="Alchemy">
+    <option data-svg-code="ylci" value="ylci">Alchemy: Ixalan (YLCI)</option>
+    <option data-svg-code="ywoe" value="ywoe">Alchemy: Wilds of Eldraine (YWOE)</option>
     <option data-svg-code="yone" value="yone">Alchemy: Phyrexia (YONE)</option>
     <option data-svg-code="ybro" value="ybro">Alchemy: The Brother's War (YBRO)</option>
     <option data-svg-code="hbg" value="hbg">Alchemy Horizons: Baldur&#39;s Gate (HBG)</option>
@@ -221,8 +225,8 @@ export const cardData = /* html */ `
     <option data-svg-code="cc1" value="cc1">Commander Collection: Green (CC1)</option>
     <option data-svg-code="cm1" value="cm1">Commander&#39;s Arsenal (CM1)</option></optgroup>
     <optgroup label="Box">
-    <option data-svg-code="ea3" value="ea3">Explorer Anthology 3 (EA3)</option>
     <option data-svg-code="ha7" value="ha7">Historic Anthology 7 (HA7)</option>
+    <option data-svg-code="ea3" value="ea3">Explorer Anthology 3 (EA3)</option>
     <option data-svg-code="ea2" value="ea2">Explorer Anthology 2 (EA2)</option>
     <option data-svg-code="q08" value="q08">Pioneer Challenger Decks 2022 (W08)</option>
     <option data-svg-code="gn3" value="gn3">Game Night 2022 (GN3)</option>
@@ -260,6 +264,7 @@ export const cardData = /* html */ `
     <option data-svg-code="vis" value="mgb">Multiverse Gift Box (MGB)</option>
     <option data-svg-code="default" value="rqs">Rivals Quick Start Set (RQS)</option></optgroup>
     <optgroup label="Commander">
+    <option data-svg-code="pip" value="pip">Fallout (PIP)</option>
     <option data-svg-code="lcc" value="lcc">Lost Caverns of Ixalan Commander (LCC)</option>
     <option data-svg-code="who" value="who">Doctor Who (WHO)</option>
     <option data-svg-code="woc" value="woc">Wilds of Eldraine Commander (WOC)</option>
@@ -429,6 +434,9 @@ export const cardData = /* html */ `
     <option data-svg-code="pd2" value="pd2">Premium Deck Series: Fire and Lightning (PD2)</option>
     <option data-svg-code="h09" value="h09">Premium Deck Series: Slivers (H09)</option></optgroup>
     <optgroup label="Promo">
+    <option data-svg-code="pf24" value="pf24">MagicFest 2024 (PF24)</option>
+    <option data-svg-code="pw24" value="pw24">Wizards Play Network 2024 (PW24)</option>
+    <option data-svg-code="plci" value="plci">The Lost Caverns of Ixalan Promos (PLCI)</option>
     <option data-svg-code="pwoe" value="pwoe">Wilds of Eldraine Promos (PWOE)</option>
     <option data-svg-code="pmda" value="pmda">Magic x Duel Masters Promos (PMDA)</option>
     <option data-svg-code="p30t" value="p30t">30th Anniversary Celebration Tokyo (P30T)</option>
@@ -717,7 +725,12 @@ export const cardData = /* html */ `
     <option data-svg-code="por" value="por">Portal (POR)</option>
     <option data-svg-code="x2ps" value="itp">Introductory Two-Player Set (ITP)</option></optgroup>
     <optgroup label="Token">
-    <option data-svg-code="tlci" value="tlci">Lost Caverns of Ixalan Tokens (TLCI)</option>
+    <option data-svg-code="tpip" value="tpip">Fallout Tokens (TPIP)</option>
+    <option data-svg-code="alci" value="alci">The Lost Caverns of Ixalan Art Series (ALCI)</option>
+    <option data-svg-code="tlcc" value="tlcc">The Lost Caverns of Ixalan Commander Tokens (TLCC)</option>
+    <option data-svg-code="slci" value="slci">The Lost Caverns of Ixalan Substitute Cards (SLCI)</option>
+    <option data-svg-code="trex" value="trex">Jurassic World Collection Tokens (TREX)</option>
+    <option data-svg-code="tlci" value="tlci">The Lost Caverns of Ixalan Tokens (TLCI)</option>
     <option data-svg-code="twho" value="twho">Doctor Who Tokens (TWHO)</option>
     <option data-svg-code="twoe" value="twoe">Wilds of Eldraine Tokens (TWOE)</option>
     <option data-svg-code="twoc" value="twoc">Wilds of Eldraine Commander Tokens (TWOC)</option>
