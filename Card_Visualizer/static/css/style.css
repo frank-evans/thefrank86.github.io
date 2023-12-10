@@ -812,6 +812,7 @@ img.logo {
   font-size: 6rem;
 }
 .flash { 
+  pointer-events: none;
   text-align: top;
   justify-content: center;
   place-items: center;
@@ -862,6 +863,7 @@ img.logo {
   cursor: help;
 }
 #tutorial {
+  border: solid 0.25rem #5d6dff;
   border-radius: 0.5rem;
   box-shadow: none;
   opacity: 1;

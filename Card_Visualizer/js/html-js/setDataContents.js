@@ -2,8 +2,8 @@ export const cardData = /* html */ `
 <optgroup label="Expansions">
     <option data-svg-code="1" value="1" disabled>'Expansions</option>
     <option data-svg-code="mkm" value="mkm">Murders at Karlov Manor (MKM)</option>
-    <option data-svg-code="lci" value="lci">Lost Caverns of Ixalan (LCI)</option>
-    <option data-svg-code="default" value="woe">Wilds of Eldraine (WOE)</option>
+    <option data-svg-code="default" value="lci">Lost Caverns of Ixalan (LCI)</option>
+    <option data-svg-code="woe" value="woe">Wilds of Eldraine (WOE)</option>
     <option data-svg-code="mat" value="mat">March of the Machine: The Aftermath (MAT)</option>
     <option data-svg-code="mom" value="mom">March of the Machine (MOM)</option>
     <option data-svg-code="one" value="one">Phyrexia: All Will Be One (ONE)</option>
