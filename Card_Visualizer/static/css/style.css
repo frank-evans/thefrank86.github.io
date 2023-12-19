@@ -838,6 +838,10 @@ img.logo {
   transform: translateZ(-100%);
   /* transition: all 0.25s; */
 }
+.flashStar {
+  font-family: OCR A Std, monospace;
+  letter-spacing: 0.1rem;
+}
 .show3 {
   opacity: 0.0;
   transform: translateZ(0);
