@@ -6,7 +6,7 @@ This is a web-based platform that allows users to search sets and pieces to the 
 
 ## View Live Here 
 
-[Cardboard in Space](https://thefrank86.github.io/Portfolio/Card_Visualizer/index.html)
+<a href="https://thefrank86.github.io/Portfolio/Card_Visualizer/index.html" target="_blank">Cardboard in Space</a>
 
 ## Usage
 
