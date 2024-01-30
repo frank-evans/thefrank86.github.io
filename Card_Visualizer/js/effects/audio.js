@@ -8,7 +8,7 @@ export function audioSunInit() {
 		audioSun.suspend();
 		gainNode = audioSun.createGain();
 
-		console.log(audioSun);
+		/* console.log(audioSun); */
 		let source = audioSun.createBufferSource();
 				//connect it to the destination so you can hear it.
 			source.connect(gainNode);

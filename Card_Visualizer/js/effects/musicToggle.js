@@ -13,6 +13,7 @@ export const musicToggle = document.addEventListener('DOMContentLoaded', functio
         if (audioYellow.muted == true && audioBlue.muted == true && audioGreen.muted == true) {
             if (lastPlayed.song == undefined) {
                 lastPlayed.song = audioYellow;
+                lastPlayed.song.load();
             }
             // update music !mute image
             music.src = "../../Card_Visualizer/static/star/mNote.png";

@@ -839,7 +839,8 @@ img.logo {
   /* transition: all 0.25s; */
 }
 .flashStar {
-  font-family: OCR A Std, monospace;
+  /* font-family: OCR A Std, monospace; */
+  font-family: Impact, fantasy;
   letter-spacing: 0.1rem;
 }
 .show3 {
